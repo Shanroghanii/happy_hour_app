@@ -71,7 +71,10 @@ class ReportScreen extends GetView<ReportController> {
                 ),
               ),
               SizedBox(
-                height: H * 0.02,
+                height: H * 0.01,
+              ),
+              const Text(
+                "Multiple Happy Hour Menu images can be uploaded",
               ),
               SizedBox(
                 height: H * 0.02,

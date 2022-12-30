@@ -629,7 +629,9 @@ Future<dynamic> detailDialog(
                   fontSize: 24,
                   textColor: blackColor,
                   text: ("Close"),
-                  onPressed: onConfrim2,
+                  onPressed: (){
+                    Get.back();
+                  },
                 ),
               ),
             ),

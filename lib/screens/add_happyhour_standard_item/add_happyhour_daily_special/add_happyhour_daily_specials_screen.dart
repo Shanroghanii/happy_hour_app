@@ -1643,6 +1643,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           height: H * 0.07,
                           width: W * 0.8,
                           child: DropdownButtonFormField<String>(
+
                             elevation: 15,
                             decoration: const InputDecoration(
                               enabled: false,
@@ -1697,9 +1698,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       CustomElevatedButtonWidget(
                         onPressed: () {
                           //* add first drop down button
-
                           controller.fridayAddTodailySpecialItemList();
-
                           Get.back();
                         },
                         text: "Add",
@@ -2193,6 +2192,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           .clear();
                     },
                     onChanged: (val) {
+                      controller.sundaydailySpecialItemList[x]['discount'] = "";
                       controller.sundaydailySpecialItemList[x]['price'] = val;
                     },
                     keyboardType: TextInputType.number,
@@ -2251,6 +2251,8 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                     controller.foodList[index].dropDown[0] =
                                         newValue!;
                                     controller.foodList[index].dropDown[1] =
+                                        newValue;
+                                    controller.foodList[index].discountIcon =
                                         newValue;
                                   },
                                 ),
@@ -2762,6 +2764,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+                                  controller.foodList[index].discountIcon = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3278,10 +3281,12 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  controller.foodList[index].discountIcon = newValue??"";
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+
                                   controller.update();
                                 },
                               ),
@@ -3785,6 +3790,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  controller.foodList[index].discountIcon = newValue??"";
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
@@ -4304,6 +4310,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  controller.foodList[index].discountIcon = newValue??"";
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
@@ -4818,6 +4825,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  controller.foodList[index].discountIcon = newValue??"";
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
@@ -5337,6 +5345,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  controller.foodList[index].discountIcon = newValue??"";
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =

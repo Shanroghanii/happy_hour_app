@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:happy_hour_app/core/constants.dart';
 import 'package:happy_hour_app/global_widgets/text_field.dart';
 import 'package:happy_hour_app/screens/account_business/claim_report/report_done_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/colors.dart';
 import '../../../global_controller/global_general_controller.dart';
 import '../../../global_widgets/main_button.dart';
+import '../../../global_widgets/upload_Image_card.dart';
+import '../../account_standard/standard_happyhour_detail/standard_happyhour_detail_screen.dart';
+import '../../add_happyhour_business/add_happyhour_business.dart';
+import 'clain_controller.dart';
 
 class ClaimReportScreen extends StatelessWidget {
   const ClaimReportScreen({Key? key}) : super(key: key);
@@ -33,41 +40,127 @@ class ClaimReportScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: H * 0.009,
-              ),
-              const Text(
-                "write your report and send us",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
+        child: GetBuilder<ClaimReportController>(
+            init: ClaimReportController(),
+            builder: (controller) {
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: H * 0.009,
+                    ),
+                    const Text(
+                      "write your report and send us",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(
+                      height: H * 0.02,
+                    ),
+                    SizedBox(
+                      height: H * 0.2,
+                      child: CustomTextFieldWidget(
+                        textEditingController: reportController,
+                        borderRadius: 12,
+                        maxLines: 8,
+                        hintText: "Write Something",
+                        elevation: 0,
+                        blurRadius: 2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: H * 0.05,
+                    ),
+                    Row(
+                      children: [
+                        topText("Business Card"),
+                        SizedBox(
+                          width: W * 0.02,
+                        ),
+                        Image.asset(
+                          "assets/icons/Group 11537.png",
+                          height: H * 0.025,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: H * 0.02,
+                    ),
+                    Obx(() => controller.busniessCard.value == ""
+                        ? UploadImageCard(
+                            title:
+                                "Upload Business Card or Proof of Ownership/Managemant",
+                            onpressed: () async {
+                              final ImagePicker _picker = ImagePicker();
+                              final XFile? imageFile = await _picker.pickImage(
+                                  source: ImageSource.gallery,
+                                  imageQuality: 85);
+                              if (imageFile != null) {
+                                controller.busniessCard.value = imageFile.path;
+                              }
+                            },
+                            // onpressed: () {
+                            //   dialogueCard(
+                            //       context,
+                            //       "Add From Gallery",
+                            //           () {
+                            //         Navigator.pop(context);
+                            //         // controller.uploadBusinessCard(
+                            //         //     ImageSource.gallery);
+                            //       },
+                            //       "Open Camera",
+                            //           () {
+                            //         Navigator.pop(context);
+                            //         controller
+                            //             .uploadBusinessCard(ImageSource.camera);
+                            //       });
+                            // },
+                          )
+                        : Center(
+                            child: GestureDetector(
+                              onTap: () async {
+                                final ImagePicker _picker = ImagePicker();
+                                final XFile? imageFile =
+                                    await _picker.pickImage(
+                                        source: ImageSource.gallery,
+                                        imageQuality: 85);
+                                if (imageFile != null) {
+                                  // businessCard = imageFile.path;
+                                }
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      controller.busniessCard.value = "";
+                                      // controller.removebusinessCard();
+                                    },
+                                    icon: const Icon(
+                                      Icons.cancel_outlined,
+                                      size: 40,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  Image.file(
+                                    File(controller.busniessCard.value),
+                                    width: W * 0.86,
+                                    height: H * 0.2,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ))
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: H * 0.02,
-              ),
-              SizedBox(
-                height: H * 0.2,
-                child: CustomTextFieldWidget(
-                  textEditingController: reportController,
-                  borderRadius: 12,
-                  maxLines: 8,
-                  hintText: "Write Something",
-                  elevation: 0,
-                  blurRadius: 2,
-                ),
-              ),
-              SizedBox(
-                height: H * 0.05,
-              ),
-            ],
-          ),
-        ),
+              );
+            }),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, bottom: 30.0),

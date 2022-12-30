@@ -24,7 +24,7 @@ class AddHappyHourProvider {
   final editFetchingQuery = FirebaseFirestore.instance
       .collection("happyhours")
       .where("id", isEqualTo: Get.find<AuthController>().user.uid)
-      .orderBy('promoted', descending: true)
+      // .orderBy('promoted', descending: true)
       .orderBy('addHappyhourTime', descending: true)
 
       //.where("promoted", whereIn: [true & false])
@@ -136,6 +136,7 @@ class AddHappyHourProvider {
       "amenities": amenities,
       "barType": barType,
       "event": event,
+      "favorite_users": [],
       "latitude": latLong["latitude"],
       "longitude": latLong["longitude"],
       "addHappyhourTime": DateTime.now(),

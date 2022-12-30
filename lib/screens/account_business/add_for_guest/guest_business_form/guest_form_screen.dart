@@ -289,6 +289,11 @@ class GuestFormScreen extends GetView<GuestController> {
                   //   height: H * 0.02,
                   // ),
                   topText("Happy Hour Menu"),
+                  const SizedBox(height: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 0.0),
+                    child: Text("Multiple Happy Hour Menu images can be uploaded"),
+                  ),
                   SizedBox(
                     height: H * 0.02,
                   ),

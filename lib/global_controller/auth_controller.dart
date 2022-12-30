@@ -45,6 +45,13 @@ class AuthController extends GetxController {
   // * methods
   @override
   void onInit() async {
+    if(auth.currentUser?.uid != null){
+      _user.value =
+      await _userProvider.getUserDocById(uid: auth.currentUser?.uid ?? "");
+      user.isBusiness == true
+          ? Get.offAllNamed(Routes.businessAccountHomeScreen)
+          : Get.offAllNamed(Routes.loginHomeScreen);
+    }
     if (box.read(loginRememberMeStatus)) {
       final _id = box.read(userId);
       _user.value = await _userProvider.getUserDocById(uid: _id);
@@ -287,4 +294,5 @@ class AuthController extends GetxController {
       );
     }
   }
+
 }

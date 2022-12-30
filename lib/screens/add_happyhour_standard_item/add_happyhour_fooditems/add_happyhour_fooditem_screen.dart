@@ -198,6 +198,7 @@ class AddHappyHourFoodItemScreen extends GetView<AddHappyhourController> {
                                   textEditingController: controller
                                       .foodList[index].priceController,
                                   onChanged: (val) {
+                                    controller.foodList[index].discount = 0;
                                     controller.foodList[index].price = val;
                                   },
                                   keyboardType: TextInputType.number,
@@ -236,6 +237,8 @@ class AddHappyHourFoodItemScreen extends GetView<AddHappyhourController> {
                                                   keyboardType:
                                                       TextInputType.number,
                                                   onChanged: (val) {
+                                                    controller.foodList[index]
+                                                        .price = "";
                                                     controller.foodList[index]
                                                             .discount =
                                                         int.parse(val);
@@ -297,6 +300,7 @@ class AddHappyHourFoodItemScreen extends GetView<AddHappyhourController> {
                                                       controller.foodList[index]
                                                               .dropDown[1] =
                                                           newValue;
+                                                      controller.foodList[index].discountIcon = newValue;
                                                       controller.update();
                                                     },
                                                   ),

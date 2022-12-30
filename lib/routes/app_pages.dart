@@ -442,7 +442,6 @@ abstract class AppPages {
         name: Routes.claimHappyHourDetailScreen,
         page: () => const ClaimHappyHourDetailScreen(),
         binding: ClaimHappyHourDetailBinding()),
-
     //Paid Screens
     GetPage(
       name: Routes.businessAccountHomeScreen,

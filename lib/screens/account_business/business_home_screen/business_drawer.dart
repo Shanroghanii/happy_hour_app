@@ -59,14 +59,14 @@ class BusinessDrawerWidget extends GetView<HomeScreenController> {
                           Get.toNamed(Routes.editHappyHourScreen);
                         },
                       ),
-                      CustomListTile(
-                        title: "Subscriptions",
-                        image: "assets/icons/content.svg",
-                        onTap: () {
-                          Get.toNamed(Routes.subcriptionScreen);
-                          //Get.toNamed(Routes.editHappyHourScreen);
-                        },
-                      ),
+                      // CustomListTile(
+                      //   title: "Subscriptions",
+                      //   image: "assets/icons/content.svg",
+                      //   onTap: () {
+                      //     Get.toNamed(Routes.subcriptionScreen);
+                      //     //Get.toNamed(Routes.editHappyHourScreen);
+                      //   },
+                      // ),
                       CustomListTile(
                         title: "Language",
                         image: "assets/icons/Group 1029.svg",

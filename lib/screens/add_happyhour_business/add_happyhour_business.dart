@@ -238,7 +238,23 @@ class AddHappyHourBusinessScreen extends GetView<AddHappyhourController> {
                     const SizedBox(height: 16.0),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
-                      child: topText("Happy Hour Menu"),
+                      child:        Row(
+                        children: [
+                          topText("Happy Hour Menu"),
+                          SizedBox(
+                            width: W * 0.02,
+                          ),
+                          Image.asset(
+                            "assets/icons/Group 11537.png",
+                            height: H * 0.025,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Text("Multiple Happy Hour Menu images can be uploaded"),
                     ),
                     SizedBox(
                       height: H * 0.02,

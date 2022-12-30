@@ -347,7 +347,24 @@ class AddHappyHourBusinessAccountScreen
                   SizedBox(
                     height: H * 0.02,
                   ),
-                  topText("Happy Hour Menu"),
+                  Row(
+                    children: [
+                      topText("Happy Hour Menu"),
+                      SizedBox(
+                        width: W * 0.02,
+                      ),
+                      Image.asset(
+                        "assets/icons/Group 11537.png",
+                        height: H * 0.025,
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 0.0),
+                    child: Text("Multiple Happy Hour Menu images can be uploaded"),
+                  ),
                   SizedBox(
                     height: H * 0.02,
                   ),

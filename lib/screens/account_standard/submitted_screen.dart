@@ -6,6 +6,8 @@ import 'package:happy_hour_app/core/constants.dart';
 import 'package:happy_hour_app/global_widgets/main_button.dart';
 import 'package:happy_hour_app/routes/app_routes.dart';
 
+import '../../global_controller/auth_controller.dart';
+
 class StandardRequestSubmitted extends StatelessWidget {
   const StandardRequestSubmitted({Key? key}) : super(key: key);
   @override
@@ -84,6 +86,8 @@ class StandardRequestSubmitted extends StatelessWidget {
                 width: W,
                 child: CustomElevatedButtonWidget(
                   onPressed: () {
+                    Get.find<AuthController>().user.isBusiness ?
+                    Get.offAllNamed(Routes.businessAccountHomeScreen) :
                     Get.offAllNamed(Routes.loginHomeScreen);
                   },
                   verticalPadding: 0,

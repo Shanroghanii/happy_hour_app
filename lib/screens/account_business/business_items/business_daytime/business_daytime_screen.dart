@@ -27,7 +27,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                 "assets/icons/Group 9108.svg",
                 height: 25,
                 width: 25,
-              )),
+              ),
+          ),
           title: const Text("Add Happy Hour Time"),
           centerTitle: true,
         ),
@@ -112,9 +113,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                       ),
                                     ))
                                 .toList(),
-                            onChanged: (time) {
-                              controller.hFromTime = time!;
-                            },
+                            onChanged: controller.showDayList
+                                ? null
+                                : (time) {
+                                    controller.hFromTime = time!;
+                                  },
                           ),
                         ),
                       ),
@@ -159,9 +162,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                       ),
                                     ))
                                 .toList(),
-                            onChanged: (time) {
-                              controller.hToTime = time!;
-                            },
+                            onChanged: controller.showDayList
+                                ? null
+                                : (time) {
+                                    controller.hToTime = time!;
+                                  },
                           ),
                         ),
                       ),
@@ -197,15 +202,17 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                             value: controller
                                                 .dayTimeList[0].isSelect.value,
                                             onChanged: (val) {
-                                              controller
-                                                      .dayTimeList[0].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[0].isSelect.value;
-                                              if (controller
-                                                  .dayTimeList[0].isSelect.isTrue) {
-                                                controller.dayTimeList[0].fromTime =
+                                              controller.dayTimeList[0].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[0]
+                                                      .isSelect.value;
+                                              if (controller.dayTimeList[0]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[0]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[0].toTime =
+                                                controller
+                                                        .dayTimeList[0].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(0);
                                               }
@@ -217,11 +224,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "S",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Transform.scale(
@@ -243,15 +250,17 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                 .dayTimeList[1].isSelect.value,
                                             onChanged: (val) {
                                               // controller.isTue = !controller.isTue;
-                                              controller
-                                                      .dayTimeList[1].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[1].isSelect.value;
-                                              if (controller
-                                                  .dayTimeList[1].isSelect.isTrue) {
-                                                controller.dayTimeList[1].fromTime =
+                                              controller.dayTimeList[1].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[1]
+                                                      .isSelect.value;
+                                              if (controller.dayTimeList[1]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[1]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[1].toTime =
+                                                controller
+                                                        .dayTimeList[1].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(1);
                                               }
@@ -263,11 +272,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "M",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Transform.scale(
@@ -288,16 +297,18 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                             value: controller
                                                 .dayTimeList[2].isSelect.value,
                                             onChanged: (val) {
-                                              controller
-                                                      .dayTimeList[2].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[2].isSelect.value;
+                                              controller.dayTimeList[2].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[2]
+                                                      .isSelect.value;
                                               //controller.isWed = !controller.isWed;
-                                              if (controller
-                                                  .dayTimeList[2].isSelect.isTrue) {
-                                                controller.dayTimeList[2].fromTime =
+                                              if (controller.dayTimeList[2]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[2]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[2].toTime =
+                                                controller
+                                                        .dayTimeList[2].toTime =
                                                     controller.hToTime!;
 
                                                 controller.addToHday(2);
@@ -310,11 +321,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "T",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Transform.scale(
@@ -337,15 +348,17 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                             onChanged: (val) {
                                               // controller.isThu = !controller.isThu;
 
-                                              controller
-                                                      .dayTimeList[3].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[3].isSelect.value;
-                                              if (controller
-                                                  .dayTimeList[3].isSelect.isTrue) {
-                                                controller.dayTimeList[3].fromTime =
+                                              controller.dayTimeList[3].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[3]
+                                                      .isSelect.value;
+                                              if (controller.dayTimeList[3]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[3]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[3].toTime =
+                                                controller
+                                                        .dayTimeList[3].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(3);
                                               }
@@ -357,11 +370,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "W",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Transform.scale(
@@ -382,15 +395,17 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                             value: controller
                                                 .dayTimeList[4].isSelect.value,
                                             onChanged: (val) {
-                                              controller
-                                                      .dayTimeList[4].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[4].isSelect.value;
-                                              if (controller
-                                                  .dayTimeList[4].isSelect.isTrue) {
-                                                controller.dayTimeList[4].fromTime =
+                                              controller.dayTimeList[4].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[4]
+                                                      .isSelect.value;
+                                              if (controller.dayTimeList[4]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[4]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[4].toTime =
+                                                controller
+                                                        .dayTimeList[4].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(4);
                                               }
@@ -402,11 +417,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "T",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Transform.scale(
@@ -428,15 +443,17 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                 .dayTimeList[5].isSelect.value,
                                             onChanged: (val) {
                                               // controller.isSat = !controller.isSat;
-                                              controller
-                                                      .dayTimeList[5].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[5].isSelect.value;
-                                              if (controller
-                                                  .dayTimeList[5].isSelect.isTrue) {
-                                                controller.dayTimeList[5].fromTime =
+                                              controller.dayTimeList[5].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[5]
+                                                      .isSelect.value;
+                                              if (controller.dayTimeList[5]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[5]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[5].toTime =
+                                                controller
+                                                        .dayTimeList[5].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(5);
                                               }
@@ -448,11 +465,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "F",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                             Row(
                               children: [
                                 Transform.scale(
@@ -474,15 +491,17 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                 .dayTimeList[6].isSelect.value,
                                             onChanged: (val) {
                                               // controller.isSun = !controller.isSun;
-                                              controller
-                                                      .dayTimeList[6].isSelect.value =
-                                                  !controller
-                                                      .dayTimeList[6].isSelect.value;
-                                              if (controller
-                                                  .dayTimeList[6].isSelect.isTrue) {
-                                                controller.dayTimeList[6].fromTime =
+                                              controller.dayTimeList[6].isSelect
+                                                      .value =
+                                                  !controller.dayTimeList[6]
+                                                      .isSelect.value;
+                                              if (controller.dayTimeList[6]
+                                                  .isSelect.isTrue) {
+                                                controller.dayTimeList[6]
+                                                        .fromTime =
                                                     controller.hFromTime!;
-                                                controller.dayTimeList[6].toTime =
+                                                controller
+                                                        .dayTimeList[6].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(6);
                                               }
@@ -494,11 +513,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                 const Text(
                                   "S",
                                   style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.w500),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
-
                           ],
                         ),
                       ),
@@ -868,9 +887,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                               ),
                                             ))
                                         .toList(),
-                                    onChanged: (time) {
-                                      controller.hFromTime2 = time!;
-                                    },
+                                    onChanged: controller.showLateDayList
+                                        ? null
+                                        : (time) {
+                                            controller.hFromTime2 = time!;
+                                          },
                                   ),
                                 ),
                               ),
@@ -923,9 +944,11 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                               ),
                                             ))
                                         .toList(),
-                                    onChanged: (time) {
-                                      controller.hToTime2 = time!;
-                                    },
+                                    onChanged: controller.showLateDayList
+                                        ? null
+                                        : (time) {
+                                            controller.hToTime2 = time!;
+                                          },
                                   ),
                                 ),
                               ),
@@ -956,25 +979,37 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[0].isLate.value,
+                                                        .dayTimeList[0]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
                                                       // controller.isSun = !controller.isSun;
-                                                      controller.dayTimeList[0].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[0]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[0]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[0]
+                                                      controller.dayTimeList[0]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[0]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[0]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[0]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[0]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[0]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(0);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(0);
                                                       }
                                                     }),
                                               ),
@@ -989,7 +1024,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                     Row(
                                       children: [
                                         Transform.scale(
@@ -1005,24 +1039,36 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[1].isLate.value,
+                                                        .dayTimeList[1]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
-                                                      controller.dayTimeList[1].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[1]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[1]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[1]
+                                                      controller.dayTimeList[1]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[1]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[1]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[1]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[1]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[1]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(1);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(1);
                                                       }
                                                     }),
                                               ),
@@ -1037,7 +1083,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                     Row(
                                       children: [
                                         Transform.scale(
@@ -1053,25 +1098,37 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[2].isLate.value,
+                                                        .dayTimeList[2]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
                                                       // controller.isTue = !controller.isTue;
-                                                      controller.dayTimeList[2].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[2]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[2]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[2]
+                                                      controller.dayTimeList[2]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[2]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[2]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[2]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[2]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[2]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(2);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(2);
                                                       }
                                                     }),
                                               ),
@@ -1086,7 +1143,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                     Row(
                                       children: [
                                         Transform.scale(
@@ -1102,24 +1158,36 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[3].isLate.value,
+                                                        .dayTimeList[3]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
-                                                      controller.dayTimeList[3].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[3]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[3]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[3]
+                                                      controller.dayTimeList[3]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[3]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[3]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[3]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[3]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[3]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(3);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(3);
                                                       }
 
                                                       //controller.isWed = !controller.isWed;
@@ -1136,7 +1204,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                     Row(
                                       children: [
                                         Transform.scale(
@@ -1152,26 +1219,38 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[4].isLate.value,
+                                                        .dayTimeList[4]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
                                                       // controller.isThu = !controller.isThu;
 
-                                                      controller.dayTimeList[4].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[4]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[4]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[4]
+                                                      controller.dayTimeList[4]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[4]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[4]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[4]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[4]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[4]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(4);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(4);
                                                       }
                                                     }),
                                               ),
@@ -1186,7 +1265,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                     Row(
                                       children: [
                                         Transform.scale(
@@ -1202,24 +1280,36 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[5].isLate.value,
+                                                        .dayTimeList[5]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
-                                                      controller.dayTimeList[5].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[5]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[5]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[5]
+                                                      controller.dayTimeList[5]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[5]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[5]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[5]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[5]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[5]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(5);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(5);
                                                       }
                                                     }),
                                               ),
@@ -1234,7 +1324,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                     Row(
                                       children: [
                                         Transform.scale(
@@ -1250,25 +1339,37 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     activeColor: primary,
                                                     checkColor: Colors.amber,
                                                     splashRadius: 20,
-                                                    shape: const StadiumBorder(),
+                                                    shape:
+                                                        const StadiumBorder(),
                                                     side: BorderSide.none,
                                                     value: controller
-                                                        .dayTimeList[6].isLate.value,
+                                                        .dayTimeList[6]
+                                                        .isLate
+                                                        .value,
                                                     onChanged: (val) {
                                                       // controller.isSat = !controller.isSat;
-                                                      controller.dayTimeList[6].isLate
-                                                              .value =
-                                                          !controller.dayTimeList[6]
-                                                              .isLate.value;
-                                                      if (controller.dayTimeList[6]
-                                                          .isLate.isTrue) {
-                                                        controller.dayTimeList[6]
+                                                      controller.dayTimeList[6]
+                                                              .isLate.value =
+                                                          !controller
+                                                              .dayTimeList[6]
+                                                              .isLate
+                                                              .value;
+                                                      if (controller
+                                                          .dayTimeList[6]
+                                                          .isLate
+                                                          .isTrue) {
+                                                        controller
+                                                                .dayTimeList[6]
                                                                 .fromTime2 =
-                                                            controller.hFromTime2!;
-                                                        controller.dayTimeList[6]
+                                                            controller
+                                                                .hFromTime2!;
+                                                        controller
+                                                                .dayTimeList[6]
                                                                 .toTime2 =
-                                                            controller.hToTime2!;
-                                                        controller.addToHdaySecond(6);
+                                                            controller
+                                                                .hToTime2!;
+                                                        controller
+                                                            .addToHdaySecond(6);
                                                       }
                                                     }),
                                               ),
@@ -1283,7 +1384,6 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                         ),
                                       ],
                                     ),
-
                                   ],
                                 ),
                               ),
@@ -1294,6 +1394,7 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                               if (controller.hFromTime2 != null &&
                                   controller.hToTime2 != null) {
                                 controller.showLateDayList = true;
+                                controller.lateHappyHourForValidationOnly = true;
                               } else {
                                 Get.find<GlobalGeneralController>()
                                     .errorSnackbar(

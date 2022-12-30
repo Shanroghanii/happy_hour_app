@@ -481,6 +481,8 @@ class AddHappyhourController extends GetxController {
 
   bool lateHappyHourForValidationOnly = false;
   hourDetailTap() {
+
+
     var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
 
     if (index == 0) {
@@ -1762,7 +1764,7 @@ class AddHappyhourController extends GetxController {
         priceController: TextEditingController(),
         earlyFood: true.obs,
         lateFood: true.obs,
-        time: foodtime,
+        time: foodtime, discountIcon: '\$',
       ),
     );
     update();
@@ -1781,6 +1783,7 @@ class AddHappyhourController extends GetxController {
           time: foodtime,
           earlyFood: true.obs,
           lateFood: true.obs,
+          discountIcon: '\$',
         ),
       );
       update();
@@ -1864,7 +1867,7 @@ class AddHappyhourController extends GetxController {
 
   //*Add Haapy Hour to FireStore
   Future<void> uploadToFireStore() async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState?.validate() ?? false) {
       GeoFirePoint _position = geo.point(latitude: _lat, longitude: _long);
       isLoading = true;
       await _addHappyHourProvider.uploadToFirebaseStorage(
@@ -1887,6 +1890,7 @@ class AddHappyhourController extends GetxController {
                   "foodprice": e.price,
                   "early": e.earlyFood.value,
                   "late": e.lateFood.value,
+          "discountIcon": e.discountIcon,
                   //"dropdown": e.dropDown[0],
                 })
             .toList(),
@@ -2005,6 +2009,7 @@ class LocalFoodModel {
   late int quantity;
   late String price;
   late int discount;
+  late String discountIcon;
   List<String> dropDown;
   TextEditingController priceController;
   TextEditingController? discountController;
@@ -2023,6 +2028,7 @@ class LocalFoodModel {
     required this.earlyFood,
     required this.lateFood,
     required this.time,
+    required this.discountIcon,
   });
 }
 

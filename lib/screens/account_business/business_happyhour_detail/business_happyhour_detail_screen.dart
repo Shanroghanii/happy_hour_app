@@ -12,6 +12,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../../core/constants.dart';
 import '../../../global_widgets/favorite_happyhour.dart';
 import '../../../routes/app_routes.dart';
+import '../claim_report/claim_report_screen.dart';
 import 'business_happyhour_detail_screen_controller.dart';
 
 class BusinessHappyHourDetailScreen
@@ -137,7 +138,7 @@ class BusinessHappyHourDetailScreen
                   // ),
                   share: GestureDetector(
                     onTap: () {
-                      controller.happyHour.id ==
+                      controller.happyHour.id !=
                               Get.find<AuthController>().user.uid
                           ? dialogueCard(
                               context,
@@ -145,8 +146,8 @@ class BusinessHappyHourDetailScreen
                               "This happy hour is already claimed by business.if you want to claim this happy hour send us the report?",
                               "Send Report", () {
                               Navigator.pop(context);
-                              //Get.to(() => const ClaimReportScreen()
-                              Get.toNamed(Routes.reportScreen);
+                              Get.to(() => const ClaimReportScreen());
+                              //Get.toNamed(Routes.reportScreen);
                             })
                           : dialogueCard(context, "Claim This Business",
                               "Do you want to claim this business?", "Yes", () {
