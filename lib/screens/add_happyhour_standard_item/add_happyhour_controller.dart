@@ -1864,7 +1864,7 @@ class AddHappyhourController extends GetxController {
 
   //*Add Haapy Hour to FireStore
   Future<void> uploadToFireStore() async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState?.validate() ?? false) {
       GeoFirePoint _position = geo.point(latitude: _lat, longitude: _long);
       isLoading = true;
       await _addHappyHourProvider.uploadToFirebaseStorage(
