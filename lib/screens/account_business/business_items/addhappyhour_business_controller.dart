@@ -2034,105 +2034,24 @@ class AddHappyhourBusinessController extends GetxController {
 
   final businessKey = GlobalKey<FormState>();
 
-  bool lateHappyHourForValidationOnly = false;
-
   void onDayTimeNextTap() {
     var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
-
-if(showDayList){
-  if (index == 0) {
-    print("1");
-    if (showLateDayList) {
-      print("2");
-      if (showLateDayList) {
-        print("3");
-        Get.toNamed(Routes.addHappyHourFoodItemScreen);
-      } else {
-        print("4");
-        Get.find<GlobalGeneralController>().errorSnackbar(
-            title: "Late Happy Hour",
-            description: "Please Select all the Time");
-      }
-    } else {
-      print("5");
-      if (!businessKey.currentState!.validate()) {
-        print("6");
-        Get.find<GlobalGeneralController>().errorSnackbar(
-            title: "Select Time",
-            description: "Please Select all the Time 90");
-      } else {
-        print("7");
-        if (businessKey.currentState!.validate()) {
-          print("8");
-          for (var i = 0; i < dayTimeList.length; i++) {
-            if (dayTimeList[i].isSelect.isTrue &&
-                dayTimeList[i].fromTime != "" &&
-                dayTimeList[i].toTime != "") {
-              print("9");
-
-              Get.toNamed(Routes.addHappyHourFoodItemScreen);
-            }
-          }
-          Get.toNamed(Routes.addHappyHourFoodItemScreen);
+    if (index == 0) {
+      Get.toNamed(Routes.businessFoodItemScreen);
+    }
+    if (!businessKey.currentState!.validate()) {
+      Get.find<GlobalGeneralController>().errorSnackbar(
+          title: "Select Time", description: "Please Select all the Time");
+    }
+    if (businessKey.currentState!.validate()) {
+      for (var i = 0; i < dayTimeList.length; i++) {
+        if (dayTimeList[i].isSelect.isTrue &&
+            dayTimeList[i].fromTime != "" &&
+            dayTimeList[i].toTime != "") {
+          Get.toNamed(Routes.businessFoodItemScreen);
         }
       }
-      Get.toNamed(Routes.addHappyHourFoodItemScreen);
     }
-  } else {
-    if (showLate) {
-      print("10");
-      if (lateHappyHourForValidationOnly) {
-        print("11");
-        Get.toNamed(Routes.addHappyHourFoodItemScreen);
-      } else {
-        Get.find<GlobalGeneralController>().errorSnackbar(
-            title: "Select Time",
-            description: "Please Select late time offer");
-      }
-    } else {
-      print("12");
-      Get.toNamed(Routes.addHappyHourFoodItemScreen);
-    }
-  }
-}else{
-  Get.find<GlobalGeneralController>().errorSnackbar(
-      title: "Error",
-      description: "Please Submit Happy Hour");
-}
-
-
-    // var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
-    // if (index == 0) {
-    //   Get.toNamed(Routes.businessFoodItemScreen);
-    // }
-    // if (!businessKey.currentState!.validate()) {
-    //   Get.find<GlobalGeneralController>().errorSnackbar(
-    //       title: "Select Time", description: "Please Select all the Time");
-    // }
-    // if (businessKey.currentState!.validate()) {
-    //   for (var i = 0; i < dayTimeList.length; i++) {
-    //     if (dayTimeList[i].isSelect.isTrue &&
-    //         dayTimeList[i].fromTime != "" &&
-    //         dayTimeList[i].toTime != "") {
-    //       Get.toNamed(Routes.businessFoodItemScreen);
-    //     }
-    //   }
-    // }else {
-    //   if (showLate) {
-    //     print("10");
-    //     if (lateHappyHourForValidationOnly) {
-    //       print("11");
-    //       Get.toNamed(Routes.addHappyHourFoodItemScreen);
-    //     } else {
-    //       Get.find<GlobalGeneralController>().errorSnackbar(
-    //           title: "Select Time",
-    //           description: "Please Select late time offer");
-    //     }
-    //   } else {
-    //     print("12");
-    //     Get.toNamed(Routes.addHappyHourFoodItemScreen);
-    //   }
-    // }
   }
 
   void onBusinessnextTap() {
