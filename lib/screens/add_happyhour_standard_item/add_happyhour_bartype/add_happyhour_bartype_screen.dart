@@ -92,7 +92,7 @@ class AddHappyHourBarTypeScreen extends GetView<AddHappyhourController> {
                                               .value =
                                           !controller.barTypeList[index]
                                               .isSelect.value;
-                                      controller.updateBartype();
+                                      controller.updateBartype(index, controller.barTypeList[index].barType);
                                     }),
                               ),
                             ),
@@ -159,9 +159,10 @@ class AddHappyHourBarTypeScreen extends GetView<AddHappyhourController> {
                     title: "Error", description: "Select only Three Bar");
               }
               if (a <= 3 && a > 0) {
+             //   controller.barTypeAddList.add(controller.barType);
                 Get.toNamed(Routes.addHappyHourEventsScreen);
               }
-              controller.barTypeAddList.add(controller.barType);
+
             },
             text: "Next",
             textColor: blackColor,

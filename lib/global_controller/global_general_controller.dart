@@ -28,6 +28,7 @@ class GlobalGeneralController extends GetxController {
     Get.snackbar(
       title,
       description,
+      overlayBlur: 1,
       snackPosition: SnackPosition.TOP,
       icon: const Icon(Icons.error, color: Colors.red),
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -44,6 +45,7 @@ class GlobalGeneralController extends GetxController {
     Get.snackbar(
       title,
       description,
+      overlayBlur: 1,
       snackPosition: SnackPosition.TOP,
       icon: const Icon(Icons.info, color: primary),
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -60,6 +62,7 @@ class GlobalGeneralController extends GetxController {
     Get.snackbar(
       title,
       description,
+      overlayBlur: 1,
       snackPosition: SnackPosition.TOP,
       icon: const Icon(Icons.check, color: Colors.green),
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),

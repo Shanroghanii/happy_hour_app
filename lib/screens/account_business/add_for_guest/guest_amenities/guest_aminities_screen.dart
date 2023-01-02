@@ -89,8 +89,14 @@ class GuestAmenitiesScreen extends GetView<GuestController> {
                                             !controller.amenitiesList[index]
                                                 .isSelect.value;
                                         controller.updateAmenity();
-                                        controller.amentyAddList
-                                            .add(controller.amenity);
+                                        if(!controller.amentyAddList.contains(controller.amenitiesList[index].amenity)){
+                                          controller.amentyAddList
+                                              .add(controller.amenitiesList[index].amenity);
+                                        }else{
+                                          controller.amentyAddList
+                                              .remove(controller.amenitiesList[index].amenity);
+                                        }
+                                        print(controller.amentyAddList);
                                       }),
                                 ),
                               ),

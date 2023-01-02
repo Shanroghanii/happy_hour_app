@@ -20,14 +20,14 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: SvgPicture.asset(
-                "assets/icons/Group 9108.svg",
-                height: 25,
-                width: 25,
-              ),
+            onPressed: () {
+              Get.back();
+            },
+            icon: SvgPicture.asset(
+              "assets/icons/Group 9108.svg",
+              height: 25,
+              width: 25,
+            ),
           ),
           title: const Text("Add Happy Hour Time"),
           centerTitle: true,
@@ -44,6 +44,7 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
               radius: const Radius.circular(20),
               thickness: 10,
               child: ListView(
+                controller: controller.scrollController,
                 children: [
                   SizedBox(
                     height: H * 0.009,
@@ -215,6 +216,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         .dayTimeList[0].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(0);
+                                              } else {
+                                                controller.removeToHday(0);
                                               }
                                             }),
                                       ),
@@ -263,6 +266,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         .dayTimeList[1].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(1);
+                                              } else {
+                                                controller.removeToHday(1);
                                               }
                                             }),
                                       ),
@@ -312,6 +317,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                     controller.hToTime!;
 
                                                 controller.addToHday(2);
+                                              } else {
+                                                controller.removeToHday(2);
                                               }
                                             }),
                                       ),
@@ -361,6 +368,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         .dayTimeList[3].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(3);
+                                              } else {
+                                                controller.removeToHday(3);
                                               }
                                             }),
                                       ),
@@ -408,6 +417,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         .dayTimeList[4].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(4);
+                                              } else {
+                                                controller.removeToHday(4);
                                               }
                                             }),
                                       ),
@@ -456,6 +467,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         .dayTimeList[5].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(5);
+                                              } else {
+                                                controller.removeToHday(5);
                                               }
                                             }),
                                       ),
@@ -504,6 +517,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         .dayTimeList[6].toTime =
                                                     controller.hToTime!;
                                                 controller.addToHday(6);
+                                              } else {
+                                                controller.removeToHday(6);
                                               }
                                             }),
                                       ),
@@ -530,12 +545,19 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                     ),
                     child: CustomElevatedButtonWidget(
                       onPressed: () {
+                        var index = controller.dayTimeList
+                            .where((e) => e.isSelect.isTrue)
+                            .length;
+
                         if (controller.hFromTime != null &&
-                            controller.hToTime != null) {
+                            controller.hToTime != null &&
+                            index != 0) {
                           controller.showDayList = true;
+                          controller.update();
                         } else {
                           Get.find<GlobalGeneralController>().errorSnackbar(
-                              title: "Time", description: "Select Time ");
+                              title: "Time",
+                              description: "Select Time and days");
                         }
                       },
                       verticalPadding: 0,
@@ -623,7 +645,10 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                         //     .dayTimeList[index]
                                                         //     .isLate
                                                         //     .value = false;
-                                                      } else {}
+                                                      } else {
+                                                        controller.removeToHday(
+                                                            index);
+                                                      }
                                                     }),
                                               ),
                                             ),
@@ -714,6 +739,7 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                 onChanged: (time) {
                                                   controller.dayTimeList[index]
                                                       .fromTime = time!;
+                                                  controller.hDayTime(index);
                                                 },
                                               ),
                                             ),
@@ -795,7 +821,7 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                 onChanged: (time) {
                                                   controller.dayTimeList[index]
                                                       .toTime = time!;
-                                                  controller.hDayTime(index);
+                                                controller.hDayTime(index);
                                                 },
                                               ),
                                             ),
@@ -887,7 +913,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                               ),
                                             ))
                                         .toList(),
-                                    onChanged: controller.showLateDayList
+                                    onChanged: controller
+                                            .lateHappyHourForValidationOnly
                                         ? null
                                         : (time) {
                                             controller.hFromTime2 = time!;
@@ -929,7 +956,9 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                     hint: const Text(
                                       "Select Time",
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.grey),
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                     icon: const Icon(Icons.keyboard_arrow_down),
                                     items: controller.timesList
@@ -944,7 +973,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                               ),
                                             ))
                                         .toList(),
-                                    onChanged: controller.showLateDayList
+                                    onChanged: controller
+                                            .lateHappyHourForValidationOnly
                                         ? null
                                         : (time) {
                                             controller.hToTime2 = time!;
@@ -994,6 +1024,10 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                               .dayTimeList[0]
                                                               .isLate
                                                               .value;
+                                                      print(controller
+                                                          .dayTimeList[0]
+                                                          .isLate
+                                                          .isTrue);
                                                       if (controller
                                                           .dayTimeList[0]
                                                           .isLate
@@ -1009,7 +1043,15 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[0]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(0);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                0);
                                                       }
                                                     }),
                                               ),
@@ -1068,7 +1110,15 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[1]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(1);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                1);
                                                       }
                                                     }),
                                               ),
@@ -1128,7 +1178,15 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[2]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(2);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                2);
                                                       }
                                                     }),
                                               ),
@@ -1187,9 +1245,16 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[3]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(3);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                3);
                                                       }
-
                                                       //controller.isWed = !controller.isWed;
                                                     }),
                                               ),
@@ -1250,7 +1315,15 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[4]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(4);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                4);
                                                       }
                                                     }),
                                               ),
@@ -1309,7 +1382,15 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[5]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(5);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                5);
                                                       }
                                                     }),
                                               ),
@@ -1369,7 +1450,15 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             controller
                                                                 .hToTime2!;
                                                         controller
+                                                            .dayTimeList[6]
+                                                            .isLate
+                                                            .value = true;
+                                                        controller
                                                             .addToHdaySecond(6);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
+                                                                6);
                                                       }
                                                     }),
                                               ),
@@ -1391,15 +1480,22 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                           ),
                           CustomElevatedButtonWidget(
                             onPressed: () {
+                              var index = controller.dayTimeList
+                                  .where((e) => e.isLate.isTrue)
+                                  .length;
                               if (controller.hFromTime2 != null &&
-                                  controller.hToTime2 != null) {
+                                  controller.hToTime2 != null &&
+                                  index != 0) {
                                 controller.showLateDayList = true;
-                                controller.lateHappyHourForValidationOnly = true;
+                                controller.lateHappyHourForValidationOnly =
+                                    true;
+                                controller.update();
+                                controller.animateToIndex(5);
                               } else {
                                 Get.find<GlobalGeneralController>()
                                     .errorSnackbar(
                                         title: "Time",
-                                        description: "Select Time ");
+                                        description: "Select Time & days");
                               }
                             },
                             horizontalPadding: 40,
@@ -1477,6 +1573,10 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                             "";
                                                         controller
                                                             .addToHdaySecond(
+                                                                index);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(
                                                                 index);
                                                       }
                                                     }),
@@ -1569,6 +1669,8 @@ class BusinessDayTimeScreen extends GetView<AddHappyhourBusinessController> {
                                                 onChanged: (time) {
                                                   controller.dayTimeList[index]
                                                       .fromTime2 = time!;
+                                                  controller
+                                                      .hDayTimeSecond(index);
                                                 },
                                               ),
                                             ),

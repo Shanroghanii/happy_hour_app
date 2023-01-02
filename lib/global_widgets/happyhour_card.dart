@@ -13,7 +13,7 @@ class CustomHappyhourCard extends StatelessWidget {
     required this.image,
     this.height,
     this.width,
-    required this.time,
+     this.time,
     this.timeIcon,
     required this.rating,
     required this.rateCount,
@@ -25,7 +25,7 @@ class CustomHappyhourCard extends StatelessWidget {
   final String image;
   final double? height;
   final double? width;
-  final String time;
+  final String? time;
   final String? timeIcon;
   final Widget rating;
   final String rateCount;
@@ -105,7 +105,7 @@ class CustomHappyhourCard extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          time,
+                          time??"",
                           style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 12,

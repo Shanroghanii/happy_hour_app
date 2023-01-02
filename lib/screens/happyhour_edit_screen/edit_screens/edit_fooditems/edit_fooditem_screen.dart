@@ -199,6 +199,7 @@ class EditFoodItemScreen extends GetView<EditController> {
                                       .foodList[index].priceController,
                                   onChanged: (val) {
                                     controller.foodList[index].price = val;
+                                    controller.foodList[index].discount = 0;
                                   },
                                   keyboardType: TextInputType.number,
                                 ),
@@ -261,6 +262,8 @@ class EditFoodItemScreen extends GetView<EditController> {
                                                     controller.foodList[index]
                                                             .discount =
                                                         int.parse(val);
+                                                    controller.foodList[index]
+                                                        .price = '';
                                                   },
                                                   decoration: InputDecoration(
                                                     // hintText: "Enter Discount",
@@ -290,14 +293,8 @@ class EditFoodItemScreen extends GetView<EditController> {
                                                     underline: Container(),
                                                     isExpanded: true,
                                                     //hint: const Text(""),
-                                                    value: controller
-                                                            .foodList.isNotEmpty
-                                                        ? controller
-                                                            .foodList[index]
-                                                            .dropDown[0]
-                                                        : controller
-                                                            .foodList[index]
-                                                            .dropDown[1],
+                                                    value: controller.foodList[index]
+                                                        .discountIcon,
                                                     items: controller
                                                         .drinkDiscountDropdown
                                                         .map((String items) {
@@ -314,11 +311,8 @@ class EditFoodItemScreen extends GetView<EditController> {
                                                     onChanged:
                                                         (String? newValue) {
                                                       controller.foodList[index]
-                                                              .dropDown[0] =
+                                                              .discountIcon =
                                                           newValue!;
-                                                      controller.foodList[index]
-                                                              .dropDown[1] =
-                                                          newValue;
                                                       controller.update();
                                                     },
                                                   ),
@@ -569,11 +563,17 @@ class EditFoodItemScreen extends GetView<EditController> {
                                       textColor: blackColor,
                                       text: ("Add"),
                                       onPressed: () {
-                                        controller.addfoodmanually();
-                                        Navigator.pop(context);
-                                        controller.addfoodManuallyController
-                                            .clear();
-                                      }),
+                                        if (controller
+                                                .addfoodManuallyController.text
+                                                .trim() !=
+                                            "") {
+                                          controller.addfoodmanually();
+                                          Navigator.pop(context);
+                                          controller.addfoodManuallyController
+                                              .clear();
+                                        }
+                                      },
+                                  ),
                                   controller.addfoodManuallyController,
                                 );
                               },
@@ -697,6 +697,7 @@ class EditFoodItemScreen extends GetView<EditController> {
           child: CustomElevatedButtonWidget(
             onPressed: () {
               if (controller.foodList.isEmpty) {
+                controller.updateBusinessHourToFireStore();
                 controller.update();
                 Get.back();
               } else {
@@ -711,6 +712,7 @@ class EditFoodItemScreen extends GetView<EditController> {
                           "Food Quantity and Price/Discount Is Required");
                 }
                 if (a.length == controller.foodList.length) {
+                  controller.updateBusinessHourToFireStore();
                   controller.update();
                   Get.back();
                 }

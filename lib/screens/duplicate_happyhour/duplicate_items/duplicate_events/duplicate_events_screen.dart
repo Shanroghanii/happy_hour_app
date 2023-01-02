@@ -132,6 +132,7 @@ class DuplicateEventsScreen extends GetView<DuplicateController> {
                                                 .isSelect.value,
                                             onChanged: (v) {
                                               controller.updateEvent(index);
+                                              controller.eventListadded(index);
                                             }),
                                       ),
                                     ),
@@ -224,6 +225,7 @@ class DuplicateEventsScreen extends GetView<DuplicateController> {
                                               : [],
                                           onChanged: (day) {
                                             controller.day = day!;
+                                            controller.eventListadded(index);
                                           },
                                         ),
                                       ),
@@ -303,6 +305,7 @@ class DuplicateEventsScreen extends GetView<DuplicateController> {
                                               : [],
                                           onChanged: (time) {
                                             controller.eventStarttime = time!;
+                                            controller.eventListadded(index);
                                             //controller.selectedEvent.add(time);
                                           },
                                         ),
@@ -383,7 +386,7 @@ class DuplicateEventsScreen extends GetView<DuplicateController> {
                                               : [],
                                           onChanged: (time) {
                                             controller.eventendtime = time!;
-                                            controller.eventListadded();
+                                            controller.eventListadded(index);
                                           },
                                         ),
                                       ),

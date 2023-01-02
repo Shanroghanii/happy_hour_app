@@ -197,6 +197,7 @@ class DuplicateFoodItemScreen extends GetView<DuplicateController> {
                                   textEditingController: controller
                                       .foodList[index].priceController,
                                   onChanged: (val) {
+                                    controller.foodList[index].discount = 0;
                                     controller.foodList[index].price = val;
                                   },
                                   keyboardType: TextInputType.number,
@@ -236,6 +237,8 @@ class DuplicateFoodItemScreen extends GetView<DuplicateController> {
                                                       TextInputType.number,
                                                   onChanged: (val) {
                                                     controller.foodList[index]
+                                                        .price = '';
+                                                    controller.foodList[index]
                                                             .discount =
                                                         int.parse(val);
                                                   },
@@ -264,14 +267,8 @@ class DuplicateFoodItemScreen extends GetView<DuplicateController> {
                                                     underline: Container(),
                                                     isExpanded: true,
                                                     //hint: const Text(""),
-                                                    value: controller
-                                                            .foodList.isNotEmpty
-                                                        ? controller
-                                                            .foodList[index]
-                                                            .dropDown[0]
-                                                        : controller
-                                                            .foodList[index]
-                                                            .dropDown[1],
+                                                    value: controller.foodList[index]
+                                                        .discountIcon,
                                                     items: controller
                                                         .drinkDiscountDropdown
                                                         .map((String items) {
@@ -287,12 +284,8 @@ class DuplicateFoodItemScreen extends GetView<DuplicateController> {
                                                     }).toList(),
                                                     onChanged:
                                                         (String? newValue) {
-                                                      controller.foodList[index]
-                                                              .dropDown[0] =
-                                                          newValue!;
-                                                      controller.foodList[index]
-                                                              .dropDown[1] =
-                                                          newValue;
+                                                          controller.foodList[index]
+                                                              .discountIcon = newValue!;
                                                       controller.update();
                                                     },
                                                   ),
@@ -518,10 +511,12 @@ class DuplicateFoodItemScreen extends GetView<DuplicateController> {
                                       textColor: blackColor,
                                       text: ("Add"),
                                       onPressed: () {
-                                        controller.addfoodmanually();
-                                        Navigator.pop(context);
-                                        controller.addfoodManuallyController
-                                            .clear();
+                                        if(controller.addfoodManuallyController.text.trim() !="") {
+                                          controller.addfoodmanually();
+                                          Navigator.pop(context);
+                                          controller.addfoodManuallyController
+                                              .clear();
+                                        }
                                       }),
                                   controller.addfoodManuallyController,
                                 );
@@ -619,6 +614,7 @@ class DuplicateFoodItemScreen extends GetView<DuplicateController> {
           height: H * 0.09,
           child: CustomElevatedButtonWidget(
             onPressed: () {
+              controller.update();
               if (controller.foodList.isEmpty) {
                 Get.back();
               } else {

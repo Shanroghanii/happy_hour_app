@@ -293,7 +293,7 @@ class BusinessSearchResultScreen
                             ": \$${9}  ${controller.searchItem.last}"
                             ": \$${12}",
                     yellowText2: controller
-                            .citySearch[index].drinkitemName!.isNotEmpty
+                            .citySearch[index].drinkitemName?.isNotEmpty ?? false
                         ? "${controller.citySearch[index].drinkitemName?.first['drinkname']}: \$${controller.citySearch[index].drinkitemName?.first["drinkprice"]}   ${controller.citySearch[index].drinkitemName?.last['drinkname']}:  \$${controller.citySearch[index].drinkitemName?.last["drinkprice"]}"
                         : "",
                     rating: "assets/icons/Path 16148.svg",

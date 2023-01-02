@@ -203,6 +203,7 @@ class AddBusinessHourScreen extends GetView<AddHappyhourBusinessController> {
                                   onChanged: (fromTime) {
                                     controller.dayFromTimeToTimeList[index]
                                         .from = fromTime!;
+                                    controller.bDayTime(index);
                                   },
                                 ),
                               ),

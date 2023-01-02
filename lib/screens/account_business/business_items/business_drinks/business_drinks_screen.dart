@@ -204,7 +204,11 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                                   child: DropdownButton(
                                                     underline: Container(),
                                                     isExpanded: true,
-                                                    hint: const Text(""),
+                                                    hint: const Text(
+                                                      "",
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    ),
                                                     value: controller
                                                             .localdrinkList[
                                                                 index]
@@ -262,6 +266,8 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                         TextEditingController();
                                     controller.localdrinkList[index]
                                         .discountController?.text = "";
+                                    controller.localdrinkList[index].discount =
+                                        0;
                                     controller.update();
                                   },
                                   textEditingController: controller
@@ -269,6 +275,8 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                   onChanged: (val) {
                                     controller.localdrinkList[index].price =
                                         val;
+                                    controller.localdrinkList[index].discount =
+                                        0;
                                   },
                                   keyboardType: TextInputType.number,
                                 ),
@@ -295,10 +303,15 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                                   controller: controller
                                                       .localdrinkList[index]
                                                       .discountController,
-                                                  onTap: () => controller
-                                                      .localdrinkList[index]
-                                                      .drinkController
-                                                      .clear(),
+                                                  onTap: () {
+                                                    controller
+                                                        .localdrinkList[index]
+                                                        .drinkController
+                                                        .clear();
+                                                    controller
+                                                        .localdrinkList[index]
+                                                        .price = '';
+                                                  },
                                                   obscureText: false,
                                                   keyboardType:
                                                       TextInputType.number,
@@ -307,6 +320,9 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                                             .localdrinkList[index]
                                                             .discount =
                                                         int.parse(val);
+                                                    controller
+                                                        .localdrinkList[index]
+                                                        .price = '';
                                                   },
                                                   decoration: InputDecoration(
                                                     hintStyle: const TextStyle(
@@ -327,6 +343,8 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                                   ),
                                                 ),
                                               ),
+
+                                              /// discount
                                               Flexible(
                                                 child: Padding(
                                                   padding:
@@ -570,10 +588,21 @@ class BusinessDrinksScreen extends GetView<AddHappyhourBusinessController> {
                                   textColor: blackColor,
                                   text: ("Add"),
                                   onPressed: () {
-                                    controller.addDrinksmanually();
-                                    Navigator.pop(context);
-                                    controller.addDrinksManuallyController
-                                        .clear();
+                                    if (controller
+                                            .addDrinksManuallyController.text
+                                            .trim() !=
+                                        "") {
+                                      controller.addDrinksmanually();
+                                      Navigator.pop(context);
+                                      controller.addDrinksManuallyController
+                                          .clear();
+                                    } else {
+                                      Get.find<GlobalGeneralController>()
+                                          .errorSnackbar(
+                                        title: "Error",
+                                        description: "Please add drink",
+                                      );
+                                    }
                                   },
                                 ),
                                 controller.addDrinksManuallyController,

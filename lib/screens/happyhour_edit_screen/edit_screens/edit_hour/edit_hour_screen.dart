@@ -87,226 +87,236 @@ class EditHourScreen extends GetView<EditController> {
               SizedBox(
                 height: H * 0.01,
               ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.dayFromTimeToTimeList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Obx(
-                          () => Transform.scale(
-                            scale: 0.6,
-                            child: Card(
-                              margin: const EdgeInsets.all(1),
-                              elevation: 6,
-                              shape: const StadiumBorder(),
-                              child: Transform.scale(
-                                scale: 2.0,
-                                child: Checkbox(
-                                    checkColor: Theme.of(context).primaryColor,
-                                    splashRadius: 20,
-                                    shape: const StadiumBorder(),
-                                    side: BorderSide.none,
-                                    value: controller
-                                        .dayFromTimeToTimeList[index]
-                                        .isSelect
-                                        .value,
-                                    onChanged: (v) {
-                                      controller.bUpdateDay(index);
-                                      controller.forKeyAssign(index);
-                                    }),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: W * 0.26,
-                          child: Text(
-                            controller.dayFromTimeToTimeList[index].day,
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        SizedBox(
-                          width: W * 0.3,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(45),
-                            ),
-                            elevation: 5,
-                            child: SizedBox(
-                              height: H * 0.04,
-                              width: W * 0.3,
-                              child: Obx(
-                                () => Form(
-                                  key: controller
-                                      .dayFromTimeToTimeList[index].key,
-                                  child: DropdownButtonFormField<String>(
-                                    validator: controller
+              GetBuilder<EditController>(
+                builder: (controller) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.dayFromTimeToTimeList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                           Transform.scale(
+                                scale: 0.6,
+                                child: Card(
+                                  margin: const EdgeInsets.all(1),
+                                  elevation: 6,
+                                  shape: const StadiumBorder(),
+                                  child: Transform.scale(
+                                    scale: 2.0,
+                                    child: Checkbox(
+                                        checkColor: Theme.of(context).primaryColor,
+                                        splashRadius: 20,
+                                        shape: const StadiumBorder(),
+                                        side: BorderSide.none,
+                                        value: controller
                                             .dayFromTimeToTimeList[index]
                                             .isSelect
-                                            .isTrue
-                                        ? (value) {
-                                            if (value.toString() ==
-                                                    "Select Time" ||
-                                                value.toString() == "") {
+                                            .value,
+                                        onChanged: (v) {
+                                          controller.bUpdateDay(index);
+                                          controller.forKeyAssign(index);
+                                          controller.update();
+                                        }),
+                                  ),
+                                ),
+                              ),
+
+                            SizedBox(
+                              width: W * 0.26,
+                              child: Text(
+                                controller.dayFromTimeToTimeList[index].day,
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            SizedBox(
+                              width: W * 0.3,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(45),
+                                ),
+                                elevation: 5,
+                                child: SizedBox(
+                                  height: H * 0.04,
+                                  width: W * 0.3,
+                                  child:  Form(
+                                      key: controller
+                                          .dayFromTimeToTimeList[index].key,
+                                      child: Builder(
+                                        builder: (context) {
+                                          return DropdownButtonFormField<String>(
+                                            validator: controller
+                                                    .dayFromTimeToTimeList[index]
+                                                    .isSelect
+                                                    .isTrue
+                                                ? (value) {
+                                                    if (value.toString() ==
+                                                            "Select Time" ||
+                                                        value.toString() == "") {
+                                                      return 'select';
+                                                    }
+
+                                                    return null;
+                                                  }
+                                                : null,
+                                            value: controller
+                                                        .dayFromTimeToTimeList[index]
+                                                        .isSelect
+                                                        .isTrue &&
+                                                    controller
+                                                            .dayFromTimeToTimeList[
+                                                                index]
+                                                            .from
+                                                            .toString() !=
+                                                        ""
+                                                ? controller
+                                                    .dayFromTimeToTimeList[index].from
+                                                : "Select Time",
+                                            elevation: 15,
+                                            decoration: const InputDecoration(
+                                              enabled: false,
+                                              contentPadding: EdgeInsets.fromLTRB(
+                                                  16.0, 2.0, 8.0, 2.0),
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(45),
+                                                ),
+                                              ),
+                                            ),
+                                            isExpanded: true,
+                                            hint: const Text(
+                                              "Select Time",
+                                              style: TextStyle(
+                                                  fontSize: 12, color: Colors.grey),
+                                            ),
+                                            icon: const Icon(Icons.keyboard_arrow_down),
+                                            items: controller
+                                                    .dayFromTimeToTimeList[index]
+                                                    .isSelect
+                                                    .isTrue
+                                                ? controller.timesList
+                                                    .map((time) => DropdownMenuItem(
+                                                          value: time,
+                                                          child: Text(
+                                                            time,
+                                                            style: const TextStyle(
+                                                              color: Colors.black,
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ))
+                                                    .toList()
+                                                : [],
+                                            onChanged: (fromTime) {
+                                              controller.dayFromTimeToTimeList[index]
+                                                  .from = fromTime!;
+                                              controller.bDayTime(index);
+                                              controller.update();
+                                            },
+                                          );
+                                        }
+                                      ),
+                                    ),
+
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: W * 0.3,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(45),
+                                ),
+                                elevation: 5,
+                                child: SizedBox(
+                                  height: H * 0.04,
+                                  width: W * 0.3,
+                                  child: Obx(
+                                    () => Form(
+                                      key: controller
+                                          .dayFromTimeToTimeList[index].key2,
+                                      child: DropdownButtonFormField<String>(
+                                        validator: (value) {
+                                          if (controller
+                                              .dayFromTimeToTimeList[index]
+                                              .isSelect
+                                              .isTrue) {
+                                            if (value.toString() == "Select Time") {
                                               return 'select';
                                             }
-
-                                            return null;
                                           }
-                                        : null,
-                                    value: controller
+                                          return null;
+                                        },
+                                        value: controller
+                                                    .dayFromTimeToTimeList[index]
+                                                    .isSelect
+                                                    .isTrue &&
+                                                controller
+                                                        .dayFromTimeToTimeList[
+                                                            index]
+                                                        .to
+                                                        .toString() !=
+                                                    ""
+                                            ? controller
+                                                .dayFromTimeToTimeList[index].to
+                                                .toString()
+                                            : "Select Time",
+                                        elevation: 15,
+                                        decoration: const InputDecoration(
+                                          enabled: false,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              16.0, 2.0, 8.0, 2.0),
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(45)),
+                                          ),
+                                        ),
+                                        isExpanded: true,
+                                        hint: const Text(
+                                          "Select Time",
+                                          style: TextStyle(
+                                              fontSize: 12, color: Colors.grey),
+                                        ),
+                                        icon: const Icon(Icons.keyboard_arrow_down),
+                                        items: controller
                                                 .dayFromTimeToTimeList[index]
                                                 .isSelect
-                                                .isTrue &&
-                                            controller
-                                                    .dayFromTimeToTimeList[
-                                                        index]
-                                                    .from
-                                                    .toString() !=
-                                                ""
-                                        ? controller
-                                            .dayFromTimeToTimeList[index].from
-                                            .toString()
-                                        : "Select Time",
-                                    elevation: 15,
-                                    decoration: const InputDecoration(
-                                      enabled: false,
-                                      contentPadding: EdgeInsets.fromLTRB(
-                                          16.0, 2.0, 8.0, 2.0),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(45)),
+                                                .isTrue
+                                            ? controller.timesList
+                                                .map((time) => DropdownMenuItem(
+                                                      value: time,
+                                                      child: Text(
+                                                        time,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                    ))
+                                                .toList()
+                                            : [],
+                                        onChanged: (toTime) {
+                                          controller.dayFromTimeToTimeList[index]
+                                              .to = toTime!;
+                                          controller.bDayTime(index);
+                                          controller.update();
+                                        },
                                       ),
                                     ),
-                                    isExpanded: true,
-                                    hint: const Text(
-                                      "Select Time",
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.grey),
-                                    ),
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: controller
-                                            .dayFromTimeToTimeList[index]
-                                            .isSelect
-                                            .isTrue
-                                        ? controller.timesList
-                                            .map((time) => DropdownMenuItem(
-                                                  value: time,
-                                                  child: Text(
-                                                    time,
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ))
-                                            .toList()
-                                        : [],
-                                    onChanged: (fromTime) {
-                                      controller.dayFromTimeToTimeList[index]
-                                          .from = fromTime!;
-                                    },
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: W * 0.3,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(45),
-                            ),
-                            elevation: 5,
-                            child: SizedBox(
-                              height: H * 0.04,
-                              width: W * 0.3,
-                              child: Obx(
-                                () => Form(
-                                  key: controller
-                                      .dayFromTimeToTimeList[index].key2,
-                                  child: DropdownButtonFormField<String>(
-                                    validator: (value) {
-                                      if (controller
-                                          .dayFromTimeToTimeList[index]
-                                          .isSelect
-                                          .isTrue) {
-                                        if (value.toString() == "Select Time") {
-                                          return 'select';
-                                        }
-                                      }
-                                      return null;
-                                    },
-                                    value: controller
-                                                .dayFromTimeToTimeList[index]
-                                                .isSelect
-                                                .isTrue &&
-                                            controller
-                                                    .dayFromTimeToTimeList[
-                                                        index]
-                                                    .to
-                                                    .toString() !=
-                                                ""
-                                        ? controller
-                                            .dayFromTimeToTimeList[index].to
-                                            .toString()
-                                        : "Select Time",
-                                    elevation: 15,
-                                    decoration: const InputDecoration(
-                                      enabled: false,
-                                      contentPadding: EdgeInsets.fromLTRB(
-                                          16.0, 2.0, 8.0, 2.0),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(45)),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    hint: const Text(
-                                      "Select Time",
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.grey),
-                                    ),
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: controller
-                                            .dayFromTimeToTimeList[index]
-                                            .isSelect
-                                            .isTrue
-                                        ? controller.timesList
-                                            .map((time) => DropdownMenuItem(
-                                                  value: time,
-                                                  child: Text(
-                                                    time,
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ))
-                                            .toList()
-                                        : [],
-                                    onChanged: (toTime) {
-                                      controller.dayFromTimeToTimeList[index]
-                                          .to = toTime!;
-                                      controller.bDayTime(index);
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+                          ],
+                        );
+                      });
+                }
+              ),
             ],
           ),
         ),

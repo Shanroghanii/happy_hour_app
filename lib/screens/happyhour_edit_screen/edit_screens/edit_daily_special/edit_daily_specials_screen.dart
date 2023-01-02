@@ -93,6 +93,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                     .daysList[0].isSelect.value;
                                             controller.dailyspecialsunDay =
                                                 controller.daysList[0].day;
+                                            if (controller
+                                                .daysList[0].isSelect.isFalse) {
+                                              print(controller
+                                                  .sundaydailySpecialItemList);
+                                              controller
+                                                  .sundaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -147,6 +155,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                       .isSelect.value;
                                               controller.dailyspecialmonDay =
                                                   controller.daysList[1].day;
+                                              if (controller.daysList[1]
+                                                  .isSelect.isFalse) {
+                                                print(controller
+                                                    .mondaydailySpecialItemList);
+                                                controller
+                                                    .mondaydailySpecialItemList
+                                                    .clear();
+                                              }
                                             }),
                                       ),
                                     ),
@@ -199,6 +215,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                     .daysList[2].isSelect.value;
                                             controller.dailyspecialtuesDay =
                                                 controller.daysList[2].day;
+                                            if (controller
+                                                .daysList[2].isSelect.isFalse) {
+                                              print(controller
+                                                  .tuesdaydailySpecialItemList);
+                                              controller
+                                                  .tuesdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -252,6 +276,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                     .daysList[3].isSelect.value;
                                             controller.dailyspecialwedDay =
                                                 controller.daysList[3].day;
+                                            if (controller
+                                                .daysList[3].isSelect.isFalse) {
+                                              print(controller
+                                                  .wednesdaydailySpecialItemList);
+                                              controller
+                                                  .wednesdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -305,6 +337,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                     .daysList[4].isSelect.value;
                                             controller.dailyspecialthursDay =
                                                 controller.daysList[4].day;
+                                            if (controller
+                                                .daysList[4].isSelect.isFalse) {
+                                              print(controller
+                                                  .thursdaydailySpecialItemList);
+                                              controller
+                                                  .thursdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -358,6 +398,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                     .daysList[5].isSelect.value;
                                             controller.dailyspecialfriDay =
                                                 controller.daysList[5].day;
+                                            if (controller
+                                                .daysList[5].isSelect.isFalse) {
+                                              print(controller
+                                                  .fridaydailySpecialItemList);
+                                              controller
+                                                  .fridaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -411,6 +459,14 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                                     .daysList[6].isSelect.value;
                                             controller.dailyspecialsaturDay =
                                                 controller.daysList[6].day;
+                                            if (controller
+                                                .daysList[6].isSelect.isFalse) {
+                                              print(controller
+                                                  .saturdaydailySpecialItemList);
+                                              controller
+                                                  .saturdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -2284,6 +2340,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                     onTap: () {
                       controller.sundaydailySpecialItemList[x]['controller']
                           .clear();
+                      controller.sundaydailySpecialItemList[x]['discount'] = '';
                     },
                     onChanged: (val) {
                       controller.sundaydailySpecialItemList[x]['price'] = val;
@@ -2311,7 +2368,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                     .clear(),
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) {},
+                                onChanged: (val) {
+                                  controller.sundaydailySpecialItemList[x]
+                                      ['price'] = "";
+                                  controller.sundaydailySpecialItemList[x]
+                                      ['discount'] = val;
+                                },
                                 decoration: InputDecoration(
                                   // hintText: "Enter Discount",
                                   hintStyle:
@@ -2341,10 +2403,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                         value: items, child: Text(items));
                                   }).toList(),
                                   onChanged: (String? newValue) {
-                                    controller.foodList[index].dropDown[0] =
-                                        newValue!;
-                                    controller.foodList[index].dropDown[1] =
-                                        newValue;
+                                    controller.sundaydailySpecialItemList[x]
+                                        ['discountIcon'] = newValue;
+                                    // controller.foodList[index].dropDown[0] =
+                                    //     newValue!;
+                                    // controller.foodList[index].dropDown[1] =
+                                    //     newValue;
                                   },
                                 ),
                               ),
@@ -2419,6 +2483,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                           ),
                         ),
                         isExpanded: true,
+                        value: controller.sundaydailySpecialItemList[x]
+                        ?['fromTime'] ??
+                            "01:00 AM",
                         hint: Text(
                           controller.sundaydailySpecialItemList[x]?['fromTime'],
                           style: const TextStyle(
@@ -2465,7 +2532,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 0.0, 2.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -2473,6 +2540,8 @@ class EditDailySpecialScreen extends GetView<EditController> {
                           ),
                         ),
                         isExpanded: true,
+                        value: controller.sundaydailySpecialItemList[x]
+                        ?['toTime'],
                         hint: Text(
                           controller.sundaydailySpecialItemList[x]?['toTime'],
                           style: const TextStyle(
@@ -2792,6 +2861,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                   onTap: () {
                     controller.mondaydailySpecialItemList[x]['controller']
                         .clear();
+                    controller.mondaydailySpecialItemList[x]['discount'] = '';
                   },
                   onChanged: (val) {
                     controller.mondaydailySpecialItemList[x]['price'] = val;
@@ -2828,7 +2898,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.mondaydailySpecialItemList[x]
+                                    ['price'] = "";
+                                controller.mondaydailySpecialItemList[x]
+                                    ['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -2857,10 +2932,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller.mondaydailySpecialItemList[x]
+                                      ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3320,6 +3397,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         .clear();
                   },
                   onChanged: (val) {
+                    controller.tuesdaydailySpecialItemList[x]['discount'] = '';
                     controller.tuesdaydailySpecialItemList[x]['price'] = val;
                   },
                   keyboardType: TextInputType.number,
@@ -3354,7 +3432,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.tuesdaydailySpecialItemList[x]
+                                    ['price'] = "";
+                                controller.tuesdaydailySpecialItemList[x]
+                                    ['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3371,7 +3454,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                           ),
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(0.0),
                               child: DropdownButton(
                                 underline: Container(),
                                 isExpanded: true,
@@ -3383,10 +3466,13 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  controller.tuesdaydailySpecialItemList[x]
+                                      ['discountIcon'] = newValue;
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+
                                   controller.update();
                                 },
                               ),
@@ -3464,19 +3550,22 @@ class EditDailySpecialScreen extends GetView<EditController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                            EdgeInsets.fromLTRB(16.0, 0, 2.0, 0.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(45)),
                         ),
                       ),
+                      value: controller.tuesdaydailySpecialItemList[x]
+                              ?['fromTime'] ??
+                          "01:00 AM",
                       isExpanded: true,
-                      hint: Text(
-                        controller.tuesdaydailySpecialItemList[x]?['fromTime'],
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.black),
-                      ),
+                      // hint: Text(
+                      //   controller.tuesdaydailySpecialItemList[x]?['fromTime'],
+                      //   style:
+                      //       const TextStyle(fontSize: 14, color: Colors.black),
+                      // ),
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
@@ -3515,7 +3604,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                            EdgeInsets.fromLTRB(16.0, 0.0, 2.0, 0.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -3844,6 +3933,8 @@ class EditDailySpecialScreen extends GetView<EditController> {
                   },
                   onChanged: (val) {
                     controller.wednesdaydailySpecialItemList[x]['price'] = val;
+                    controller.wednesdaydailySpecialItemList[x]['discount'] =
+                        "";
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -3868,7 +3959,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.wednesdaydailySpecialItemList[x]
+                                    ['price'] = "";
+                                controller.wednesdaydailySpecialItemList[x]
+                                    ['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3885,7 +3981,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                           ),
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(0.0),
                               child: DropdownButton(
                                 underline: Container(),
                                 isExpanded: true,
@@ -3897,10 +3993,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  controller.wednesdaydailySpecialItemList[x]
+                                      ['discountIcon'] = newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
                                   controller.update();
                                 },
                               ),
@@ -3977,20 +4075,23 @@ class EditDailySpecialScreen extends GetView<EditController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                            EdgeInsets.fromLTRB(16.0, 0.0, 2.0, 0.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(45)),
                         ),
                       ),
+                      value: controller.wednesdaydailySpecialItemList[x]
+                              ?['fromTime'] ??
+                          "01:00 AM",
                       isExpanded: true,
-                      hint: Text(
-                        controller.wednesdaydailySpecialItemList[x]
-                            ?['fromTime'],
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.black),
-                      ),
+                      // hint: Text(
+                      //   controller.wednesdaydailySpecialItemList[x]
+                      //       ?['fromTime'],
+                      //   style:
+                      //       const TextStyle(fontSize: 14, color: Colors.black),
+                      // ),
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
@@ -4029,7 +4130,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                            EdgeInsets.fromLTRB(10.0, 0.0, 2.0, 0.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -4037,6 +4138,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.wednesdaydailySpecialItemList[x]
+                              ?['toTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.wednesdaydailySpecialItemList[x]?['toTime'],
                         style:
@@ -4052,8 +4156,10 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                     color: Colors.black,
                                     fontSize: 14,
                                   ),
+                                  maxLines: 1,
                                 ),
-                              ))
+                              ),
+                      )
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -4360,6 +4466,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         .clear();
                   },
                   onChanged: (val) {
+                    controller.thursdaydailySpecialItemList[x]['discount'] = "";
                     controller.thursdaydailySpecialItemList[x]['price'] = val;
                   },
                   keyboardType: TextInputType.number,
@@ -4395,7 +4502,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.thursdaydailySpecialItemList[x]
+                                    ['price'] = "";
+                                controller.thursdaydailySpecialItemList[x]
+                                    ['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4424,10 +4536,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  controller.thursdaydailySpecialItemList[x]
+                                      ['discountIcon'] = newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
                                   controller.update();
                                 },
                               ),
@@ -4512,6 +4626,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.thursdaydailySpecialItemList[x]
+                      ?['fromTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.thursdaydailySpecialItemList[x]?['fromTime'],
                         style:
@@ -4563,6 +4680,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.thursdaydailySpecialItemList[x]
+                      ?['toTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.thursdaydailySpecialItemList[x]?['toTime'],
                         style:
@@ -4883,6 +5003,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                   },
                   onChanged: (val) {
                     controller.fridaydailySpecialItemList[x]['price'] = val;
+                    controller.fridaydailySpecialItemList[x]['discount'] = "";
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -4916,7 +5037,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.fridaydailySpecialItemList[x]
+                                    ['price'] = "";
+                                controller.fridaydailySpecialItemList[x]
+                                    ['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4945,10 +5071,8 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  controller.fridaydailySpecialItemList[x]
+                                      ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -5033,6 +5157,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.fridaydailySpecialItemList[x]
+                      ?['fromTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.fridaydailySpecialItemList[x]?['fromTime'],
                         style:
@@ -5084,6 +5211,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.fridaydailySpecialItemList[x]
+                      ?['toTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.fridaydailySpecialItemList[x]?['toTime'],
                         style:
@@ -5407,6 +5537,7 @@ class EditDailySpecialScreen extends GetView<EditController> {
                   },
                   onChanged: (val) {
                     controller.saturdaydailySpecialItemList[x]['price'] = val;
+                    controller.saturdaydailySpecialItemList[x]['discount'] = '';
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -5441,7 +5572,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.saturdaydailySpecialItemList[x]
+                                    ['price'] = '';
+                                controller.saturdaydailySpecialItemList[x]
+                                    ['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -5470,10 +5606,12 @@ class EditDailySpecialScreen extends GetView<EditController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  controller.saturdaydailySpecialItemList[x]
+                                      ['discountIcon'] = newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
                                   controller.update();
                                 },
                               ),
@@ -5548,6 +5686,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.saturdaydailySpecialItemList[x]
+                      ?['fromTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.saturdaydailySpecialItemList[x]?['fromTime'],
                         style:
@@ -5599,6 +5740,9 @@ class EditDailySpecialScreen extends GetView<EditController> {
                         ),
                       ),
                       isExpanded: true,
+                      value: controller.saturdaydailySpecialItemList[x]
+                      ?['toTime'] ??
+                          "01:00 AM",
                       hint: Text(
                         controller.saturdaydailySpecialItemList[x]?['toTime'],
                         style:

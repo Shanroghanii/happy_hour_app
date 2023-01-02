@@ -262,6 +262,8 @@ class GuestDrinksScreen extends GetView<GuestController> {
                                         TextEditingController();
                                     controller.localdrinkList[index]
                                         .discountController?.text = "";
+                                    controller.localdrinkList[index]
+                                        .discount = 0;
                                     controller.update();
                                   },
                                   textEditingController: controller
@@ -269,6 +271,7 @@ class GuestDrinksScreen extends GetView<GuestController> {
                                   onChanged: (val) {
                                     controller.localdrinkList[index].price =
                                         val;
+                                    controller.localdrinkList[index].discount = 0;
                                   },
                                   keyboardType: TextInputType.number,
                                 ),
@@ -303,6 +306,7 @@ class GuestDrinksScreen extends GetView<GuestController> {
                                                   keyboardType:
                                                       TextInputType.number,
                                                   onChanged: (val) {
+                                                    controller.localdrinkList[index].price = "";
                                                     controller
                                                             .localdrinkList[index]
                                                             .discount =
@@ -367,6 +371,8 @@ class GuestDrinksScreen extends GetView<GuestController> {
                                                       controller
                                                           .localdrinkList[index]
                                                           .dropDown[1] = newValue;
+                                                      controller
+                                                          .localdrinkList[index].discounticon = newValue;
                                                       controller.update();
                                                     },
                                                   ),
@@ -425,7 +431,8 @@ class GuestDrinksScreen extends GetView<GuestController> {
                                               onChanged: (v) {
                                                 controller
                                                     .showLateTimeDrink(index);
-                                              }),
+                                              },
+                                          ),
 
                                           Flexible(
                                             child: Padding(
@@ -490,10 +497,18 @@ class GuestDrinksScreen extends GetView<GuestController> {
                                     textColor: blackColor,
                                     text: ("Add"),
                                     onPressed: () {
-                                      controller.addDrinksmanually();
-                                      Navigator.pop(context);
-                                      controller.addDrinksManuallyController
-                                          .clear();
+                                      if(controller.addDrinksManuallyController.text.trim() != "") {
+                                        controller.addDrinksmanually();
+                                        Navigator.pop(context);
+                                        controller.addDrinksManuallyController
+                                            .clear();
+                                      }else {
+                                        Get.find<GlobalGeneralController>()
+                                            .errorSnackbar(
+                                            title: "Error",
+                                            description:
+                                            "Please add drink");
+                                      }
                                     }),
                                 controller.addDrinksManuallyController,
                               );
@@ -618,6 +633,10 @@ class GuestDrinksScreen extends GetView<GuestController> {
                 }
                 if (a.length == controller.localdrinkList.length) {
                   Get.toNamed(Routes.guestDailySpecialScreen);
+                }else{
+                  Get.find<GlobalGeneralController>().errorSnackbar(
+                      title: "Error",
+                      description: "Drink Size and Price/Discount Is Required");
                 }
               }
             },

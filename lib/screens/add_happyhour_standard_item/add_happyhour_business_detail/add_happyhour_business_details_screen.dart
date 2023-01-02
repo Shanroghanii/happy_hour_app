@@ -46,6 +46,8 @@ class AddHappyHourBusinessDetailScreen extends GetView<AddHappyhourController> {
               radius: const Radius.circular(20),
               thickness: 10,
               child: ListView(
+                controller: controller.scrollController
+                ,
                 children: [
                   SizedBox(
                     height: H * 0.009,
@@ -519,14 +521,16 @@ class AddHappyHourBusinessDetailScreen extends GetView<AddHappyhourController> {
                     ),
                     child: CustomElevatedButtonWidget(
                       onPressed: () {
+                        var index = controller.dayTimeList.where((e) => e.isSelect.isTrue).length;
+
                         if (controller.hfromTime != null &&
-                            controller.htoTime != null) {
+                            controller.htoTime != null && index != 0) {
                           controller.showDayList = true;
 
                           controller.update();
                         } else {
                           Get.find<GlobalGeneralController>().errorSnackbar(
-                              title: "Time", description: "Select Time ");
+                              title: "Time", description: "Select Time and day ");
                         }
                       },
                       verticalPadding: 0,
@@ -1297,8 +1301,10 @@ class AddHappyHourBusinessDetailScreen extends GetView<AddHappyhourController> {
                           ),
                           CustomElevatedButtonWidget(
                             onPressed: () {
+                              var index = controller.dayTimeList.where((e) => e.isLate.isTrue).length;
+
                               if (controller.hfromTime2 != null &&
-                                  controller.htoTime2 != null) {
+                                  controller.htoTime2 != null && index != 0) {
                                 controller.showLateDayList = true;
                                 controller.lateHappyHourForValidationOnly = true;
                                 controller.update();
@@ -1306,7 +1312,7 @@ class AddHappyHourBusinessDetailScreen extends GetView<AddHappyhourController> {
                                 Get.find<GlobalGeneralController>()
                                     .errorSnackbar(
                                         title: "Time",
-                                        description: "Select Time ");
+                                        description: "Select Time and days ");
                               }
                             },
                             horizontalPadding: 40,

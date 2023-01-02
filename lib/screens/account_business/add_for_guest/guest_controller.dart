@@ -594,6 +594,7 @@ class GuestController extends GetxController {
         quantity: 0,
         price: "",
         discount: 0,
+        discountIcon: "%",
         dropDown: ["%", "\$"],
         priceController: TextEditingController(),
         earlyFood: true.obs,
@@ -612,6 +613,7 @@ class GuestController extends GetxController {
           quantity: 0,
           price: "",
           discount: 0,
+          discountIcon: "%",
           dropDown: ["%", "\$"],
           priceController: TextEditingController(),
           earlyFood: true.obs,
@@ -873,6 +875,7 @@ class GuestController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -886,6 +889,7 @@ class GuestController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -899,6 +903,7 @@ class GuestController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -912,6 +917,7 @@ class GuestController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -925,6 +931,7 @@ class GuestController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -937,6 +944,7 @@ class GuestController extends GetxController {
         "name": e['name'],
         "quantity": e['quantity'],
         "price": e["price"],
+        "discountIcon": e["discountIcon"],
         "discount": e["discount"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
@@ -951,6 +959,7 @@ class GuestController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -976,6 +985,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsunDay,
       "fromTime": dailySpecialfromtime,
@@ -1012,6 +1022,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialmonDay,
       "fromTime": dailySpecialfromtime,
@@ -1029,6 +1040,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsunDay,
       "fromTime": dailySpecialfromtime,
@@ -1046,6 +1058,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialmonDay,
       "fromTime": dailySpecialfromtime,
@@ -1063,6 +1076,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialtuesDay,
       "fromTime": dailySpecialfromtime,
@@ -1080,6 +1094,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialwedDay,
       "fromTime": dailySpecialfromtime,
@@ -1097,6 +1112,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialthursDay,
       "fromTime": dailySpecialfromtime,
@@ -1114,6 +1130,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialfriDay,
       "fromTime": dailySpecialfromtime,
@@ -1131,6 +1148,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsaturDay,
       "fromTime": dailySpecialfromtime,
@@ -1167,6 +1185,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialtuesDay,
       "fromTime": dailySpecialfromtime,
@@ -1203,6 +1222,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialwedDay,
       "fromTime": dailySpecialfromtime,
@@ -1239,6 +1259,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialthursDay,
       "fromTime": dailySpecialfromtime,
@@ -1275,6 +1296,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialfriDay,
       "fromTime": dailySpecialfromtime,
@@ -1311,6 +1333,7 @@ class GuestController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsaturDay,
       "fromTime": dailySpecialfromtime,
@@ -1466,6 +1489,7 @@ class GuestController extends GetxController {
       Get.find<GlobalGeneralController>().errorSnackbar(
           title: "Error", description: "Fill All The Required Fields");
     } else if (index == 0) {
+      addToDailyySpecial();
       Get.toNamed(Routes.guestAmenitiesScreen);
     } else if (isSunday == false ||
         isMonday == false ||
@@ -1491,10 +1515,9 @@ class GuestController extends GetxController {
           isFridayQuantityV &&
           isSaturday &&
           isSatudaryQuantityV) {
+        addToDailyySpecial();
         Get.toNamed(Routes.guestAmenitiesScreen);
       }
-
-      addToDailyySpecial();
     }
   }
 
@@ -1698,13 +1721,18 @@ class GuestController extends GetxController {
     // BarType(isSelect: false.obs, barType: "Strip Club"),
   ];
 
-  void updateBartype() async {
-    for (var e in barTypeList) {
-      if (e.isSelect.value == true) {
-        barType = e.barType;
-        update();
-      }
+  void updateBartype(index) async {
+    if (barTypeList[index].isSelect.isTrue) {
+      barTypeAddList.add(barTypeList[index].barType);
+    } else if (barTypeAddList.contains(barTypeList[index].barType)) {
+      barTypeAddList.remove(barTypeList[index].barType);
     }
+    // for (var e in barTypeList) {
+    //   if (e.isSelect.isTrue) {
+    //     barType = e.barType;
+    //     update();
+    //   }
+    // }
   }
 
   //*Event Section*//
@@ -1817,12 +1845,24 @@ class GuestController extends GetxController {
   String? eventname = "";
 
   eventListadded(index) {
-    selectedEvent.add({
-      "name": eventList[index].event,
-      "day": day,
-      "fromtime": eventStarttime,
-      "totime": eventendtime
+    bool isAlreadyExist = false;
+    selectedEvent.forEach((element) {
+      if (element['name'] == eventList[index].event) {
+        isAlreadyExist = true;
+      }
     });
+    if (!isAlreadyExist) {
+      selectedEvent.add({
+        "name": eventList[index].event,
+        "day": day,
+        "fromtime": eventStarttime,
+        "totime": eventendtime
+      });
+    } else {
+      selectedEvent
+          .removeWhere((element) => element['name'] == eventList[index].event);
+    }
+    print(selectedEvent.toString());
     update();
   }
 
@@ -1872,24 +1912,128 @@ class GuestController extends GetxController {
 
   final businessKey = GlobalKey<FormState>();
 
+  // void onDayTimeNextTap() {
+  //   var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
+  //   if (index == 0) {
+  //     Get.toNamed(Routes.guestFoodItemScreen);
+  //   }
+  //   if (!businessKey.currentState!.validate()) {
+  //     Get.find<GlobalGeneralController>().errorSnackbar(
+  //         title: "Select Time", description: "Please Select all the Time");
+  //   }
+  //   if (businessKey.currentState!.validate()) {
+  //     for (var i = 0; i < dayTimeList.length; i++) {
+  //       if (dayTimeList[i].isSelect.isTrue &&
+  //           dayTimeList[i].fromTime != "" &&
+  //           dayTimeList[i].toTime != "") {
+  //         Get.toNamed(Routes.guestFoodItemScreen);
+  //       }
+  //     }
+  //   }
+  // }
+
+  final ScrollController scrollController = ScrollController();
+  final double _height = 100.0;
+
+  void animateToIndex(int index) {
+    scrollController.animateTo(
+      index * _height,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  bool lateHappyHourForValidationOnly = false;
+
   void onDayTimeNextTap() {
     var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
+
     if (index == 0) {
-      Get.toNamed(Routes.guestFoodItemScreen);
-    }
-    if (!businessKey.currentState!.validate()) {
-      Get.find<GlobalGeneralController>().errorSnackbar(
-          title: "Select Time", description: "Please Select all the Time");
-    }
-    if (businessKey.currentState!.validate()) {
-      for (var i = 0; i < dayTimeList.length; i++) {
-        if (dayTimeList[i].isSelect.isTrue &&
-            dayTimeList[i].fromTime != "" &&
-            dayTimeList[i].toTime != "") {
+      print("1");
+      if (showLateDayList) {
+        print("2");
+        if (showLateDayList) {
+          print("3");
           Get.toNamed(Routes.guestFoodItemScreen);
+        } else {
+          print("4");
+          Get.find<GlobalGeneralController>().errorSnackbar(
+              title: "Late Happy Hour",
+              description: "Please Select all the Time");
         }
+      } else {
+        print("5");
+        if (!businessKey.currentState!.validate()) {
+          print("6");
+          Get.find<GlobalGeneralController>().errorSnackbar(
+              title: "Select Time", description: "Please Select all the Time");
+        } else {
+          print("7");
+          if (businessKey.currentState!.validate()) {
+            print("8");
+            for (var i = 0; i < dayTimeList.length; i++) {
+              if (dayTimeList[i].isSelect.isTrue &&
+                  dayTimeList[i].fromTime != "" &&
+                  dayTimeList[i].toTime != "") {
+                print("9");
+
+                Get.toNamed(Routes.guestFoodItemScreen);
+              }
+            }
+            Get.toNamed(Routes.guestFoodItemScreen);
+          }
+        }
+        Get.toNamed(Routes.guestFoodItemScreen);
+      }
+    } else {
+      if (showLate) {
+        print("10");
+        if (lateHappyHourForValidationOnly) {
+          print("11");
+          Get.toNamed(Routes.guestFoodItemScreen);
+        } else {
+          Get.find<GlobalGeneralController>().errorSnackbar(
+              title: "Select Time",
+              description: "Please Select late time offer");
+        }
+      } else {
+        print("12");
+        Get.toNamed(Routes.guestFoodItemScreen);
       }
     }
+
+    // var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
+    // if (index == 0) {
+    //   Get.toNamed(Routes.businessFoodItemScreen);
+    // }
+    // if (!businessKey.currentState!.validate()) {
+    //   Get.find<GlobalGeneralController>().errorSnackbar(
+    //       title: "Select Time", description: "Please Select all the Time");
+    // }
+    // if (businessKey.currentState!.validate()) {
+    //   for (var i = 0; i < dayTimeList.length; i++) {
+    //     if (dayTimeList[i].isSelect.isTrue &&
+    //         dayTimeList[i].fromTime != "" &&
+    //         dayTimeList[i].toTime != "") {
+    //       Get.toNamed(Routes.businessFoodItemScreen);
+    //     }
+    //   }
+    // }else {
+    //   if (showLate) {
+    //     print("10");
+    //     if (lateHappyHourForValidationOnly) {
+    //       print("11");
+    //       Get.toNamed(Routes.addHappyHourFoodItemScreen);
+    //     } else {
+    //       Get.find<GlobalGeneralController>().errorSnackbar(
+    //           title: "Select Time",
+    //           description: "Please Select late time offer");
+    //     }
+    //   } else {
+    //     print("12");
+    //     Get.toNamed(Routes.addHappyHourFoodItemScreen);
+    //   }
+    // }
   }
 
   final _showDaysList = false.obs;
@@ -1912,6 +2056,15 @@ class GuestController extends GetxController {
     });
   }
 
+  void removeToHday(int i) {
+    hDayTimeList
+        .removeWhere((element) => element['Hday'] == dayTimeList[i].day);
+    // hDayTimeList.remove({
+    //   "Hday": dayTimeList[i].day,
+    //   "HfromTime": hFromTime,
+    //   "HtoTime": hToTime,
+    // });
+  }
   void hDayTimeSecond(index) {
     var a = hDayTimeLateList
         .where((e) => e['Hday2'].toString() == dayTimeList[index].day)
@@ -1939,6 +2092,15 @@ class GuestController extends GetxController {
       "HfromTime2": hFromTime2,
       "HtoTime2": hToTime2,
     });
+  }
+  void removeToHdaySecond(int i) {
+    hDayTimeLateList
+        .removeWhere((element) => element['Hday2'] == dayTimeList[i].day);
+    // hDayTimeLateList.remove({
+    //   "Hday2": dayTimeList[i].day,
+    //   "HfromTime2": hFromTime2,
+    //   "HtoTime2": hToTime2,
+    // });
   }
 
   void onBusinessnextTap() {
@@ -1977,6 +2139,7 @@ class GuestController extends GetxController {
                   "foodname": e.name,
                   "foodcount": e.quantity,
                   "fooddiscount": e.discount,
+                  "discountIcon": e.discountIcon,
                   "foodprice": e.price,
                   "early": e.earlyFood.value,
                   "late": e.lateFood.value,
@@ -2119,6 +2282,7 @@ class LocalFoodModel {
   late int quantity;
   late String price;
   late int discount;
+  late String discountIcon;
   List<String> dropDown;
   TextEditingController priceController;
   TextEditingController? discountController;
@@ -2132,6 +2296,7 @@ class LocalFoodModel {
     required this.price,
     required this.discount,
     required this.dropDown,
+    required this.discountIcon,
     required this.priceController,
     this.discountController,
     required this.earlyFood,

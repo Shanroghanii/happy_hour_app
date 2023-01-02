@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../core/constants.dart';
+import '../edit_screens/edit_controller.dart';
 
 class EditDetailScreen extends GetView<EditDetailScreenController> {
   const EditDetailScreen({Key? key}) : super(key: key);
@@ -285,182 +286,273 @@ class Reviews extends GetView<EditDetailScreenController> {
   }
 }
 
-class OverView extends GetView<EditDetailScreenController> {
+class OverView extends GetView<EditController> {
   const OverView({
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return  Padding(
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            height: H * 0.01,
-          ),
-          const Text(
-            "Happy Hour Times",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            height: H * 0.01,
-          ),
-          GridView.builder(
-            physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 32 / 2,
-              crossAxisCount: 1,
-            ),
-            shrinkWrap: true,
-            itemCount: controller.happyHour.day?.length ?? 0,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: SizedBox(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: W * 0.4,
-                        child: Text(
-                            "• ${controller.happyHour.day?[index]['Hday'].toString()}"),
-                      ),
-                      Text(
-                          "${controller.happyHour.day?[index]['HfromTime'].toString()} - ${controller.happyHour.day?[index]['HtoTime'].toString()}"),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-          const Text(
-            "Description",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Description",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+
+            ],
           ),
           SizedBox(
             height: H * 0.01,
           ),
           Text(
-            controller.happyHour.description ?? "",
+            controller.descriptionController.text
+                .toString() ==
+                ""
+                ? controller.hour.description.toString()
+                : controller.descriptionController.text
+                .toString(),
             textAlign: TextAlign.left,
+
             // overflow: TextOverflow.ellipsis,
             //softWrap: false,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+            style: const TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w300),
           ),
-          SizedBox(
-            height: H * 0.01,
-          ),
-          const Text(
-            "Happy Hour Menu",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            height: H * 0.01,
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(() => DetailScreen(
-                  tag: "tag",
-                  image: controller.happyHour.menuImage.toString()));
-            },
-            child: Container(
-              height: H * 0.3,
-              width: W,
-              decoration: BoxDecoration(
-                border: Border.all(width: 4, color: primary),
-              ),
-              child: Image.network(
-                controller.happyHour.menuImage.toString(),
-                fit: BoxFit.cover,
-              ),
 
-              // InteractiveViewer(
-              //   panEnabled: false,
-              //   clipBehavior: Clip.none,
-              //   minScale: 1,
-              //   maxScale: 4,
-              //   child: AspectRatio(
-              //     aspectRatio: 1,
-              //     child: ClipRRect(
-              //       child: Hero(
-              //         tag: "Image Hero",
-              //         child: Image.network(
-              //           controller.happyHour.menuImage.toString(),
-              //           fit: BoxFit.cover,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-            ),
-          ),
-          // Image.network(controller.happyHour.menuImage.toString()),
-          //  SizedBox(
-          //     width: W,
-          //     height: H * 0.3,
-          //     child: PhotoView(
-          //       initialScale: PhotoViewComputedScale.covered,
-          //       imageProvider: NetworkImage(
-          //         (controller.happyHour.menuImage),
-          //       ),
-          //     ),
-          //   ),
           SizedBox(
-            height: H * 0.02,
+            height: H * 0.01,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Happy Hour Menu",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+
+            ],
+          ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+
+
+          SizedBox(
+            height: H * 0.25,
+            width: W * 1.2,
+            child:
+            Swiper(
+              //physics: const NeverScrollableScrollPhysics(),
+              itemCount: controller.menuImageList.length,
+              pagination: const SwiperPagination(),
+              viewportFraction: 1,
+              scale: 1,
+              loop: false,
+              itemBuilder: (BuildContext context, int i) {
+                return Container(
+                  height: H * 0.3,
+                  width: W,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 4, color: primary),
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => DetailScreen(
+                          tag: "tag",
+                          image: controller.menuImageList[i].toString()));
+                    },
+                    child: Image.network(
+                      controller.menuImageList[i],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+
+                //  Image.network(
+                //   controller.imageList[index],
+                //   // controller.happyHour.businessImage?.toString() ??
+                //   //     controller.happyHour.menuImage.toString(),
+                //   fit: BoxFit.fitWidth,
+                // );
+              },
+            ),
+          ),
+
+          SizedBox(
+            height: H * 0.01,
+          ),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Happy Hour Times",
+                style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.w600, color: primary),
+              ),
+
+            ],
+          ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          GridView.builder(
+            physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              //  mainAxisExtent: 1,
+              childAspectRatio: 30 / 2,
+              crossAxisCount: 1,
+            ),
+            shrinkWrap: true,
+            itemCount: controller.hDayTimeList.isEmpty
+                ? controller.hour.day?.length
+                : controller.hDayTimeList.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  controller.dayTimeList.isEmpty
+                      ? Row(
+                    children: [
+                      SizedBox(
+                        width: W * 0.25,
+                        child: Text(
+                            "•  ${controller.hour.day?[index]['Hday']}"),
+                      ),
+                      Text(
+                        "    ${controller.hour.day?[index]['HfromTime']}  -"
+                            "    ${controller.hour.day?[index]['HtoTime']}",
+                      ),
+                    ],
+                  )
+                      : controller.hDayTimeList.isNotEmpty
+                      ? Row(
+                    children: [
+                      SizedBox(
+                        width: W * 0.25,
+                        child: Text(
+                            "•  ${controller.hDayTimeList[index]['Hday']}"),
+                      ),
+                      Text(
+                          " ${controller.hDayTimeList[index]['HfromTime']}   -"
+                              "   ${controller.hDayTimeList[index]['HtoTime']}"),
+                    ],
+                  )
+                      : const SizedBox(),
+
+                  // Text(controller.dayTimeList.isEmpty
+                  //     ? "•  ${controller.hour.day?[index]['Hday']}"
+                  //         "    ${controller.hour.day?[index]['HfromTime']} -"
+                  //         "    ${controller.hour.day?[index]['HtoTime']}"
+                  //     : controller.hDayTimeList.isNotEmpty
+                  //         ? "•  ${controller.hDayTimeList[index]['Hday']}"
+                  //             "    ${controller.hDayTimeList[index]['HfromTime']} -"
+                  //             "    ${controller.hDayTimeList[index]['HtoTime']}"
+                  //         : ""),
+                ],
+              );
+            },
+          ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
             children: const [
               Text(
                 "Food Items",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
-              Text(
-                "Quantity",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                "Price/Discount",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
+
             ],
           ),
+          Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Name",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Quantity",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Price/Discount",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ]),
           SizedBox(
             height: H * 0.01,
           ),
-          ListView.builder(
+          GridView.builder(
             physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              //  mainAxisExtent: 1,
+              childAspectRatio: 24 / 2,
+              crossAxisCount: 1,
+            ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.foodName?.length ?? 0,
+            itemCount: controller.foodList.isEmpty
+                ? controller.hour.foodName?.length
+                : controller.foodList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: W * 0.32,
-                      child: Text(
-                        "• ${controller.happyHour.foodName?[index]["foodname"]}",
-                        maxLines: 1,
-                      ),
-                    ),
-                    SizedBox(
-                      width: W * 0.25,
-                      child: Text(
-                          "• ${controller.happyHour.foodName?[index]["foodcount"]}"),
-                    ),
-                    SizedBox(
-                      width: W * 0.2,
-                      child: Text("${controller.happyHour.foodName?[index]["foodprice"]}" !=
-                              ""
-                          ? "• \$ ${controller.happyHour.foodName?[index]["foodprice"]}"
-                          : "• \$ ${controller.happyHour.foodName?[index]["foodcount"]}"),
-                    ),
-                  ],
-                ),
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: W * 0.28,
+                    child: Text(controller.foodList.isEmpty
+                        ? "•  ${controller.hour.foodName?[index]['foodname']}"
+                        : "•  ${controller.foodList[index].name}"),
+                  ),
+                  SizedBox(
+                    width: W * 0.23,
+                    child: Text(controller.foodList.isEmpty
+                        ? "•  ${controller.hour.foodName?[index]['foodcount']}"
+                        : "•  ${controller.foodList[index].quantity}"),
+                  ),
+                  controller.foodList[index].price != "" ? SizedBox(
+                    width: W * 0.25,
+                    child: controller.foodList[index].price != "" ? Text(controller.foodList.isEmpty
+                        ? (controller.hour.foodName?[index]['foodprice']) == "" ? "" : "•  \$${controller.hour.foodName?[index]['foodprice']}"
+                        : controller.foodList[index].price == "" ? "" : "•  \$${controller.foodList[index].price}") : const Text(""),
+                  ):
+                  SizedBox(
+                    width: W * 0.25,
+                    child: controller
+                        .foodList[index].discount
+                        .toString() !=
+                        '0'
+                        ? Text(controller.foodList.isEmpty
+                        ? "• ${controller.hour.foodName?[index]['fooddiscount']} off"
+                        : "• ${controller.foodList[index].discount}${controller.foodList[index].discountIcon} off")
+                        : const Text(""),
+                  ),
+                ],
               );
             },
           ),
@@ -468,221 +560,606 @@ class OverView extends GetView<EditDetailScreenController> {
             height: H * 0.01,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
             children: const [
               Text(
-                "Drinks ",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                "Drink Items",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              Text(
-                "   Size",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                "Price/Discount",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
+
             ],
           ),
+          Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Name    ",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Size",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Price/Discount",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                // Text(
+                //   "",
+                //   style: TextStyle(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w600),
+                // ),
+              ]),
           SizedBox(
             height: H * 0.01,
           ),
-          ListView.builder(
+          GridView.builder(
             physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 24 / 2,
+              crossAxisCount: 1,
+            ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.drinkitemName?.length ?? 0,
+            itemCount: controller.localdrinkList.isEmpty
+                ? controller.hour.drinkitemName?.length
+                : controller.localdrinkList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: W * 0.3,
-                      child: Text(
-                        "• ${controller.happyHour.drinkitemName?[index]['drinkname']}",
-                        maxLines: 1,
-                      ),
+              return Row(
+                mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: W * 0.28,
+                    child: Text(
+                      controller.localdrinkList.isEmpty
+                          ? "•  ${controller.hour.drinkitemName?[index]['drinkname']}"
+                          : "•  ${controller.localdrinkList[index].name}",
                     ),
-                    SizedBox(
-                      width: W * 0.25,
-                      child: Text(
-                          "• ${controller.happyHour.drinkitemName?[index]['drinksize']}  ${controller.happyHour.drinkitemName?[index]['sizeIcon']}"),
+                  ),
+                  SizedBox(
+                    width: W * 0.23,
+                    child: Text(controller
+                        .localdrinkList.isEmpty
+                        ? "•  ${controller.hour.drinkitemName?[index]['drinksize']}${controller.hour.drinkitemName?[index]['drinksize']}"
+                        : "•  ${controller.localdrinkList[index].size}${controller.localdrinkList[index].sizeicon}",
                     ),
-                    SizedBox(
-                      width: W * 0.2,
-                      child: Text("${controller.happyHour.drinkitemName?[index]['drinkprice']}" !=
-                              ""
-                          ? "• \$ ${controller.happyHour.drinkitemName?[index]['drinkprice']}"
-                          : "• \$ ${controller.happyHour.drinkitemName?[index]['drinkdiscount']}"),
+                  ),
+                  controller.localdrinkList[index].price != "" ? SizedBox(
+                    width: W * 0.25,
+                    child: Text(
+                      controller
+                          .localdrinkList.isEmpty
+                          ? (controller.hour.drinkitemName?[index]['drinkprice']) == "" ? "" : "• \$${controller.hour.drinkitemName?[index]['drinkprice']}"
+                          : controller.localdrinkList[index].price == "" ? "" : "• \$${controller.localdrinkList[index].price}",
                     ),
-                  ],
-                ),
+                  ):
+                  SizedBox(
+                    width: W * 0.25,
+                    child: controller.localdrinkList[index]
+                        .discount
+                        .toString() !=
+                        '0'
+                        ? Text(
+                      controller
+                          .localdrinkList.isEmpty
+                          ? "• ${controller.hour.drinkitemName?[index]['drinkdiscount']} off"
+                          : "• ${controller.localdrinkList[index].discount}${controller.localdrinkList[index].discounticon} off",
+                      maxLines: 2,
+                    )
+                        : const Text(""),
+                  ),
+                ],
               );
             },
           ),
           SizedBox(
             height: H * 0.01,
           ),
-          const Text(
-            "Daily Specials",
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+
+          // const Text(
+          //   "Early Happy Hour time",
+          //   style: TextStyle(
+          //       fontSize: 14, fontWeight: FontWeight.w600),
+          // ),
+          // SizedBox(
+          //   height: H * 0.01,
+          // ),
+          // GridView.builder(
+          //   physics: const ScrollPhysics(),
+          //   gridDelegate:
+          //   const SliverGridDelegateWithFixedCrossAxisCount(
+          //     //  mainAxisExtent: 1,
+          //     childAspectRatio: 30 / 2,
+          //     crossAxisCount: 1,
+          //   ),
+          //   shrinkWrap: true,
+          //   itemCount: controller.hDayTimeList.isEmpty
+          //       ? controller.hour.day?.length
+          //       : controller.hDayTimeList.length,
+          //   itemBuilder: (context, index) {
+          //     return Column(
+          //       children: [
+          //         controller.dayTimeList.isEmpty
+          //             ? Row(
+          //           children: [
+          //             SizedBox(
+          //               width: W * 0.25,
+          //               child: Text(
+          //                   "•  ${controller.hour.day?[index]['Hday']}"),
+          //             ),
+          //             Text(
+          //               "    ${controller.hour.day?[index]['HfromTime']}  -"
+          //                   "    ${controller.hour.day?[index]['HtoTime']}",
+          //             ),
+          //           ],
+          //         )
+          //             : controller.hDayTimeList.isNotEmpty
+          //             ? Row(
+          //           children: [
+          //             SizedBox(
+          //               width: W * 0.25,
+          //               child: Text(
+          //                   "•  ${controller.hDayTimeList[index]['Hday']}"),
+          //             ),
+          //             Text(
+          //                 " ${controller.hDayTimeList[index]['HfromTime']}   -"
+          //                     "   ${controller.hDayTimeList[index]['HtoTime']}"),
+          //           ],
+          //         )
+          //             : const SizedBox(),
+          //
+          //         // Text(controller.dayTimeList.isEmpty
+          //         //     ? "•  ${controller.hour.day?[index]['Hday']}"
+          //         //         "    ${controller.hour.day?[index]['HfromTime']} -"
+          //         //         "    ${controller.hour.day?[index]['HtoTime']}"
+          //         //     : controller.hDayTimeList.isNotEmpty
+          //         //         ? "•  ${controller.hDayTimeList[index]['Hday']}"
+          //         //             "    ${controller.hDayTimeList[index]['HfromTime']} -"
+          //         //             "    ${controller.hDayTimeList[index]['HtoTime']}"
+          //         //         : ""),
+          //       ],
+          //     );
+          //   },
+          // ),
+          controller.hour.dayLate!.isNotEmpty || controller.hDayTimeLateList.isNotEmpty
+              ? const Text(
+            "Late Happy Hour Times",
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w600, color: primary),
+          )
+              : const SizedBox(),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          controller.hour.dayLate!.isNotEmpty || controller.hDayTimeLateList.isNotEmpty
+              ? GridView.builder(
+            physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 30 / 2,
+              crossAxisCount: 1,
+            ),
+            shrinkWrap: true,
+            itemCount: controller
+                .hDayTimeLateList.isEmpty
+                ? controller.hour.dayLate?.length
+                : controller.hDayTimeLateList.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  controller.hDayTimeLateList.isEmpty
+                      ? Row(
+                    children: [
+                      SizedBox(
+                        width: W * 0.25,
+                        child: Text(
+                            "•  ${controller.hour.dayLate?[index]['Hday2'].toString()}"),
+                      ),
+                      Text(
+                          "   ${controller.hour.dayLate?[index]['HfromTime2'].toString()}   -"
+                              "   ${controller.hour.dayLate?[index]['HtoTime2'].toString()}"),
+                    ],
+                  )
+                      : controller.hDayTimeLateList
+                      .isNotEmpty
+                      ? Row(
+                    children: [
+                      SizedBox(
+                        width: W * 0.25,
+                        child: Text(
+                            "•  ${controller.hDayTimeLateList[index]['Hday2']}"),
+                      ),
+                      Text(
+                        "  ${controller.hDayTimeLateList[index]['HfromTime2']}   -"
+                            "  ${controller.hDayTimeLateList[index]['HtoTime2']}",
+                      ),
+                    ],
+                  )
+                      : const SizedBox(),
+                ],
+              );
+            },
+          )
+              : const SizedBox(),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Late Food Items",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+
+            ],
+          ),
+          Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Name",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Quantity",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Price/Discount",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
+          ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          GridView.builder(
+            physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              //  mainAxisExtent: 1,
+              childAspectRatio: 24 / 2,
+              crossAxisCount: 1,
+            ),
+            shrinkWrap: true,
+            itemCount: controller.foodList.isEmpty
+                ? controller.hour.foodName?.length
+                : controller.foodList.length,
+            itemBuilder: (context, index) {
+              return controller.foodList[index].lateFood.isTrue ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: W * 0.28,
+                    child: Text(controller.foodList.isEmpty
+                        ? "•  ${controller.hour.foodName?[index]['foodname']}"
+                        : "•  ${controller.foodList[index].name}"),
+                  ),
+                  SizedBox(
+                    width: W * 0.23,
+                    child: Text(controller.foodList.isEmpty
+                        ? "•  ${controller.hour.foodName?[index]['foodcount']}"
+                        : "•  ${controller.foodList[index].quantity}"),
+                  ),
+                  controller.foodList[index].price != "" ? SizedBox(
+                    width: W * 0.25,
+                    child: controller.foodList[index].price != "" ? Text(controller.foodList.isEmpty
+                        ? (controller.hour.foodName?[index]['foodprice']) == "" ? "" : "•  \$${controller.hour.foodName?[index]['foodprice']}"
+                        : controller.foodList[index].price == "" ? "" : "•  \$${controller.foodList[index].price}") : const Text(""),
+                  ):
+                  SizedBox(
+                    width: W * 0.25,
+                    child: controller
+                        .foodList[index].discount
+                        .toString() !=
+                        '0'
+                        ? Text(controller.foodList.isEmpty
+                        ? "• ${controller.hour.foodName?[index]['fooddiscount']} off"
+                        : "• ${controller.foodList[index].discount}${controller.foodList[index].discountIcon} off")
+                        : const Text(""),
+                  ),
+                ],
+              ) : SizedBox();
+            },
           ),
           SizedBox(
             height: H * 0.01,
           ),
 
-          ListView.builder(
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Drink Items",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+            ],
+          ),
+          Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Name    ",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Size",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Price/Discount",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                // Text(
+                //   "",
+                //   style: TextStyle(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w600),
+                // ),
+              ]),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          GridView.builder(
             physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 24 / 2,
+              crossAxisCount: 1,
+            ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.dailySpecils?.length ?? 0,
+            itemCount:  controller.localdrinkList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
+              return controller.localdrinkList[index].lateDrink.isTrue ? Row(
+                mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: W * 0.28,
+                    child: Text(
+                      controller.localdrinkList.isEmpty
+                          ? "•  ${controller.hour.drinkitemName?[index]['drinkname']}"
+                          : "•  ${controller.localdrinkList[index].name}",
+                    ),
+                  ),
+                  SizedBox(
+                    width: W * 0.23,
+                    child: Text(controller
+                        .localdrinkList.isEmpty
+                        ? "•  ${controller.hour.drinkitemName?[index]['drinksize']}${controller.hour.drinkitemName?[index]['drinksize']}"
+                        : "•  ${controller.localdrinkList[index].size}${controller.localdrinkList[index].sizeicon}",
+                    ),
+                  ),
+                  controller.localdrinkList[index].price != "" ? SizedBox(
+                    width: W * 0.25,
+                    child: Text(
+                      controller
+                          .localdrinkList.isEmpty
+                          ? (controller.hour.drinkitemName?[index]['drinkprice']) == "" ? "" : "• \$${controller.hour.drinkitemName?[index]['drinkprice']}"
+                          : controller.localdrinkList[index].price == "" ? "" : "• \$${controller.localdrinkList[index].price}",
+                    ),
+                  ):
+                  SizedBox(
+                    width: W * 0.25,
+                    child: controller.localdrinkList[index]
+                        .discount
+                        .toString() !=
+                        '0'
+                        ? Text(
+                      controller
+                          .localdrinkList.isEmpty
+                          ? "• ${controller.hour.drinkitemName?[index]['drinkdiscount']} off"
+                          : "• ${controller.localdrinkList[index].discount}${controller.localdrinkList[index].discounticon} off",
+                      maxLines: 2,
+                    )
+                        : const Text(""),
+                  ),
+                ],
+              ): SizedBox();
+            },
+          ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Daily Special",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Day",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "Name",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "Price",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "Size/Quantity",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "Discount",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          GridView.builder(
+            physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 10 / 2,
+              crossAxisCount: 1,
+            ),
+            shrinkWrap: true,
+            itemCount:
+            controller.alldailySpecialList.length,
+            itemBuilder: (context, index) {
+              print(controller.alldailySpecialList[index]
+              ['quantity']);
+              return SizedBox(
+                height: 50,
                 child: Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          "Item Name",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "Quantity",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "Size",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "Price",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "Discount",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                    SizedBox(
+                      width: W * 0.4,
+                      child: Text(controller
+                          .alldailySpecialList.isEmpty
+                          ? "•${controller.hour.dailySpecils?[index]['day']}"
+                          : "•${controller.alldailySpecialList[index]['day']}"),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment:
+                      MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: W * 0.25,
-                          child: Text(
-                            "• ${controller.happyHour.dailySpecils?[index]['name']}",
-                            maxLines: 2,
-                          ),
+                          width: W * 0.3,
+                          child: Text(controller
+                              .alldailySpecialList
+                              .isEmpty
+                              ? "•    ${controller.hour.dailySpecils?[index]['name']}"
+                              : "•    ${controller.alldailySpecialList[index]['name']}"),
                         ),
                         SizedBox(
-                          width: W * 0.15,
-                          child: Text(
-                            controller.happyHour.dailySpecils?[index]
-                                        ['index'] ==
-                                    "Foods"
-                                ? "  ${controller.happyHour.dailySpecils?[index]['quantity']}"
-                                : "",
-                            maxLines: 1,
-                          ),
+                          width: W * 0.24,
+                          child: Text(controller
+                              .alldailySpecialList
+                              .isEmpty
+                              ? (controller.hour.dailySpecils?[index]['price']) != "" ? "•  \$${controller.hour.dailySpecils?[index]['price']}" :""
+                              : (controller.alldailySpecialList[index]['price']) != "" ? "•  \$${controller.alldailySpecialList[index]['price']}" : ""),
                         ),
                         SizedBox(
-                          width: W * 0.19,
-                          child: Row(
-                            children: [
-                              Text(
-                                controller.happyHour.dailySpecils?[index]
-                                            ['index'] ==
-                                        "Drinks"
-                                    ? "${controller.happyHour.dailySpecils?[index]['quantity']} "
-                                    : "",
-                                maxLines: 1,
-                              ),
-                              controller.happyHour.dailySpecils?[index]
-                                          ['index'] ==
-                                      "Drinks"
-                                  ? Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        controller.happyHour
-                                                        .dailySpecils?[index]
-                                                    ['sizeIcon'] ==
-                                                null
-                                            ? "ml"
-                                            : "${controller.happyHour.dailySpecils?[index]['sizeIcon']}",
-                                        maxLines: 1,
-                                        softWrap: false,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    )
-                                  : const Text(""),
-                            ],
-                          ),
+                          width: W * 0.2,
+                          child: controller.alldailySpecialList[index]
+                          ['index'] ==
+                              'Foods'
+                              ? Text(controller
+                              .alldailySpecialList
+                              .isEmpty
+                              ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
+                              : controller.alldailySpecialList[
+                          index][
+                          'quantity'] ==
+                              ''
+                              ? "•  0"
+                              : "•  ${controller.alldailySpecialList[index]['quantity']}")
+                              : Text(controller
+                              .alldailySpecialList
+                              .isEmpty
+                              ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
+                              : controller.alldailySpecialList[index]
+                          ['index'] !=
+                              "food"
+                              ? "•  ${controller.alldailySpecialList[index]['quantity']} ${controller.alldailySpecialList[index]['sizeIcon']}"
+                              : "•  ${controller.alldailySpecialList[index]['quantity']}"),
                         ),
                         SizedBox(
-                          width: W * 0.16,
-                          child: Text(
-                            "\$${controller.happyHour.dailySpecils?[index]['price']}",
-                            maxLines: 1,
-                          ),
-                        ),
-                        SizedBox(
-                          width: W * 0.1,
-                          child: Text(
-                            "${controller.happyHour.dailySpecils?[index]['discount']}",
-                            maxLines: 1,
-                          ),
+                          width: W * 0.22,
+                          child: controller.alldailySpecialList[index]
+                          ['discount'] !=
+                              "" &&
+                              controller.alldailySpecialList[index]
+                              ['discount']
+                                  .toString() !=
+                                  '0' &&
+                              controller.alldailySpecialList[index][
+                              'discountIcon'] !=
+                                  "null"
+                              ? Text(controller
+                              .alldailySpecialList
+                              .isEmpty
+                              ? "• ${controller.hour.dailySpecils?[index]['discount']}"
+                              : controller.alldailySpecialList[index]
+                          ['discountIcon'] !=
+                              null &&
+                              controller.alldailySpecialList[index]['discountIcon'] != "null"
+                              ? "• ${controller.alldailySpecialList[index]['discount']}${controller.alldailySpecialList[index]['discountIcon']} off"
+                              : "• ${controller.alldailySpecialList[index]['discount']}% off",
+                          )
+                              : const Text(""),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: H * 0.01,
+                    const SizedBox(
+                      height: 10,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        SizedBox(
-                          width: 70,
-                        ),
-                        Text(
-                          "Day",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "From Time",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          "To Time",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         const SizedBox(
                           width: 70,
                         ),
                         Text(
-                          "${controller.happyHour.dailySpecils?[index]['day']}",
-                          maxLines: 1,
-                        ),
-                        Text(
-                          "${controller.happyHour.dailySpecils?[index]['fromTime']}",
-                          maxLines: 1,
-                        ),
-                        Text(
-                          "${controller.happyHour.dailySpecils?[index]['toTime']}",
+                          "${controller.alldailySpecialList[index]['fromTime']} -  ${controller.alldailySpecialList[index]['toTime']}",
                           maxLines: 1,
                         ),
                       ],
@@ -692,97 +1169,239 @@ class OverView extends GetView<EditDetailScreenController> {
               );
             },
           ),
-
           SizedBox(
             height: H * 0.01,
           ),
-          const Text(
-            "Amenities",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Amenities",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+
+            ],
           ),
           SizedBox(
             height: H * 0.01,
           ),
           GridView.builder(
             physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
               //  mainAxisExtent: 1,
               childAspectRatio: 16 / 2,
               crossAxisCount: 2,
             ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.amenities?.length ?? 0,
+            itemCount: controller.amentyAddList.isEmpty
+                ? controller.hour.amenities?.length
+                : controller.amentyAddList.length,
             itemBuilder: (context, index) {
-              return Text("• ${controller.happyHour.amenities?[index]}");
+              return Text(controller.amentyAddList.isEmpty
+                  ? "•  ${controller.hour.amenities?[index]}"
+                  : "•  ${controller.amentyAddList[index]}",
+              );
             },
           ),
-
           SizedBox(
             height: H * 0.01,
           ),
-          const Text(
-            "Bar-Types",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Bar Type",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+
+            ],
           ),
           SizedBox(
             height: H * 0.01,
           ),
           GridView.builder(
             physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
               //  mainAxisExtent: 1,
               childAspectRatio: 16 / 2,
               crossAxisCount: 2,
             ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.barType?.length ?? 0,
+            itemCount: controller.barTypeAddList.isEmpty
+                ? controller.hour.barType?.length
+                : controller.barTypeAddList.length,
             itemBuilder: (context, index) {
-              return Text("•  ${controller.happyHour.barType?[index]}");
+              return Text(controller.barTypeAddList.isEmpty
+                  ? "•  ${controller.hour.barType?[index]}"
+                  : "•  ${controller.barTypeAddList[index]}");
             },
           ),
-
           SizedBox(
             height: H * 0.01,
           ),
-          const Text(
-            "Events",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Events",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Name",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Day",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "From",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "To",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: H * 0.01,
           ),
           GridView.builder(
             physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
               //  mainAxisExtent: 1,
               childAspectRatio: 16 / 2,
-              crossAxisCount: 2,
+              crossAxisCount: 1,
             ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.event?.length ?? 0,
+            itemCount: controller.selectedEvent.isEmpty
+                ? controller.hour.event?.length
+                : controller.selectedEvent.length,
             itemBuilder: (context, index) {
-              return Text("• ${controller.happyHour.event?[index]['name']}");
+              return Row(
+                mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: W * 0.2,
+                    child: Text(
+                      controller
+                          .selectedEvent.isEmpty
+                          ? "•  ${controller.hour.event?[index]['name']}"
+                          : "•  ${controller.selectedEvent[index]['name']}",
+                    ),
+                  ),
+                  Text(controller.selectedEvent.isEmpty
+                      ? "•  ${controller.hour.event?[index]['day']}"
+                      : "•  ${controller.selectedEvent[index]['day']}"),
+                  Text(controller.selectedEvent.isEmpty
+                      ? "•  ${controller.hour.event?[index]['fromtime']}"
+                      : "•  ${controller.selectedEvent[index]['fromtime']}",),
+                  Text(controller.selectedEvent.isEmpty
+                      ? "•  ${controller.hour.event?[index]['totime']}"
+                      : "•  ${controller.selectedEvent[index]['totime']}"),
+                ],
+              );
             },
           ),
+          SizedBox(
+            height: H * 0.01,
+          ),
+          Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                "Business Hour",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
 
-          SizedBox(
-            height: H * 0.01,
-          ),
-          const Text(
-            "Business Times",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ],
           ),
           SizedBox(
             height: H * 0.01,
           ),
-          ListView.builder(
+          GridView.builder(
             physics: const ScrollPhysics(),
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              //  mainAxisExtent: 1,
+              childAspectRatio: 30 / 2,
+              crossAxisCount: 1,
+            ),
             shrinkWrap: true,
-            itemCount: controller.happyHour.fromTimeToTime?.length ?? 0,
+            itemCount: controller.selecteddays.isEmpty
+                ? controller.hour.fromTimeToTime?.length
+                : controller.selecteddays.length,
             itemBuilder: (context, index) {
-              return Text(
-                  "• ${controller.happyHour.fromTimeToTime?[index]['bDay'].toString()}  ${controller.happyHour.fromTimeToTime?[index]['bFtime'].toString()} - ${controller.happyHour.fromTimeToTime?[index]['bTtime'].toString()}");
+              return Column(
+                children: [
+                  controller.dayFromTimeToTimeList.isEmpty
+                      ? Row(
+                    children: [
+                      SizedBox(
+                        width: W * 0.25,
+                        child: Text(
+                            "•  ${controller.hour.fromTimeToTime?[index]['bDay']}"),
+                      ),
+                      Text(
+                          "${controller.hour.fromTimeToTime?[index]['bFtime']}   -"
+                              "    ${controller.hour.fromTimeToTime?[index]['bTtime']}"),
+                    ],
+                  )
+                      : controller.selecteddays.isNotEmpty
+                      ? Row(
+                    children: [
+                      SizedBox(
+                        width: W * 0.25,
+                        child: Text(
+                            "• ${controller.selecteddays[index]['bDay']}"),
+                      ),
+                      Text(
+                          "${controller.selecteddays[index]['bFtime']}   -"
+                              "  ${controller.selecteddays[index]['bTtime']}"),
+                    ],
+                  )
+                      : const SizedBox(),
+                ],
+              );
             },
+          ),
+          SizedBox(
+            height: H * 0.03,
           ),
         ],
       ),

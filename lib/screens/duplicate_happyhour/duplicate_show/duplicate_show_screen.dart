@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:happy_hour_app/global_widgets/main_button.dart';
 
 import '../../../core/constants.dart';
 import '../../../routes/app_routes.dart';
+import '../../happyhour_detail_screen/happyhour_detail_screen.dart';
 import '../duplicate_happyhour_controller.dart';
 
 class DuplicateShowScreen extends GetView<DuplicateController> {
@@ -45,7 +47,7 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
             extendBodyBehindAppBar: false,
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.only(left: 18.0, right: 18),
+                padding: const EdgeInsets.only(left: 10.0, right: 10),
                 child: GetBuilder<DuplicateController>(builder: (_) {
                   return Column(
                     children: [
@@ -144,6 +146,7 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                 ),
                               ],
                             ),
+
                             SizedBox(
                               height: H * 0.01,
                             ),
@@ -156,6 +159,109 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                               //softWrap: false,
                               style: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w300),
+                            ),
+                            SizedBox(
+                              height: H * 0.01,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Happy Hour Menu",
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(
+                                        Routes.duplicateBusinessAccountScreen,
+                                        arguments: controller.hour);
+                                  },
+                                  child: Image.asset(
+                                    "assets/icons/Group 11493@2x.png",
+                                    height: H * 0.05,
+                                    // width: W * 0.05,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: H * 0.01,
+                            ),
+                            SizedBox(
+                              height: H * 0.25,
+                              width: W * 1.2,
+                              child:
+                              controller.menuImagePathList.isNotEmpty ? Swiper(
+                                //physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.menuImagePathList.length,
+                                pagination: const SwiperPagination(),
+                                viewportFraction: 1,
+                                scale: 1,
+                                loop: false,
+                                itemBuilder: (BuildContext context, int i) {
+                                  return Container(
+                                    height: H * 0.3,
+                                    width: W,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 4, color: primary),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => DetailScreen(
+                                            tag: "tag",
+                                            image: controller.menuImageList[i].toString()));
+                                      },
+                                      child: Image.file(File(
+                                          controller.menuImagePathList[i]),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  );
+
+                                  //  Image.network(
+                                  //   controller.imageList[index],
+                                  //   // controller.happyHour.businessImage?.toString() ??
+                                  //   //     controller.happyHour.menuImage.toString(),
+                                  //   fit: BoxFit.fitWidth,
+                                  // );
+                                },
+                              ) :
+                              Swiper(
+                                //physics: const NeverScrollableScrollPhysics(),
+                                itemCount: controller.menuImageList.length,
+                                pagination: const SwiperPagination(),
+                                viewportFraction: 1,
+                                scale: 1,
+                                loop: false,
+                                itemBuilder: (BuildContext context, int i) {
+                                  return Container(
+                                    height: H * 0.3,
+                                    width: W,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 4, color: primary),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => DetailScreen(
+                                            tag: "tag",
+                                            image: controller.menuImageList[i].toString()));
+                                      },
+                                      child: Image.network(
+                                        controller.menuImageList[i],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  );
+
+                                  //  Image.network(
+                                  //   controller.imageList[index],
+                                  //   // controller.happyHour.businessImage?.toString() ??
+                                  //   //     controller.happyHour.menuImage.toString(),
+                                  //   fit: BoxFit.fitWidth,
+                                  // );
+                                },
+                              ),
                             ),
                             SizedBox(
                               height: H * 0.01,
@@ -401,12 +507,16 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   Text(
-                                    "Price",
+                                    "Price/Discount",
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  Text(""),
+                                  Text("",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ]),
                             SizedBox(
                               height: H * 0.01,
@@ -428,7 +538,7 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: W * 0.4,
+                                      width: W * 0.25,
                                       child: Text(controller.foodList.isEmpty
                                           ? "•  ${controller.hour.foodName?[index]['foodname']}"
                                           : "•  ${controller.foodList[index].name}"),
@@ -440,10 +550,21 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                           : "•  ${controller.foodList[index].quantity}"),
                                     ),
                                     SizedBox(
-                                      width: W * 0.2,
-                                      child: Text(controller.foodList.isEmpty
-                                          ? "•  ${controller.hour.foodName?[index]['foodprice']}"
-                                          : "•  ${controller.foodList[index].price}"),
+                                      width: W * 0.25,
+                                      child: controller.foodList[index].price != "" ? Text(controller.foodList.isEmpty
+                                          ? (controller.hour.foodName?[index]['foodprice']) == "" ? "" : "•  \$${controller.hour.foodName?[index]['foodprice']}"
+                                          : controller.foodList[index].price == "" ? "" : "•  \$${controller.foodList[index].price}") : const Text(""),
+                                    ),
+                                    SizedBox(
+                                      width: W * 0.19,
+                                      child: controller
+                                          .foodList[index].discount
+                                          .toString() !=
+                                          '0'
+                                          ? Text(controller.foodList.isEmpty
+                                          ? "• ${controller.hour.foodName?[index]['fooddiscount']} off"
+                                          : "• ${controller.foodList[index].discount}${controller.foodList[index].discountIcon} off")
+                                          : const Text(""),
                                     ),
                                   ],
                                 );
@@ -495,7 +616,11 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  Text(""),
+                                  Text("Discount",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ]),
                             SizedBox(
                               height: H * 0.01,
@@ -515,25 +640,44 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                 return Row(
                                   children: [
                                     SizedBox(
-                                      width: W * 0.4,
-                                      child: Text(controller
-                                              .localdrinkList.isEmpty
-                                          ? "•  ${controller.hour.drinkitemName?[index]['drinkname']}"
-                                          : "•  ${controller.localdrinkList[index].name}"),
+                                      width: W * 0.28,
+                                      child: Text(
+                                        controller.localdrinkList.isEmpty
+                                            ? "•  ${controller.hour.drinkitemName?[index]['drinkname']}"
+                                            : "•  ${controller.localdrinkList[index].name}",
+                                      ),
                                     ),
                                     SizedBox(
-                                      width: W * 0.24,
+                                      width: W * 0.23,
                                       child: Text(controller
-                                              .localdrinkList.isEmpty
-                                          ? "•  ${controller.hour.drinkitemName?[index]['drinksize']}"
-                                          : "•  ${controller.localdrinkList[index].size}"),
+                                          .localdrinkList.isEmpty
+                                          ? "•  ${controller.hour.drinkitemName?[index]['drinksize']}${controller.hour.drinkitemName?[index]['drinksize']}"
+                                          : "•  ${controller.localdrinkList[index].size}${controller.localdrinkList[index].sizeicon}",
+                                      ),
                                     ),
                                     SizedBox(
-                                      width: W * 0.2,
-                                      child: Text(controller
-                                              .localdrinkList.isEmpty
-                                          ? "•  ${controller.hour.drinkitemName?[index]['drinkprice']}"
-                                          : "•  ${controller.localdrinkList[index].price.toString()}"),
+                                      width: W * 0.25,
+                                      child: Text(
+                                        controller
+                                            .localdrinkList.isEmpty
+                                            ? (controller.hour.drinkitemName?[index]['drinkprice']) == "" ? "" : "• \$${controller.hour.drinkitemName?[index]['drinkprice']}"
+                                            :controller.localdrinkList[index].price == "" ? "" : "• \$${controller.localdrinkList[index].price}",
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: W * 0.16,
+                                      child: controller.localdrinkList[index]
+                                          .discount
+                                          .toString() !=
+                                          '0'
+                                          ? Text(
+                                        controller
+                                            .localdrinkList.isEmpty
+                                            ? "• ${controller.hour.drinkitemName?[index]['drinkdiscount']} off"
+                                            : "• ${controller.localdrinkList[index].discount}${controller.localdrinkList[index].discounticon} off",
+                                        maxLines: 2,
+                                      )
+                                          : const Text(""),
                                     ),
                                   ],
                                 );
@@ -591,6 +735,12 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),
                                 ),
+                                Text(
+                                  "Discount",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ],
                             ),
                             SizedBox(
@@ -600,7 +750,7 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                               physics: const ScrollPhysics(),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 24 / 2,
+                                childAspectRatio: 10 / 2,
                                 crossAxisCount: 1,
                               ),
                               shrinkWrap: true,
@@ -608,38 +758,93 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                                   ? controller.hour.dailySpecils?.length
                                   : controller.alldailySpecialList.length,
                               itemBuilder: (context, index) {
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: W * 0.2,
-                                      child: Text(controller
-                                              .alldailySpecialList.isEmpty
-                                          ? "  •${controller.hour.dailySpecils?[index]['day']}"
-                                          : "   •${controller.alldailySpecialList[index]['day']}"),
-                                    ),
-                                    SizedBox(
-                                      width: W * 0.3,
-                                      child: Text(controller
-                                              .alldailySpecialList.isEmpty
-                                          ? "•  ${controller.hour.dailySpecils?[index]['name']}"
-                                          : "•  ${controller.alldailySpecialList[index]['name']}"),
-                                    ),
-                                    SizedBox(
-                                      width: W * 0.24,
-                                      child: Text(controller
-                                              .alldailySpecialList.isEmpty
-                                          ? "•  ${controller.hour.dailySpecils?[index]['price']}"
-                                          : "•  ${controller.alldailySpecialList[index]['price']}"),
-                                    ),
-                                    SizedBox(
-                                      width: W * 0.1,
-                                      child: Text(controller
-                                              .alldailySpecialList.isEmpty
-                                          ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
-                                          : "•  ${controller.alldailySpecialList[index]['quantity']}"),
-                                    ),
-                                  ],
+                                return SizedBox(
+                                  height: 50,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: W * 0.4,
+                                        child: Text(controller
+                                            .alldailySpecialList.isEmpty
+                                            ? "•${controller.hour.dailySpecils?[index]['day']}"
+                                            : "•${controller.alldailySpecialList[index]['day']}"),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: W * 0.3,
+                                            child: Text(controller
+                                                .alldailySpecialList
+                                                .isEmpty
+                                                ? "•    ${controller.hour.dailySpecils?[index]['name']}"
+                                                : "•    ${controller.alldailySpecialList[index]['name']}"),
+                                          ),
+                                          SizedBox(
+                                            width: W * 0.24,
+                                            child: Text(controller
+                                                .alldailySpecialList
+                                                .isEmpty
+                                                ? (controller.hour.dailySpecils?[index]['price']) != "" ? "•  \$${controller.hour.dailySpecils?[index]['price']}" :""
+                                                : (controller.alldailySpecialList[index]['price']) != "" ? "•  \$${controller.alldailySpecialList[index]['price']}" : ""),
+                                          ),
+                                          SizedBox(
+                                            width: W * 0.2,
+                                            child: controller.alldailySpecialList[index]
+                                            ['index'] ==
+                                                'Foods'
+                                                ? Text(controller
+                                                .alldailySpecialList
+                                                .isEmpty
+                                                ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
+                                                : controller.alldailySpecialList[
+                                            index][
+                                            'quantity'] ==
+                                                ''
+                                                ? "•  0"
+                                                : "•  ${controller.alldailySpecialList[index]['quantity']}")
+                                                : Text(controller
+                                                .alldailySpecialList
+                                                .isEmpty
+                                                ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
+                                                : controller.alldailySpecialList[index]
+                                            ['index'] !=
+                                                "food"
+                                                ? "•  ${controller.alldailySpecialList[index]['quantity']} ${controller.alldailySpecialList[index]['sizeIcon']}"
+                                                : "•  ${controller.alldailySpecialList[index]['quantity']}"),
+                                          ),
+                                          SizedBox(
+                                            width: W * 0.22,
+                                            child: controller.alldailySpecialList[index]
+                                            ['discount'] !=
+                                                "" &&
+                                                controller.alldailySpecialList[index]
+                                                ['discount']
+                                                    .toString() !=
+                                                    '0' &&
+                                                controller.alldailySpecialList[index][
+                                                'discountIcon'] !=
+                                                    "null"
+                                                ? Text(controller
+                                                .alldailySpecialList
+                                                .isEmpty
+                                                ? "• ${controller.hour.dailySpecils?[index]['discount']}"
+                                                : controller.alldailySpecialList[index]
+                                            ['discountIcon'] !=
+                                                null &&
+                                                controller.alldailySpecialList[index]['discountIcon'] != "null"
+                                                ? "• ${controller.alldailySpecialList[index]['discount']}${controller.alldailySpecialList[index]['discountIcon']} off"
+                                                : "• ${controller.alldailySpecialList[index]['discount']}% off",
+                                            )
+                                                : const Text(""),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             ),
@@ -796,7 +1001,7 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                             GridView.builder(
                               physics: const ScrollPhysics(),
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                 //  mainAxisExtent: 1,
                                 childAspectRatio: 16 / 2,
                                 crossAxisCount: 1,
@@ -808,21 +1013,23 @@ class DuplicateShowScreen extends GetView<DuplicateController> {
                               itemBuilder: (context, index) {
                                 return Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
                                       width: W * 0.2,
-                                      child: Text(controller
-                                              .selectedEvent.isEmpty
-                                          ? "•  ${controller.hour.event?[index]['name']}"
-                                          : "•  ${controller.selectedEvent[index]['name']}"),
+                                      child: Text(
+                                        controller
+                                            .selectedEvent.isEmpty
+                                            ? "•  ${controller.hour.event?[index]['name']}"
+                                            : "•  ${controller.selectedEvent[index]['name']}",
+                                      ),
                                     ),
                                     Text(controller.selectedEvent.isEmpty
                                         ? "•  ${controller.hour.event?[index]['day']}"
                                         : "•  ${controller.selectedEvent[index]['day']}"),
                                     Text(controller.selectedEvent.isEmpty
                                         ? "•  ${controller.hour.event?[index]['fromtime']}"
-                                        : "•  ${controller.selectedEvent[index]['fromtime']}"),
+                                        : "•  ${controller.selectedEvent[index]['fromtime']}",),
                                     Text(controller.selectedEvent.isEmpty
                                         ? "•  ${controller.hour.event?[index]['totime']}"
                                         : "•  ${controller.selectedEvent[index]['totime']}"),

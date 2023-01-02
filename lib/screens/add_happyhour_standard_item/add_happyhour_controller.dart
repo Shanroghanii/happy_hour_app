@@ -32,6 +32,17 @@ class AddHappyhourController extends GetxController {
 
   final ImagePicker _picker = ImagePicker();
 
+  final ScrollController scrollController = ScrollController();
+  final double _height = 100.0;
+
+  void animateToIndex(int index) {
+    scrollController.animateTo(
+      index * _height,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   //Drink type drop down
   final _drinkDiscount = "%".obs;
   String get drinkDiscount => _drinkDiscount.value;
@@ -302,12 +313,11 @@ class AddHappyhourController extends GetxController {
     BarType(isSelect: false.obs, barType: "Roof Top"),
   ];
 
-  void updateBartype() async {
-    for (var e in barTypeList) {
-      if (e.isSelect.value == true) {
-        barType = e.barType;
-        update();
-      }
+  void updateBartype(index, String barType) async {
+    if (barTypeList[index].isSelect.isTrue) {
+      barTypeAddList.add(barTypeList[index].barType);
+    } else if(barTypeAddList.contains(barType)){
+      barTypeAddList.remove(barType);
     }
   }
 
@@ -481,8 +491,6 @@ class AddHappyhourController extends GetxController {
 
   bool lateHappyHourForValidationOnly = false;
   hourDetailTap() {
-
-
     var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
 
     if (index == 0) {
@@ -503,25 +511,27 @@ class AddHappyhourController extends GetxController {
         if (!businessKey.currentState!.validate()) {
           print("6");
           Get.find<GlobalGeneralController>().errorSnackbar(
-              title: "Select Time",
-              description: "Please Select all the Time 90");
+              title: "Select Time", description: "Please Select all the Time");
         } else {
           print("7");
           if (businessKey.currentState!.validate()) {
-            print("8");
-            for (var i = 0; i < dayTimeList.length; i++) {
-              if (dayTimeList[i].isSelect.isTrue &&
-                  dayTimeList[i].fromTime != "" &&
-                  dayTimeList[i].toTime != "") {
-                print("9");
+            if (lateHappyHourForValidationOnly) {
+              print("8");
+              for (var i = 0; i < dayTimeList.length; i++) {
+                if (dayTimeList[i].isSelect.isTrue &&
+                    dayTimeList[i].fromTime != "" &&
+                    dayTimeList[i].toTime != "") {
+                  print("9");
 
-                Get.toNamed(Routes.addHappyHourFoodItemScreen);
+                  Get.toNamed(Routes.addHappyHourFoodItemScreen);
+                }
               }
+              Get.toNamed(Routes.addHappyHourFoodItemScreen);
             }
-            Get.toNamed(Routes.addHappyHourFoodItemScreen);
           }
+          Get.toNamed(Routes.addHappyHourFoodItemScreen);
         }
-        Get.toNamed(Routes.addHappyHourFoodItemScreen);
+        // Get.toNamed(Routes.addHappyHourFoodItemScreen);
       }
     } else {
       if (showLate) {
@@ -678,6 +688,7 @@ class AddHappyhourController extends GetxController {
         "name": e['name'],
         "quantity": e['quantity'],
         "price": e["price"],
+        "discountIcon": e["discountIcon"],
         "discount": e["discount"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
@@ -692,6 +703,7 @@ class AddHappyhourController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -705,6 +717,7 @@ class AddHappyhourController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -718,6 +731,7 @@ class AddHappyhourController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -731,6 +745,7 @@ class AddHappyhourController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -744,6 +759,7 @@ class AddHappyhourController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -757,6 +773,7 @@ class AddHappyhourController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -782,6 +799,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsunDay,
       "fromTime": dailySpecialfromtime,
@@ -818,6 +836,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialmonDay,
       "fromTime": dailySpecialfromtime,
@@ -835,6 +854,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsunDay,
       "fromTime": dailySpecialfromtime,
@@ -852,6 +872,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialmonDay,
       "fromTime": dailySpecialfromtime,
@@ -869,6 +890,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialtuesDay,
       "fromTime": dailySpecialfromtime,
@@ -886,6 +908,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialwedDay,
       "fromTime": dailySpecialfromtime,
@@ -903,6 +926,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialthursDay,
       "fromTime": dailySpecialfromtime,
@@ -920,6 +944,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialfriDay,
       "fromTime": dailySpecialfromtime,
@@ -937,6 +962,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsaturDay,
       "fromTime": dailySpecialfromtime,
@@ -973,8 +999,9 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
-      "day": tuesdaydailySpecialType,
+      "day": dailyspecialtuesDay,
       "fromTime": dailySpecialfromtime,
       "toTime": dailySpecialtotime,
       "index": tuesdaydailySpecialType,
@@ -1009,8 +1036,9 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
-      "day": wednesdaydailySpecialType,
+      "day": dailyspecialwedDay,
       "fromTime": dailySpecialfromtime,
       "toTime": dailySpecialtotime,
       "index": wednesdaydailySpecialType,
@@ -1045,6 +1073,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialthursDay,
       "fromTime": dailySpecialfromtime,
@@ -1081,6 +1110,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialfriDay,
       "fromTime": dailySpecialfromtime,
@@ -1117,6 +1147,7 @@ class AddHappyhourController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsaturDay,
       "fromTime": dailySpecialfromtime,
@@ -1273,6 +1304,7 @@ class AddHappyhourController extends GetxController {
       Get.find<GlobalGeneralController>().errorSnackbar(
           title: "Error", description: "Fill All The Required Fields");
     } else if (index == 0) {
+      addToDailyySpecial();
       Get.toNamed(Routes.addHappyHourAmenitiesScreen);
     }
     //  else if (sundaydailySpecialItemList.isEmpty && index > 0) {
@@ -1303,13 +1335,12 @@ class AddHappyhourController extends GetxController {
           isFridayQuantityV &&
           isSaturday &&
           isSatudaryQuantityV) {
+        addToDailyySpecial();
         Get.toNamed(Routes.addHappyHourAmenitiesScreen);
-      }else{
-        Get.find<GlobalGeneralController>()
-            .errorSnackbar(title: "Error", description: "Field must be validated");
+      } else {
+        Get.find<GlobalGeneralController>().errorSnackbar(
+            title: "Error", description: "Field must be validated");
       }
-
-      addToDailyySpecial();
     }
   }
 
@@ -1375,7 +1406,7 @@ class AddHappyhourController extends GetxController {
         size: "",
         price: "",
         sizeicon: "",
-        discounticon: "",
+        discounticon: "%",
         discount: 0,
         dropDown: ["%", "\$"],
         dropDownSize: [
@@ -1410,7 +1441,7 @@ class AddHappyhourController extends GetxController {
           price: "",
           discount: 0,
           sizeicon: "",
-          discounticon: "",
+          discounticon: "%",
           dropDown: ["%", "\$"],
           dropDownSize: [
             'oz',
@@ -1764,7 +1795,8 @@ class AddHappyhourController extends GetxController {
         priceController: TextEditingController(),
         earlyFood: true.obs,
         lateFood: true.obs,
-        time: foodtime, discountIcon: '\$',
+        time: foodtime,
+        discountIcon: '\$',
       ),
     );
     update();
@@ -1867,7 +1899,7 @@ class AddHappyhourController extends GetxController {
 
   //*Add Haapy Hour to FireStore
   Future<void> uploadToFireStore() async {
-    if (formKey.currentState?.validate() ?? false) {
+    if (formKey.currentState!.validate()) {
       GeoFirePoint _position = geo.point(latitude: _lat, longitude: _long);
       isLoading = true;
       await _addHappyHourProvider.uploadToFirebaseStorage(
@@ -1890,7 +1922,7 @@ class AddHappyhourController extends GetxController {
                   "foodprice": e.price,
                   "early": e.earlyFood.value,
                   "late": e.lateFood.value,
-          "discountIcon": e.discountIcon,
+                  "discountIcon": e.discountIcon,
                   //"dropdown": e.dropDown[0],
                 })
             .toList(),

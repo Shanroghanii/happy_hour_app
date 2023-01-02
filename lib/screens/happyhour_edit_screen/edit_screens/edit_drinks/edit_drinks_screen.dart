@@ -205,15 +205,8 @@ class EditDrinksScreen extends GetView<EditController> {
                                                     isExpanded: true,
                                                     hint: const Text(""),
                                                     value: controller
-                                                            .localdrinkList[
-                                                                index]
-                                                            .sizeicon
-                                                            .isNotEmpty
-                                                        ? controller
-                                                            .localdrinkList[
-                                                                index]
-                                                            .dropDownSize[index]
-                                                        : "oz",
+                                                        .localdrinkList[index]
+                                                        .sizeicon,
 
                                                     //  controller
                                                     //     .localdrinkList[index]
@@ -367,12 +360,14 @@ class EditDrinksScreen extends GetView<EditController> {
                                                     }).toList(),
                                                     onChanged:
                                                         (String? newValue) {
-                                                      controller
-                                                          .localdrinkList[index]
-                                                          .dropDown[0] = newValue!;
-                                                      controller
-                                                          .localdrinkList[index]
-                                                          .dropDown[1] = newValue;
+                                                          controller.localdrinkList[index].price =
+                                                              newValue!;
+                                                      // controller
+                                                      //     .localdrinkList[index]
+                                                      //     .dropDown[0] = newValue!;
+                                                      // controller
+                                                      //     .localdrinkList[index]
+                                                      //     .dropDown[1] = newValue;
                                                       controller.update();
                                                     },
                                                   ),
@@ -615,11 +610,14 @@ class EditDrinksScreen extends GetView<EditController> {
                                     textColor: blackColor,
                                     text: ("Add"),
                                     onPressed: () {
-                                      controller.addDrinksmanually();
-                                      Navigator.pop(context);
-                                      controller.addDrinksManuallyController
-                                          .clear();
-                                    }),
+                                      if(controller.addDrinksManuallyController.text.trim() != "") {
+                                        controller.addDrinksmanually();
+                                        Navigator.pop(context);
+                                        controller.addDrinksManuallyController
+                                            .clear();
+                                      }
+                                    },
+                                ),
                                 controller.addDrinksManuallyController,
                               );
                             },
@@ -712,6 +710,7 @@ class EditDrinksScreen extends GetView<EditController> {
           child: CustomElevatedButtonWidget(
             onPressed: () {
               if (controller.localdrinkList.isEmpty) {
+                controller.updateBusinessHourToFireStore();
                 Get.back();
                 controller.update();
               } else {
@@ -727,6 +726,7 @@ class EditDrinksScreen extends GetView<EditController> {
                       description: "Drink Size and Price/Discount Is Required");
                 }
                 if (a.length == controller.localdrinkList.length) {
+                  controller.updateBusinessHourToFireStore();
                   Get.back();
                   controller.update();
                 }

@@ -92,7 +92,7 @@ class GuestBarTypeScreen extends GetView<GuestController> {
                                               .value =
                                           !controller.barTypeList[index]
                                               .isSelect.value;
-                                      controller.updateBartype();
+                                      controller.updateBartype(index);
                                     }),
                               ),
                             ),

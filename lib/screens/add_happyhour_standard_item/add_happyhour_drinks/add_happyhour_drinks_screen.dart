@@ -236,6 +236,9 @@ class AddHappyHourDrinksScreen extends GetView<AddHappyhourController> {
                                                       controller
                                                           .localdrinkList[index]
                                                           .sizeicon = q;
+                                                      print(controller
+                                                          .localdrinkList[index]
+                                                          .sizeicon);
                                                       controller.update();
                                                     },
                                                   ),
@@ -258,6 +261,8 @@ class AddHappyHourDrinksScreen extends GetView<AddHappyhourController> {
                                         TextEditingController();
                                     controller.localdrinkList[index]
                                         .discountController?.text = "";
+                                    controller.localdrinkList[index].discount =
+                                        0;
                                     controller.update();
                                   },
                                   textEditingController: controller
@@ -291,10 +296,15 @@ class AddHappyHourDrinksScreen extends GetView<AddHappyhourController> {
                                                   controller: controller
                                                       .localdrinkList[index]
                                                       .discountController,
-                                                  onTap: () => controller
-                                                      .localdrinkList[index]
-                                                      .drinkController
-                                                      .clear(),
+                                                  onTap: () {
+                                                    controller
+                                                        .localdrinkList[index]
+                                                        .drinkController
+                                                        .clear();
+                                                    controller
+                                                        .localdrinkList[index]
+                                                        .price = "";
+                                                  },
                                                   obscureText: false,
                                                   keyboardType:
                                                       TextInputType.number,
@@ -478,10 +488,20 @@ class AddHappyHourDrinksScreen extends GetView<AddHappyhourController> {
                                   textColor: blackColor,
                                   text: ("Add"),
                                   onPressed: () {
-                                    controller.addDrinksmanually();
-                                    Navigator.pop(context);
-                                    controller.addDrinksManuallyController
-                                        .clear();
+                                    if (controller
+                                            .addDrinksManuallyController.text
+                                            .trim() !=
+                                        "") {
+                                      controller.addDrinksmanually();
+                                      Navigator.pop(context);
+                                      controller.addDrinksManuallyController
+                                          .clear();
+                                    } else {
+                                      Get.find<GlobalGeneralController>()
+                                          .errorSnackbar(
+                                              title: "Error",
+                                              description: "Text required");
+                                    }
                                   },
                                 ),
                                 controller.addDrinksManuallyController,
@@ -607,6 +627,10 @@ class AddHappyHourDrinksScreen extends GetView<AddHappyhourController> {
                 }
                 if (a.length == controller.localdrinkList.length) {
                   Get.toNamed(Routes.addHappyDailySpecialScreen);
+                } else {
+                  Get.find<GlobalGeneralController>().errorSnackbar(
+                      title: "Error",
+                      description: "Drink Size and Price/Discount Is Required");
                 }
               }
             },

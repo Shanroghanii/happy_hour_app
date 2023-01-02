@@ -450,6 +450,9 @@ class BusinessDailySpecialScreen
                                                 controller.daysList[6].day;
                                             if (controller.dayTimeList[6]
                                                 .isSelect.isFalse) {
+                                              print("fdsafsdfsdfsadfsdfadsfsadfasdfadsf");
+                                              print(controller
+                                                  .saturdaydailySpecialItemList);
                                               controller
                                                   .saturdaydailySpecialItemList
                                                   .clear();
@@ -762,6 +765,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                          //  value: controller.sundaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
@@ -810,6 +814,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.sundaydailySpecialType == "Drinks"
                                 ? controller.dri
@@ -838,9 +843,9 @@ class BusinessDailySpecialScreen
                                             ))
                                         .toList()
                                     : [],
-                            onChanged: (time) {
+                            onChanged: controller.sundaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -951,6 +956,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                          //  value: controller.mondaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
@@ -1027,9 +1033,9 @@ class BusinessDailySpecialScreen
                                             ))
                                         .toList()
                                     : [],
-                            onChanged: (time) {
+                            onChanged: controller.mondaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1108,6 +1114,7 @@ class BusinessDailySpecialScreen
                     },
                   ),
                   controller.adddailySpecialManuallyController,
+
                 );
               },
               GetBuilder<AddHappyhourBusinessController>(
@@ -1141,6 +1148,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                           //  value: controller.tuesdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
@@ -1156,6 +1164,7 @@ class BusinessDailySpecialScreen
                                 .toList(),
                             onChanged: (daily) {
                               controller.tuesdaydailySpecialType = daily!;
+                              print(controller.adddailySpecialManuallyController.text);
                               controller.update();
                             },
                           ),
@@ -1218,9 +1227,9 @@ class BusinessDailySpecialScreen
                                             ))
                                         .toList()
                                     : [],
-                            onChanged: (time) {
+                            onChanged: controller.tuesdaydailySpecialType != null ?  (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1333,6 +1342,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                          //  value: controller.wednesdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
@@ -1411,9 +1421,9 @@ class BusinessDailySpecialScreen
                                                 ))
                                             .toList()
                                         : [],
-                            onChanged: (time) {
+                            onChanged:controller.wednesdaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            }: null,
                           ),
                         ),
                       ),
@@ -1526,6 +1536,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                          //  value: controller.thursdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
@@ -1603,9 +1614,9 @@ class BusinessDailySpecialScreen
                                             ))
                                         .toList()
                                     : [],
-                            onChanged: (time) {
+                            onChanged: controller.thursdaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1717,6 +1728,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                          //  value: controller.fridaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
@@ -1793,9 +1805,9 @@ class BusinessDailySpecialScreen
                                             ))
                                         .toList()
                                     : [],
-                            onChanged: (time) {
+                            onChanged: controller.fridaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1907,6 +1919,7 @@ class BusinessDailySpecialScreen
                               style:
                                   TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                         //   value: controller.saturdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map(
@@ -1986,9 +1999,9 @@ class BusinessDailySpecialScreen
                                             ))
                                         .toList()
                                     : [],
-                            onChanged: (name) {
+                            onChanged:controller.saturdaydailySpecialType != null ? (name) {
                               controller.dailSpecialName = name!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -2312,6 +2325,7 @@ class BusinessDailySpecialScreen
                     onTap: () {
                       controller.sundaydailySpecialItemList[x]['controller']
                           .clear();
+                      controller.sundaydailySpecialItemList[x]['discount'] = '';
                     },
                     onChanged: (val) {
                       controller.sundaydailySpecialItemList[x]['price'] = val;
@@ -2333,13 +2347,18 @@ class BusinessDailySpecialScreen
                                 controller:
                                     controller.sundaydailySpecialItemList[x]
                                         ['controller'],
-                                onTap: () => controller
-                                    .sundaydailySpecialItemList[x]
-                                        ['pricecontroller']
-                                    .clear(),
+                                onTap: () {
+                                  controller
+                                      .sundaydailySpecialItemList[x]
+                                  ['pricecontroller']
+                                      .clear();
+                                  controller.sundaydailySpecialItemList[x]['price'] = "";
+                                },
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) {},
+                                onChanged: (val) {
+                                  controller.sundaydailySpecialItemList[x]['discount']= val;
+                                },
                                 decoration: InputDecoration(
                                   // hintText: "Enter Discount",
                                   hintStyle:
@@ -2369,10 +2388,14 @@ class BusinessDailySpecialScreen
                                         value: items, child: Text(items));
                                   }).toList(),
                                   onChanged: (String? newValue) {
-                                    controller.foodList[index].dropDown[0] =
-                                        newValue!;
-                                    controller.foodList[index].dropDown[1] =
-                                        newValue;
+                                    // controller.foodList[index].dropDown[0] =
+                                    //     newValue!;
+                                    // controller.foodList[index].dropDown[1] =
+                                    //     newValue;
+                                    controller
+                                        .sundaydailySpecialItemList[x]
+                                    ['discountIcon'] = newValue;
+
                                   },
                                 ),
                               ),
@@ -2465,6 +2488,9 @@ class BusinessDailySpecialScreen
                                 ))
                             .toList(),
                         onChanged: (time) {
+                          controller
+                              .sundaydailySpecialItemList[x]
+                          ['fromTime'] = time;
                           controller.dailySpecialfromtime = time!;
                           controller.update();
                           // print(controller.dailySpecialfromtime);
@@ -2518,6 +2544,9 @@ class BusinessDailySpecialScreen
                                 ))
                             .toList(),
                         onChanged: (time) {
+                          controller
+                              .sundaydailySpecialItemList[x]
+                          ['toTime'] = time;
                           controller.dailySpecialtotime = time!;
                           controller.update();
                         },
@@ -2851,7 +2880,10 @@ class BusinessDailySpecialScreen
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.mondaydailySpecialItemList[x]['price'] = "";
+                                controller.mondaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -2880,10 +2912,13 @@ class BusinessDailySpecialScreen
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .mondaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -2984,6 +3019,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .mondaydailySpecialItemList[x]
+                        ['fromTime'] = time;
                         controller.dailySpecialfromtime = time!;
                         controller.update();
                       },
@@ -3035,6 +3073,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .mondaydailySpecialItemList[x]
+                        ['toTime'] = time;
                         controller.dailySpecialtotime = time!;
                         controller.update();
                       },
@@ -3372,7 +3413,10 @@ class BusinessDailySpecialScreen
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.tuesdaydailySpecialItemList[x]['price'] = "";
+                                controller.tuesdaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3401,10 +3445,13 @@ class BusinessDailySpecialScreen
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .tuesdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3508,6 +3555,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .tuesdaydailySpecialItemList[x]
+                        ['fromTime'] = time;
                         controller.dailySpecialfromtime = time!;
                       },
                     ),
@@ -3558,6 +3608,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .tuesdaydailySpecialItemList[x]
+                        ['toTime'] = time;
                         controller.dailySpecialtotime = time!;
                       },
                     ),
@@ -3881,7 +3934,10 @@ class BusinessDailySpecialScreen
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.wednesdaydailySpecialItemList[x]['price'] = "";
+                                controller.wednesdaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3910,10 +3966,13 @@ class BusinessDailySpecialScreen
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .wednesdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -4016,6 +4075,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .wednesdaydailySpecialItemList[x]
+                        ['fromTime'] = time;
                         controller.dailySpecialfromtime = time!;
                       },
                     ),
@@ -4066,6 +4128,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .wednesdaydailySpecialItemList[x]
+                        ['toTime'] = time;
                         controller.dailySpecialtotime = time!;
                       },
                     ),
@@ -4402,7 +4467,10 @@ class BusinessDailySpecialScreen
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.thursdaydailySpecialItemList[x]['price'] = "";
+                                controller.thursdaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4431,10 +4499,13 @@ class BusinessDailySpecialScreen
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .thursdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -4537,6 +4608,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .thursdaydailySpecialItemList[x]
+                        ['fromTime'] = time;
                         controller.dailySpecialfromtime = time!;
                       },
                     ),
@@ -4587,6 +4661,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .thursdaydailySpecialItemList[x]
+                        ['toTime'] = time;
                         controller.dailySpecialtotime = time!;
                       },
                     ),
@@ -4918,7 +4995,10 @@ class BusinessDailySpecialScreen
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.fridaydailySpecialItemList[x]['price'] = "";
+                                controller.fridaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4947,10 +5027,13 @@ class BusinessDailySpecialScreen
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .fridaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -5053,6 +5136,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .fridaydailySpecialItemList[x]
+                        ['fromTime'] = time;
                         controller.dailySpecialfromtime = time!;
                       },
                     ),
@@ -5103,6 +5189,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .fridaydailySpecialItemList[x]
+                        ['toTime'] = time;
                         controller.dailySpecialtotime = time!;
                       },
                     ),
@@ -5438,7 +5527,10 @@ class BusinessDailySpecialScreen
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.saturdaydailySpecialItemList[x]['price'] = "";
+                                controller.saturdaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -5467,10 +5559,13 @@ class BusinessDailySpecialScreen
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .saturdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -5563,6 +5658,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .saturdaydailySpecialItemList[x]
+                        ['fromTime'] = time;
                         controller.dailySpecialfromtime = time!;
                       },
                     ),
@@ -5613,6 +5711,9 @@ class BusinessDailySpecialScreen
                               ))
                           .toList(),
                       onChanged: (time) {
+                        controller
+                            .saturdaydailySpecialItemList[x]
+                        ['toTime'] = time;
                         controller.dailySpecialtotime = time!;
                       },
                     ),

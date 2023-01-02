@@ -24,6 +24,16 @@ class AddHappyhourBusinessController extends GetxController {
 
   final ImagePicker _picker = ImagePicker();
 
+  final ScrollController scrollController = ScrollController();
+  final double _height = 100.0;
+
+  void animateToIndex(int index) {
+    scrollController.animateTo(
+      index * _height,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 //observable variables
   final _busniessCard = "".obs;
   String get businessCard => _busniessCard.value;
@@ -298,6 +308,8 @@ class AddHappyhourBusinessController extends GetxController {
   String selectedday = "";
 
   final timesList = [
+    "12:00 AM",
+    "12:30 AM",
     "01:00 AM",
     "01:30 AM",
     "02:00 AM",
@@ -344,8 +356,11 @@ class AddHappyhourBusinessController extends GetxController {
     "10:30 PM",
     "11:00 PM",
     "11:30 PM",
-    "12:00 AM",
-    "12:30 AM",
+    "12:00 AM ",
+    "12:30 AM ",
+    "01:00 PM ",
+    "01:30 AM ",
+    "02:00 AM ",
     "Select Time",
   ];
 
@@ -547,12 +562,35 @@ class AddHappyhourBusinessController extends GetxController {
         .removeWhere((e) => e['bDay'] == dayFromTimeToTimeList[index].day);
   }
 
+  // void bDayTime(index) {
+  //   selecteddays.add({
+  //     "bDay": dayFromTimeToTimeList[index].day,
+  //     "bFtime": dayFromTimeToTimeList[index].from,
+  //     "bTtime": dayFromTimeToTimeList[index].to,
+  //   });
+  // }
+
   void bDayTime(index) {
-    selecteddays.add({
-      "bDay": dayFromTimeToTimeList[index].day,
-      "bFtime": dayFromTimeToTimeList[index].from,
-      "bTtime": dayFromTimeToTimeList[index].to,
+    bool isExist = false;
+    selecteddays.forEach((element) {
+      if (element['bDay'] == dayFromTimeToTimeList[index].day) {
+        isExist = true;
+      }
     });
+    if (!isExist) {
+      selecteddays.add({
+        "bDay": dayFromTimeToTimeList[index].day,
+        "bFtime": dayFromTimeToTimeList[index].from,
+        "bTtime": dayFromTimeToTimeList[index].to,
+      });
+    } else {
+      selecteddays.forEach((element) {
+        if (element['bDay'] == dayFromTimeToTimeList[index].day) {
+          element["bFtime"] = dayFromTimeToTimeList[index].from;
+          element["bTtime"] = dayFromTimeToTimeList[index].to;
+        }
+      });
+    }
   }
 
   forKeyAssign(index) {
@@ -610,16 +648,22 @@ class AddHappyhourBusinessController extends GetxController {
   final g2 = GlobalKey<FormState>();
 
   void onHourScreenNextTap() async {
+    int number = 0;
+    int trueList = 0;
     for (var i = 0; i < dayFromTimeToTimeList.length; i++) {
       if (dayFromTimeToTimeList[i].isSelect.isTrue) {
+        trueList++;
         if (dayFromTimeToTimeList[i].key!.currentState!.validate() &&
             dayFromTimeToTimeList[i].key2!.currentState!.validate()) {
-          Get.toNamed(Routes.businessDayTimeScreen);
-        } else {
-          Get.find<GlobalGeneralController>().errorSnackbar(
-              title: "Select Time", description: "Please Select all the Time");
+          number++;
         }
       }
+    }
+    if (trueList == number) {
+      Get.toNamed(Routes.businessDayTimeScreen);
+    } else {
+      Get.find<GlobalGeneralController>().errorSnackbar(
+          title: "Select Time", description: "Please Select all the Time");
     }
     var index = dayFromTimeToTimeList.where((e) => e.isSelect.isTrue).length;
 
@@ -715,20 +759,34 @@ class AddHappyhourBusinessController extends GetxController {
         "HfromTime": dayTimeList[index].fromTime,
         "HtoTime": dayTimeList[index].toTime,
       });
+    }else{
+      hDayTimeList.forEach((element) {
+        if(element['Hday'].toString() == dayTimeList[index].day){
+          element['HfromTime'] = dayTimeList[index].fromTime;
+          element['HtoTime'] = dayTimeList[index].toTime;
+        }
+      });
     }
   }
 
   List hDayTimeLateList = [];
   void hDayTimeSecond(index) {
     var a = hDayTimeLateList
-        .where((e) => e['Hday'].toString() == dayTimeList[index].day)
+        .where((e) => e['Hday2'].toString() == dayTimeList[index].day)
         .toList();
-
     if (a.isEmpty) {
       hDayTimeLateList.add({
         "Hday2": dayTimeList[index].day,
         "HfromTime2": dayTimeList[index].fromTime2,
         "HtoTime2": dayTimeList[index].toTime2
+      });
+    }
+    else{
+      hDayTimeLateList.forEach((element) {
+        if(element['Hday2'].toString() == dayTimeList[index].day){
+          element['HfromTime2'] = dayTimeList[index].fromTime2;
+          element['HtoTime2'] = dayTimeList[index].toTime2;
+        }
       });
     }
   }
@@ -966,20 +1024,20 @@ class AddHappyhourBusinessController extends GetxController {
         size: "",
         price: "",
         discount: 0,
-        sizeicon: "",
-        discounticon: "",
+        sizeicon: "oz",
+        discounticon: "%",
         dropDown: ["%", "\$"],
         dropDownSize: [
           'oz',
-          'ml',
-          'Can',
-          'Tall Can',
-          'Bottle',
-          'Pint-Draft',
-          'Large Draft',
-          'Pitcher',
-          'Glass',
-          'Shot'
+          'oz',
+          'oz',
+          'oz',
+          'oz',
+          'oz',
+          'oz',
+          'oz',
+          'oz',
+          'oz'
         ],
         drinkController: TextEditingController(),
         bothTimeDrink: false.obs,
@@ -1000,20 +1058,20 @@ class AddHappyhourBusinessController extends GetxController {
             size: "",
             price: "",
             discount: 0,
-            sizeicon: "",
-            discounticon: "",
+            sizeicon: "oz",
+            discounticon: "%",
             dropDown: ["%", "\$"],
             dropDownSize: [
               'oz',
-              'ml',
-              'Can',
-              'Tall Can',
-              'Bottle',
-              'Pint-Draft',
-              'Large Draft',
-              'Pitcher',
-              'Glass',
-              'Shot'
+              'oz',
+              'oz',
+              'oz',
+              'oz',
+              'oz',
+              'oz',
+              'oz',
+              'oz',
+              'oz'
             ],
             drinkController: TextEditingController(),
             bothTimeDrink: false.obs,
@@ -1110,6 +1168,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1123,6 +1182,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1136,6 +1196,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1149,6 +1210,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1162,6 +1224,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1175,6 +1238,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1188,6 +1252,7 @@ class AddHappyhourBusinessController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1213,6 +1278,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsunDay,
       "fromTime": dailySpecialfromtime,
@@ -1249,6 +1315,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialmonDay,
       "fromTime": dailySpecialfromtime,
@@ -1267,6 +1334,7 @@ class AddHappyhourBusinessController extends GetxController {
       "price": "",
       "discount": "",
       "sizeIcon": "oz",
+      "discountIcon": "%",
       "day": dailyspecialsunDay,
       "fromTime": dailySpecialfromtime,
       "toTime": dailySpecialtotime,
@@ -1284,6 +1352,7 @@ class AddHappyhourBusinessController extends GetxController {
       "price": "",
       "discount": "",
       "sizeIcon": "oz",
+      "discountIcon": "%",
       "day": dailyspecialmonDay,
       "fromTime": dailySpecialfromtime,
       "toTime": dailySpecialtotime,
@@ -1300,6 +1369,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialtuesDay,
       "fromTime": dailySpecialfromtime,
@@ -1317,6 +1387,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialwedDay,
       "fromTime": dailySpecialfromtime,
@@ -1334,6 +1405,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialthursDay,
       "fromTime": dailySpecialfromtime,
@@ -1351,6 +1423,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialfriDay,
       "fromTime": dailySpecialfromtime,
@@ -1368,6 +1441,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsaturDay,
       "fromTime": dailySpecialfromtime,
@@ -1404,6 +1478,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialtuesDay,
       "fromTime": dailySpecialfromtime,
@@ -1440,6 +1515,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialwedDay,
       "fromTime": dailySpecialfromtime,
@@ -1476,6 +1552,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialthursDay,
       "fromTime": dailySpecialfromtime,
@@ -1512,6 +1589,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialfriDay,
       "fromTime": dailySpecialfromtime,
@@ -1548,6 +1626,7 @@ class AddHappyhourBusinessController extends GetxController {
       "quantity": dailySpecialQuantity,
       "price": "",
       "discount": "",
+      "discountIcon": "%",
       "sizeIcon": "oz",
       "day": dailyspecialsaturDay,
       "fromTime": dailySpecialfromtime,
@@ -1703,6 +1782,7 @@ class AddHappyhourBusinessController extends GetxController {
       Get.find<GlobalGeneralController>().errorSnackbar(
           title: "Error", description: "Fill All The Required Fields");
     } else if (index == 0) {
+      addToDailyySpecial();
       Get.toNamed(Routes.businessAmenitiesScreen);
     } else if (isSunday == false ||
         isMonday == false ||
@@ -1728,13 +1808,12 @@ class AddHappyhourBusinessController extends GetxController {
           isFridayQuantityV &&
           isSaturday &&
           isSatudaryQuantityV) {
+        addToDailyySpecial();
         Get.toNamed(Routes.businessAmenitiesScreen);
-      }else {
-        Get.find<GlobalGeneralController>()
-            .errorSnackbar(
+      } else {
+        Get.find<GlobalGeneralController>().errorSnackbar(
             title: "Error", description: "Fill All The Required Fields");
       }
-      addToDailyySpecial();
     }
   }
 
@@ -1938,11 +2017,12 @@ class AddHappyhourBusinessController extends GetxController {
     // BarType(isSelect: false.obs, barType: "Strip Club"),
   ];
 
-  void updateBartype(index) async {
+  void updateBartype(index, String barType) async {
     if (barTypeList[index].isSelect.isTrue) {
+      barTypeAddList.remove('');
       barTypeAddList.add(barTypeList[index].barType);
-    } else {
-      barTypeAddList.removeAt(index);
+    } else  if(barTypeAddList.contains(barType)) {
+      barTypeAddList.remove(barType);
     }
     // for (var e in barTypeList) {
     //   if (e.isSelect.isTrue) {
@@ -1956,6 +2036,7 @@ class AddHappyhourBusinessController extends GetxController {
   final eventKey = GlobalKey<FormState>();
   String eventStarttime = "01:00 AM";
   String eventendtime = "01:00 PM";
+  String? eventname = "";
 
   List selectedEvent = [];
   List eventList = [
@@ -1976,26 +2057,80 @@ class AddHappyhourBusinessController extends GetxController {
     Event(isSelect: false.obs, event: "Industry Night", day: "", time: ""),
   ];
 
-  String? eventname = "";
 
-  eventListadded() {
-    selectedEvent.add({
-      "name": eventname!,
-      "day": day,
-      "fromtime": eventStarttime,
-      "totime": eventendtime
-    });
-    update();
-  }
 
-  void updateEvent() async {
-    for (var event in eventList) {
-      if (event.isSelect == true) {
-        eventname = event.event;
-        update();
-      }
+  addIntoList(String name){
+    var a = selectedEvent.where((element) => element['name'] == name);
+    if(a.isEmpty){
+      selectedEvent.add({
+        "name": name,
+        "day": day,
+        "fromtime": eventStarttime,
+        "totime": eventendtime
+      });
+    } else{
+      selectedEvent.removeWhere((element) => element['name'] == name);
     }
   }
+
+  assignDayValue(String day, name){
+    selectedEvent.forEach((element) {
+            if(element['name'] == name){
+            element["day"] = day;
+            }
+    });
+  }
+
+  assignFromTimeValue(String startTime, name){
+    selectedEvent.forEach((element) {
+      if(element['name'] == name){
+        element["fromtime"] = startTime;
+      }
+    });
+  }
+  assignToTimeValue(String endtime, name){
+    selectedEvent.forEach((element) {
+      if(element['name'] == name){
+        element["totime"] = endtime;
+      }
+    });
+  }
+
+  // eventListadded() {
+  //   if(eventname != "") {
+  //     selectedEvent.forEach((element) {
+  //       if(element['name'] == eventname){
+  //         element["name"] = eventname;
+  //       element["day"] = day;
+  //       element["fromtime"] = eventStarttime;
+  //       element["totime"] = eventendtime;
+  //       }
+  //     });
+  //   }
+  //   if(selectedEvent.contains(element)) {
+  //     selectedEvent.add({
+  //       "name": eventname!,
+  //       "day": day,
+  //       "fromtime": eventStarttime,
+  //       "totime": eventendtime
+  //     });
+  //   }
+  //   update();
+  // }
+
+  // void updateEvent() async {
+  //   for (var event in eventList) {
+  //     if (event.isSelect == true) {
+  //       eventname = event.event;
+  //       update();
+  //     }
+  //   }
+  //   eventList.forEach((element) {
+  //     if(element.isSelect == true){
+  //       eventListadded();
+  //     }
+  //   });
+  // }
 
   List<SelectDay> daysList = [
     SelectDay(
@@ -2039,67 +2174,65 @@ class AddHappyhourBusinessController extends GetxController {
   void onDayTimeNextTap() {
     var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
 
-if(showDayList){
-  if (index == 0) {
-    print("1");
-    if (showLateDayList) {
-      print("2");
-      if (showLateDayList) {
-        print("3");
-        Get.toNamed(Routes.addHappyHourFoodItemScreen);
-      } else {
-        print("4");
-        Get.find<GlobalGeneralController>().errorSnackbar(
-            title: "Late Happy Hour",
-            description: "Please Select all the Time");
-      }
-    } else {
-      print("5");
-      if (!businessKey.currentState!.validate()) {
-        print("6");
-        Get.find<GlobalGeneralController>().errorSnackbar(
-            title: "Select Time",
-            description: "Please Select all the Time 90");
-      } else {
-        print("7");
-        if (businessKey.currentState!.validate()) {
-          print("8");
-          for (var i = 0; i < dayTimeList.length; i++) {
-            if (dayTimeList[i].isSelect.isTrue &&
-                dayTimeList[i].fromTime != "" &&
-                dayTimeList[i].toTime != "") {
-              print("9");
-
-              Get.toNamed(Routes.addHappyHourFoodItemScreen);
+    // if (showDayList) {
+      if (index == 0) {
+        print("1");
+        if (showLateDayList) {
+          print("2");
+          if (showLateDayList) {
+            print("3");
+            Get.toNamed(Routes.businessFoodItemScreen);
+          } else {
+            print("4");
+            Get.find<GlobalGeneralController>().errorSnackbar(
+                title: "Late Happy Hour",
+                description: "Please Select all the Time");
+          }
+        } else {
+          print("5");
+          if (!businessKey.currentState!.validate()) {
+            print("6");
+            Get.find<GlobalGeneralController>().errorSnackbar(
+                title: "Select Time",
+                description: "Please Select all the Time 90");
+          } else {
+            print("7");
+            if (businessKey.currentState!.validate()) {
+              print("8");
+              for (var i = 0; i < dayTimeList.length; i++) {
+                if (dayTimeList[i].isSelect.isTrue &&
+                    dayTimeList[i].fromTime != "" &&
+                    dayTimeList[i].toTime != "") {
+                  print("9");
+                  Get.toNamed(Routes.businessFoodItemScreen);
+                }
+              }
+              Get.toNamed(Routes.businessFoodItemScreen);
             }
           }
-          Get.toNamed(Routes.addHappyHourFoodItemScreen);
+          Get.toNamed(Routes.businessFoodItemScreen);
+        }
+      } else {
+        if (showLate) {
+          print("10");
+          if (lateHappyHourForValidationOnly) {
+            print("11");
+            Get.toNamed(Routes.businessFoodItemScreen);
+          } else {
+            Get.find<GlobalGeneralController>().errorSnackbar(
+                title: "Select Time",
+                description: "Please Select late time offer");
+          }
+        } else {
+          print("12");
+          Get.toNamed(Routes.businessFoodItemScreen);
         }
       }
-      Get.toNamed(Routes.addHappyHourFoodItemScreen);
-    }
-  } else {
-    if (showLate) {
-      print("10");
-      if (lateHappyHourForValidationOnly) {
-        print("11");
-        Get.toNamed(Routes.addHappyHourFoodItemScreen);
-      } else {
-        Get.find<GlobalGeneralController>().errorSnackbar(
-            title: "Select Time",
-            description: "Please Select late time offer");
-      }
-    } else {
-      print("12");
-      Get.toNamed(Routes.addHappyHourFoodItemScreen);
-    }
-  }
-}else{
-  Get.find<GlobalGeneralController>().errorSnackbar(
-      title: "Error",
-      description: "Please Submit Happy Hour");
-}
-
+   // }
+    // else {
+    //   Get.find<GlobalGeneralController>().errorSnackbar(
+    //       title: "Error", description: "Please Submit the happy hour first");
+    // }
 
     // var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
     // if (index == 0) {
@@ -2242,12 +2375,22 @@ if(showDayList){
     });
   }
 
+  void removeToHday(int i) {
+    hDayTimeList.removeWhere((element) => element['Hday'] == dayTimeList[i].day);
+    print(dayTimeList[i].day);
+  }
+
   void addToHdaySecond(int i) {
     hDayTimeLateList.add({
       "Hday2": dayTimeList[i].day,
       "HfromTime2": hFromTime2,
       "HtoTime2": hToTime2,
     });
+  }
+
+  void removeToHdaySecond(int i) {
+    hDayTimeLateList.removeWhere((element) => element['Hday2'] == dayTimeList[i].day);
+    print(dayTimeList[i].day);
   }
 
   void removeBusinessImage() {

@@ -2311,6 +2311,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                     onTap: () {
                       controller.sundaydailySpecialItemList[x]['controller']
                           .clear();
+                      controller.sundaydailySpecialItemList[x]['discount'] = "";
                     },
                     onChanged: (val) {
                       controller.sundaydailySpecialItemList[x]['price'] = val;
@@ -2338,7 +2339,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                     .clear(),
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) {},
+                                onChanged: (val) {
+                                  controller.sundaydailySpecialItemList[x]['price'] = '';
+                                  controller.sundaydailySpecialItemList[x]['discount'] = val;
+                                },
                                 decoration: InputDecoration(
                                   // hintText: "Enter Discount",
                                   hintStyle:
@@ -2371,6 +2375,8 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                     controller.foodList[index].dropDown[0] =
                                         newValue!;
                                     controller.foodList[index].dropDown[1] =
+                                        newValue;
+                                    controller.foodList[index].discountIcon =
                                         newValue;
                                   },
                                 ),
@@ -2822,6 +2828,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                         .clear();
                   },
                   onChanged: (val) {
+                    controller.mondaydailySpecialItemList[x]['discount'] = "";
                     controller.mondaydailySpecialItemList[x]['price'] = val;
                   },
                   keyboardType: TextInputType.number,
@@ -2856,7 +2863,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.mondaydailySpecialItemList[x]['discount'] = val;
+                                controller.mondaydailySpecialItemList[x]['price'] = '';
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -2889,6 +2899,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+                                  controller.foodList[index].discountIcon = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3343,6 +3354,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                         .clear();
                   },
                   onChanged: (val) {
+                    controller.tuesdaydailySpecialItemList[x]['discount'] = "";
                     controller.tuesdaydailySpecialItemList[x]['price'] = val;
                   },
                   keyboardType: TextInputType.number,
@@ -3377,7 +3389,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.tuesdaydailySpecialItemList[x]['discount'] = val;
+                                controller.tuesdaydailySpecialItemList[x]['price'] = "";
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3410,6 +3425,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+                                  controller.foodList[index].discountIcon = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3862,6 +3878,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                   },
                   onChanged: (val) {
                     controller.wednesdaydailySpecialItemList[x]['price'] = val;
+                    controller.wednesdaydailySpecialItemList[x]['discount'] = "";
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -3886,7 +3903,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.wednesdaydailySpecialItemList[x]['price'] = "";
+                                controller.wednesdaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3918,6 +3938,8 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   controller.foodList[index].dropDown[0] =
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
+                                      newValue;
+                                  controller.foodList[index].discountIcon =
                                       newValue;
                                   controller.update();
                                 },
@@ -4373,6 +4395,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                   },
                   onChanged: (val) {
                     controller.thursdaydailySpecialItemList[x]['price'] = val;
+                    controller.thursdaydailySpecialItemList[x]['discount'] = "";
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -4407,7 +4430,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.thursdaydailySpecialItemList[x]['price'] = "";
+                                controller.thursdaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4440,6 +4466,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+                                  controller.foodList[index].discountIcon = newValue;
                                   controller.update();
                                 },
                               ),
@@ -4890,6 +4917,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                   },
                   onChanged: (val) {
                     controller.fridaydailySpecialItemList[x]['price'] = val;
+                    controller.fridaydailySpecialItemList[x]['discount'] = "";
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -4923,7 +4951,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.fridaydailySpecialItemList[x]['price'] = "";
+                                controller.fridaydailySpecialItemList[x]['discount'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4956,6 +4987,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+                                  controller.foodList[index].discountIcon = newValue;
                                   controller.update();
                                 },
                               ),
@@ -5408,6 +5440,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                         .clear();
                   },
                   onChanged: (val) {
+                    controller.saturdaydailySpecialItemList[x]['discount'] = "";
                     controller.saturdaydailySpecialItemList[x]['price'] = val;
                   },
                   keyboardType: TextInputType.number,
@@ -5443,7 +5476,10 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.saturdaydailySpecialItemList[x]['discount'] = val;
+                                controller.saturdaydailySpecialItemList[x]['price'] = "";
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -5476,6 +5512,7 @@ class GuestDailySpecialScreen extends GetView<GuestController> {
                                       newValue!;
                                   controller.foodList[index].dropDown[1] =
                                       newValue;
+                                  controller.foodList[index].discountIcon = newValue;
                                   controller.update();
                                 },
                               ),

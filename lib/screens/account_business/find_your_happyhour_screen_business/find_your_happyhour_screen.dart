@@ -140,10 +140,7 @@ class BusinessFindYourHappyHourScreen
                                     .hoursInRadiusList[index].businessAddress
                                     .toString(),
                                 timeIcon: "assets/icons/Group 11432.svg",
-                                time:
-                                    "${controller.hoursInRadiusList[index].day?[0]['HfromTime']}  - "
-                                    "${controller.hoursInRadiusList[index].day?[0]['HtoTime']}",
-                                //"${DateTime.parse("2202-11-01 " + controller.hoursInRadiusList[index].day?[0]['HfromTime'].split(' ')[0])}",
+                                time: "",
                                 rating: RatingBarIndicator(
                                   unratedColor: Colors.grey.shade300,
                                   direction: Axis.horizontal,
@@ -196,9 +193,7 @@ class BusinessFindYourHappyHourScreen
                                 .hoursInRadiusList[index].businessAddress
                                 .toString(),
                             timeIcon: "assets/icons/Group 11432.svg",
-                            time:
-                                "${controller.hoursInRadiusList[index].day?[0]['HfromTime']}  - "
-                                "${controller.hoursInRadiusList[index].day?[0]['HtoTime']}",
+                            time: "",
                             //"${DateTime.parse("2202-11-01 " + controller.hoursInRadiusList[index].day?[0]['HfromTime'].split(' ')[0])}",
                             rating: RatingBarIndicator(
                               unratedColor: Colors.grey.shade300,
@@ -208,6 +203,7 @@ class BusinessFindYourHappyHourScreen
                               itemSize: 20,
                               itemBuilder: (context, index) => Image.asset(
                                 "assets/icons/Path 602@2x.png",
+
                                 height: 7,
                                 width: 10,
                                 color: primary,
@@ -232,7 +228,6 @@ class BusinessFindYourHappyHourScreen
                               controller.viewCount(
                                   controller.hoursInRadiusList[index].hid);
                               //  print(controller.hoursInRadiusList[index].hid);
-
                               Get.toNamed(Routes.businessHappyHourDetailScreen,
                                   arguments:
                                       controller.hoursInRadiusList[index]);

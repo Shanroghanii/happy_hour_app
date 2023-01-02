@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../core/colors.dart';
 import '../../../core/constants.dart';
+import '../../../global_controller/global_general_controller.dart';
 import '../../../global_widgets/main_button.dart';
 import '../../../global_widgets/price_field.dart';
 import '../../../global_widgets/text_field.dart';
@@ -71,7 +72,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Obx(
-                                  () => Card(
+                                      () => Card(
                                     margin: const EdgeInsets.all(1),
                                     elevation: 3,
                                     shape: const StadiumBorder(),
@@ -86,11 +87,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                               .daysList[0].isSelect.value,
                                           onChanged: (val) {
                                             controller.daysList[0].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[0].isSelect.value;
+                                                .value =
+                                            !controller
+                                                .daysList[0].isSelect.value;
                                             controller.dailyspecialsunDay =
                                                 controller.daysList[0].day;
+                                            if (controller.dayTimeList[0]
+                                                .isSelect.isFalse) {
+                                              controller
+                                                  .sundaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -124,29 +131,34 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                 Transform.scale(
                                   scale: 0.6,
                                   child: Obx(
-                                    () => Card(
+                                        () => Card(
                                       margin: const EdgeInsets.all(1),
                                       elevation: 6,
                                       shape: const StadiumBorder(),
                                       child: Transform.scale(
                                         scale: 2.0,
                                         child: Checkbox(
-                                          checkColor:
-                                              Theme.of(context).primaryColor,
-                                          splashRadius: 20,
-                                          shape: const StadiumBorder(),
-                                          side: BorderSide.none,
-                                          value: controller
-                                              .daysList[1].isSelect.value,
-                                          onChanged: (v) {
-                                            controller.daysList[1].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[1].isSelect.value;
-                                            controller.dailyspecialmonDay =
-                                                controller.daysList[1].day;
-                                          },
-                                        ),
+                                            checkColor:
+                                            Theme.of(context).primaryColor,
+                                            splashRadius: 20,
+                                            shape: const StadiumBorder(),
+                                            side: BorderSide.none,
+                                            value: controller
+                                                .daysList[1].isSelect.value,
+                                            onChanged: (v) {
+                                              controller.daysList[1].isSelect
+                                                  .value =
+                                              !controller.daysList[1]
+                                                  .isSelect.value;
+                                              controller.dailyspecialmonDay =
+                                                  controller.daysList[1].day;
+                                              if (controller.dayTimeList[1]
+                                                  .isSelect.isFalse) {
+                                                controller
+                                                    .mondaydailySpecialItemList
+                                                    .clear();
+                                              }
+                                            }),
                                       ),
                                     ),
                                   ),
@@ -178,7 +190,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Obx(
-                                  () => Card(
+                                      () => Card(
                                     margin: const EdgeInsets.all(1),
                                     elevation: 3,
                                     shape: const StadiumBorder(),
@@ -193,11 +205,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                               .daysList[2].isSelect.value,
                                           onChanged: (val) {
                                             controller.daysList[2].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[2].isSelect.value;
+                                                .value =
+                                            !controller
+                                                .daysList[2].isSelect.value;
                                             controller.dailyspecialtuesDay =
                                                 controller.daysList[2].day;
+                                            if (controller.dayTimeList[2]
+                                                .isSelect.isFalse) {
+                                              controller
+                                                  .tuesdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -231,7 +249,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Obx(
-                                  () => Card(
+                                      () => Card(
                                     margin: const EdgeInsets.all(1),
                                     elevation: 3,
                                     shape: const StadiumBorder(),
@@ -246,11 +264,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                               .daysList[3].isSelect.value,
                                           onChanged: (val) {
                                             controller.daysList[3].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[3].isSelect.value;
+                                                .value =
+                                            !controller
+                                                .daysList[3].isSelect.value;
                                             controller.dailyspecialwedDay =
                                                 controller.daysList[3].day;
+                                            if (controller.dayTimeList[3]
+                                                .isSelect.isFalse) {
+                                              controller
+                                                  .wednesdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -284,7 +308,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Obx(
-                                  () => Card(
+                                      () => Card(
                                     margin: const EdgeInsets.all(1),
                                     elevation: 3,
                                     shape: const StadiumBorder(),
@@ -299,11 +323,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                               .daysList[4].isSelect.value,
                                           onChanged: (val) {
                                             controller.daysList[4].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[4].isSelect.value;
+                                                .value =
+                                            !controller
+                                                .daysList[4].isSelect.value;
                                             controller.dailyspecialthursDay =
                                                 controller.daysList[4].day;
+                                            if (controller.dayTimeList[4]
+                                                .isSelect.isFalse) {
+                                              controller
+                                                  .thursdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -337,7 +367,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Obx(
-                                  () => Card(
+                                      () => Card(
                                     margin: const EdgeInsets.all(1),
                                     elevation: 3,
                                     shape: const StadiumBorder(),
@@ -352,12 +382,19 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                               .daysList[5].isSelect.value,
                                           onChanged: (val) {
                                             controller.daysList[5].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[5].isSelect.value;
+                                                .value =
+                                            !controller
+                                                .daysList[5].isSelect.value;
                                             controller.dailyspecialfriDay =
                                                 controller.daysList[5].day;
-                                          }),
+                                            if (controller.dayTimeList[5]
+                                                .isSelect.isFalse) {
+                                              controller
+                                                  .fridaydailySpecialItemList
+                                                  .clear();
+                                            }
+                                          },
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -390,7 +427,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Obx(
-                                  () => Card(
+                                      () => Card(
                                     margin: const EdgeInsets.all(0),
                                     elevation: 5,
                                     shape: const StadiumBorder(),
@@ -405,11 +442,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                               .daysList[6].isSelect.value,
                                           onChanged: (val) {
                                             controller.daysList[6].isSelect
-                                                    .value =
-                                                !controller
-                                                    .daysList[6].isSelect.value;
+                                                .value =
+                                            !controller
+                                                .daysList[6].isSelect.value;
                                             controller.dailyspecialsaturDay =
                                                 controller.daysList[6].day;
+                                            if (controller.dayTimeList[6]
+                                                .isSelect.isFalse) {
+                                              controller
+                                                  .saturdaydailySpecialItemList
+                                                  .clear();
+                                            }
                                           }),
                                     ),
                                   ),
@@ -434,6 +477,381 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     SizedBox(
                       height: H * 0.02,
                     ),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Transform.scale(
+                    //             scale: 0.6,
+                    //             child: Obx(
+                    //               () => Card(
+                    //                 margin: const EdgeInsets.all(1),
+                    //                 elevation: 3,
+                    //                 shape: const StadiumBorder(),
+                    //                 child: Transform.scale(
+                    //                   scale: 2.0,
+                    //                   child: Checkbox(
+                    //                       checkColor: Colors.amber,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[0].isSelect.value,
+                    //                       onChanged: (val) {
+                    //                         controller.daysList[0].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[0].isSelect.value;
+                    //                         controller.dailyspecialsunDay =
+                    //                             controller.daysList[0].day;
+                    //                       }),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: W * 0.02,
+                    //           ),
+                    //           Text(
+                    //             controller.daysList[0].day,
+                    //             style: const TextStyle(
+                    //               fontSize: 20,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       sundayList(0, context),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Column(
+                    //       children: [
+                    //         Row(
+                    //           children: [
+                    //             Transform.scale(
+                    //               scale: 0.6,
+                    //               child: Obx(
+                    //                 () => Card(
+                    //                   margin: const EdgeInsets.all(1),
+                    //                   elevation: 6,
+                    //                   shape: const StadiumBorder(),
+                    //                   child: Transform.scale(
+                    //                     scale: 2.0,
+                    //                     child: Checkbox(
+                    //                       checkColor:
+                    //                           Theme.of(context).primaryColor,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[1].isSelect.value,
+                    //                       onChanged: (v) {
+                    //                         controller.daysList[1].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[1].isSelect.value;
+                    //                         controller.dailyspecialmonDay =
+                    //                             controller.daysList[1].day;
+                    //                       },
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             SizedBox(
+                    //               width: W * 0.02,
+                    //             ),
+                    //             Text(
+                    //               controller.daysList[1].day,
+                    //               style: const TextStyle(
+                    //                 fontSize: 18,
+                    //                 fontWeight: FontWeight.w500,
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         mondayList(1, context),
+                    //       ],
+                    //     )),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Transform.scale(
+                    //             scale: 0.6,
+                    //             child: Obx(
+                    //               () => Card(
+                    //                 margin: const EdgeInsets.all(1),
+                    //                 elevation: 3,
+                    //                 shape: const StadiumBorder(),
+                    //                 child: Transform.scale(
+                    //                   scale: 2.0,
+                    //                   child: Checkbox(
+                    //                       checkColor: Colors.amber,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[2].isSelect.value,
+                    //                       onChanged: (val) {
+                    //                         controller.daysList[2].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[2].isSelect.value;
+                    //                         controller.dailyspecialtuesDay =
+                    //                             controller.daysList[2].day;
+                    //                       }),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: W * 0.02,
+                    //           ),
+                    //           Text(
+                    //             controller.daysList[2].day,
+                    //             style: const TextStyle(
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       tuesdayList(2, context),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Transform.scale(
+                    //             scale: 0.6,
+                    //             child: Obx(
+                    //               () => Card(
+                    //                 margin: const EdgeInsets.all(1),
+                    //                 elevation: 3,
+                    //                 shape: const StadiumBorder(),
+                    //                 child: Transform.scale(
+                    //                   scale: 2.0,
+                    //                   child: Checkbox(
+                    //                       checkColor: Colors.amber,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[3].isSelect.value,
+                    //                       onChanged: (val) {
+                    //                         controller.daysList[3].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[3].isSelect.value;
+                    //                         controller.dailyspecialwedDay =
+                    //                             controller.daysList[3].day;
+                    //                       }),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: W * 0.02,
+                    //           ),
+                    //           Text(
+                    //             controller.daysList[3].day,
+                    //             style: const TextStyle(
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       wednesdayList(3, context),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Transform.scale(
+                    //             scale: 0.6,
+                    //             child: Obx(
+                    //               () => Card(
+                    //                 margin: const EdgeInsets.all(1),
+                    //                 elevation: 3,
+                    //                 shape: const StadiumBorder(),
+                    //                 child: Transform.scale(
+                    //                   scale: 2.0,
+                    //                   child: Checkbox(
+                    //                       checkColor: Colors.amber,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[4].isSelect.value,
+                    //                       onChanged: (val) {
+                    //                         controller.daysList[4].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[4].isSelect.value;
+                    //                         controller.dailyspecialthursDay =
+                    //                             controller.daysList[4].day;
+                    //                       }),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: W * 0.02,
+                    //           ),
+                    //           Text(
+                    //             controller.daysList[4].day,
+                    //             style: const TextStyle(
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       thursdayList(4, context),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Transform.scale(
+                    //             scale: 0.6,
+                    //             child: Obx(
+                    //               () => Card(
+                    //                 margin: const EdgeInsets.all(1),
+                    //                 elevation: 3,
+                    //                 shape: const StadiumBorder(),
+                    //                 child: Transform.scale(
+                    //                   scale: 2.0,
+                    //                   child: Checkbox(
+                    //                       checkColor: Colors.amber,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[5].isSelect.value,
+                    //                       onChanged: (val) {
+                    //                         controller.daysList[5].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[5].isSelect.value;
+                    //                         controller.dailyspecialfriDay =
+                    //                             controller.daysList[5].day;
+                    //                       }),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: W * 0.02,
+                    //           ),
+                    //           Text(
+                    //             controller.daysList[5].day,
+                    //             style: const TextStyle(
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       fridayList(5, context),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: H * 0.01,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Transform.scale(
+                    //             scale: 0.6,
+                    //             child: Obx(
+                    //               () => Card(
+                    //                 margin: const EdgeInsets.all(0),
+                    //                 elevation: 5,
+                    //                 shape: const StadiumBorder(),
+                    //                 child: Transform.scale(
+                    //                   scale: 2.0,
+                    //                   child: Checkbox(
+                    //                       checkColor: Colors.amber,
+                    //                       splashRadius: 20,
+                    //                       shape: const StadiumBorder(),
+                    //                       side: BorderSide.none,
+                    //                       value: controller
+                    //                           .daysList[6].isSelect.value,
+                    //                       onChanged: (val) {
+                    //                         controller.daysList[6].isSelect
+                    //                                 .value =
+                    //                             !controller
+                    //                                 .daysList[6].isSelect.value;
+                    //                         controller.dailyspecialsaturDay =
+                    //                             controller.daysList[6].day;
+                    //                       }),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: W * 0.02,
+                    //           ),
+                    //           Text(
+                    //             controller.daysList[6].day,
+                    //             style: const TextStyle(
+                    //               fontSize: 18,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       saturdayList(6, context),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: H * 0.02,
+                    // ),
                   ],
                 ),
               ),
@@ -459,6 +877,9 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
       ),
     );
   }
+
+
+
 
   Obx sundayList(int index, BuildContext context) {
     return Obx(
@@ -645,7 +1066,9 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
     );
   }
 
-//*Add New Item Button
+  /// replace this by business dailyspecial
+
+
   Center sundayaddButtonPopUP(BuildContext context, int index) {
     return Center(
       child: SizedBox(
@@ -657,7 +1080,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addSundayManually(
                   context,
@@ -670,11 +1093,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.sundaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller.addManuallysundayAddTodailySpecialItemList();
-                        Navigator.pop(context);
+
                         controller.adddailySpecialManuallyController.clear();
+                        controller.sundaydailySpecialType = "";
+                        Navigator.pop(context);
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -698,32 +1127,33 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //  value: controller.sundaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                              value: foodOrDrink,
+                              child: Text(
+                                foodOrDrink,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                                 .toList(),
                             onChanged: (daily) {
                               controller.sundaydailySpecialType = daily!;
@@ -746,49 +1176,52 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.sundaydailySpecialType == "Drinks"
                                 ? controller.dri
-                                    .map((name) => DropdownMenuItem(
-                                          value: name,
-                                          child: Text(
-                                            name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList()
-                                : controller.foo
-                                    .map((name) => DropdownMenuItem(
-                                          value: name,
-                                          child: Text(
-                                            name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                            onChanged: (time) {
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.sundaydailySpecialType == "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged: controller.sundaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -800,6 +1233,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                               controller.dailSpecialName != null) {
                             controller.sundayAddTodailySpecialItemList();
                             Get.back();
+                            controller.sundaydailySpecialType = "";
                           }
                         },
                         text: "Add",
@@ -837,7 +1271,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addMondayManually(
                   context,
@@ -850,11 +1284,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.mondaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller.addManuallymondayAddTodailySpecialItemList();
-                        Navigator.pop(context);
+
                         controller.adddailySpecialManuallyController.clear();
+                        controller.mondaydailySpecialType = "";
+                        Navigator.pop(context);
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -878,32 +1318,33 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //  value: controller.mondaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                              value: foodOrDrink,
+                              child: Text(
+                                foodOrDrink,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                                 .toList(),
                             onChanged: (daily) {
                               controller.mondaydailySpecialType = daily!;
@@ -926,49 +1367,51 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.mondaydailySpecialType == "Drinks"
                                 ? controller.dri
-                                    .map((name) => DropdownMenuItem(
-                                          value: name,
-                                          child: Text(
-                                            name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList()
-                                : controller.foo
-                                    .map((name) => DropdownMenuItem(
-                                          value: name,
-                                          child: Text(
-                                            name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                            onChanged: (time) {
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.mondaydailySpecialType == "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged: controller.mondaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -976,10 +1419,12 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       CustomElevatedButtonWidget(
                         onPressed: () {
                           //* add first drop down button
-
-                          controller.mondayAddTodailySpecialItemList();
-
-                          Get.back();
+                          if (controller.mondaydailySpecialType != null &&
+                              controller.dailSpecialName != null) {
+                            controller.mondayAddTodailySpecialItemList();
+                            Get.back();
+                            controller.mondaydailySpecialType = "";
+                          }
                         },
                         text: "Add",
                         textColor: blackColor,
@@ -1016,7 +1461,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addTuesdayManually(
                   context,
@@ -1029,12 +1474,18 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.tuesdaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller
                             .addManuallytuesdayAddTodailySpecialItemList();
-                        Navigator.pop(context);
+
                         controller.adddailySpecialManuallyController.clear();
+                        controller.tuesdaydailySpecialType = "";
+                        Navigator.pop(context);
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -1058,32 +1509,33 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //  value: controller.tuesdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                              value: foodOrDrink,
+                              child: Text(
+                                foodOrDrink,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                                 .toList(),
                             onChanged: (daily) {
                               controller.tuesdaydailySpecialType = daily!;
@@ -1106,50 +1558,52 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
-                            items:
-                                controller.tuesdaydailySpecialType == "Drinks"
-                                    ? controller.dri
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList()
-                                    : controller.foo
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                            onChanged: (time) {
+                            items: controller.tuesdaydailySpecialType ==
+                                "Drinks"
+                                ? controller.dri
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.tuesdaydailySpecialType == "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged: controller.tuesdaydailySpecialType != null ?  (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1158,8 +1612,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         onPressed: () {
                           //* add first drop down button
 
-                          controller.tuesdayAddTodailySpecialItemList();
-                          Get.back();
+                          if (controller.tuesdaydailySpecialType != null &&
+                              controller.dailSpecialName != null) {
+                            controller.tuesdayAddTodailySpecialItemList();
+
+                            Get.back();
+                            controller.tuesdaydailySpecialType = "";
+                          }
                         },
                         text: "Add",
                         textColor: blackColor,
@@ -1196,7 +1655,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addWednesdayManually(
                   context,
@@ -1209,12 +1668,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.wednesdaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller
                             .addManuallywednesdayAddTodailySpecialItemList();
                         Navigator.pop(context);
                         controller.adddailySpecialManuallyController.clear();
+                        controller.wednesdaydailySpecialType = "";
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -1238,32 +1702,33 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //  value: controller.wednesdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                              value: foodOrDrink,
+                              child: Text(
+                                foodOrDrink,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                                 .toList(),
                             onChanged: (daily) {
                               controller.wednesdaydailySpecialType = daily!;
@@ -1286,50 +1751,53 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items:
-                                controller.wednesdaydailySpecialType == "Drinks"
-                                    ? controller.dri
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList()
-                                    : controller.foo
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                            onChanged: (time) {
+                            controller.wednesdaydailySpecialType == "Drinks"
+                                ? controller.dri
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.wednesdaydailySpecialType ==
+                                "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged:controller.wednesdaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            }: null,
                           ),
                         ),
                       ),
@@ -1338,9 +1806,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         onPressed: () {
                           //* add first drop down button
 
-                          controller.wednesdayAddTodailySpecialItemList();
+                          if (controller.wednesdaydailySpecialType != null &&
+                              controller.dailSpecialName != null) {
+                            controller.wednesdayAddTodailySpecialItemList();
 
-                          Get.back();
+                            Get.back();
+                            controller.wednesdaydailySpecialType = "";
+                          }
                         },
                         text: "Add",
                         textColor: blackColor,
@@ -1377,7 +1849,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addThursdayManually(
                   context,
@@ -1390,12 +1862,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.thursdaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller
                             .addManuallythursdayAddTodailySpecialItemList();
-                        Navigator.pop(context);
                         controller.adddailySpecialManuallyController.clear();
+                        controller.thursdaydailySpecialType = "";
+                        Navigator.pop(context);
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -1419,32 +1896,33 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //  value: controller.thursdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                              value: foodOrDrink,
+                              child: Text(
+                                foodOrDrink,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                                 .toList(),
                             onChanged: (daily) {
                               controller.thursdaydailySpecialType = daily!;
@@ -1467,50 +1945,52 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
-                            items:
-                                controller.thursdaydailySpecialType == "Drinks"
-                                    ? controller.dri
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList()
-                                    : controller.foo
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                            onChanged: (time) {
+                            items: controller.thursdaydailySpecialType ==
+                                "Drinks"
+                                ? controller.dri
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.thursdaydailySpecialType == "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged: controller.thursdaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1519,9 +1999,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         onPressed: () {
                           //* add first drop down button
 
-                          controller.thursdayAddTodailySpecialItemList();
+                          if (controller.thursdaydailySpecialType != null &&
+                              controller.dailSpecialName != null) {
+                            controller.thursdayAddTodailySpecialItemList();
 
-                          Get.back();
+                            Get.back();
+                            controller.thursdaydailySpecialType = "";
+                          }
                         },
                         text: "Add",
                         textColor: blackColor,
@@ -1558,24 +2042,29 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addFridayManually(
                   context,
                   "Add Manually",
                   CustomElevatedButtonWidget(
-                    horizontalPadding: 100,
+                    horizontalPadding: W * 0.2,
                     verticalPadding: 22,
                     borderRadius: 45,
                     fontSize: 24,
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.fridaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller.addManuallyfridayAddTodailySpecialItemList();
-                        Navigator.pop(context);
                         controller.adddailySpecialManuallyController.clear();
+                        controller.fridaydailySpecialType = "";
+                        Navigator.pop(context);
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -1599,32 +2088,33 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //  value: controller.fridaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
                                 .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                              value: foodOrDrink,
+                              child: Text(
+                                foodOrDrink,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                                 .toList(),
                             onChanged: (daily) {
                               controller.fridaydailySpecialType = daily!;
@@ -1643,54 +2133,55 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           height: H * 0.07,
                           width: W * 0.8,
                           child: DropdownButtonFormField<String>(
-
                             elevation: 15,
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.fridaydailySpecialType == "Drinks"
                                 ? controller.dri
-                                    .map((name) => DropdownMenuItem(
-                                          value: name,
-                                          child: Text(
-                                            name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList()
-                                : controller.foo
-                                    .map((name) => DropdownMenuItem(
-                                          value: name,
-                                          child: Text(
-                                            name,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                            onChanged: (time) {
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.fridaydailySpecialType == "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged: controller.fridaydailySpecialType != null ? (time) {
                               controller.dailSpecialName = time!;
-                            },
+                            } : null,
                           ),
                         ),
                       ),
@@ -1698,8 +2189,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       CustomElevatedButtonWidget(
                         onPressed: () {
                           //* add first drop down button
-                          controller.fridayAddTodailySpecialItemList();
-                          Get.back();
+                          if (controller.fridaydailySpecialType != null &&
+                              controller.dailSpecialName != null) {
+                            controller.fridayAddTodailySpecialItemList();
+
+                            Get.back();
+                            controller.fridaydailySpecialType = "";
+                          }
                         },
                         text: "Add",
                         textColor: blackColor,
@@ -1736,7 +2232,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
             addNewItemDialog(
               context,
               "Add new item",
-              () {
+                  () {
                 navigator?.pop(context);
                 addSaturdayManually(
                   context,
@@ -1749,12 +2245,17 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     textColor: blackColor,
                     text: ("Add"),
                     onPressed: () {
-                      if (controller.adddailySpecialManuallyController.text !=
-                          "") {
+                      if (controller.saturdaydailySpecialType != "" &&
+                          controller.adddailySpecialManuallyController.text !=
+                              "") {
                         controller
                             .addManuallysaturdayAddTodailySpecialItemList();
-                        Navigator.pop(context);
                         controller.adddailySpecialManuallyController.clear();
+                        controller.saturdaydailySpecialType = "";
+                        Navigator.pop(context);
+                      } else {
+                        Get.find<GlobalGeneralController>()
+                            .toastMessage(message: "Select Type and Name");
                       }
                     },
                   ),
@@ -1778,32 +2279,35 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Type",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
+                            //   value: controller.saturdaydailySpecialType,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: controller.dailyDropDown
-                                .map((foodOrDrink) => DropdownMenuItem(
-                                      value: foodOrDrink,
-                                      child: Text(
-                                        foodOrDrink,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
+                                .map(
+                                  (foodOrDrink) => DropdownMenuItem(
+                                value: foodOrDrink,
+                                child: Text(
+                                  foodOrDrink,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            )
                                 .toList(),
                             onChanged: (daily) {
                               controller.saturdaydailySpecialType = daily!;
@@ -1826,50 +2330,52 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             decoration: const InputDecoration(
                               enabled: false,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(45)),
+                                BorderRadius.all(Radius.circular(45)),
                               ),
                             ),
                             isExpanded: true,
                             hint: const Text(
                               "Select Item",
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
-                            items:
-                                controller.saturdaydailySpecialType == "Drinks"
-                                    ? controller.dri
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList()
-                                    : controller.foo
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                            onChanged: (time) {
-                              controller.dailSpecialName = time!;
-                            },
+                            items: controller.saturdaydailySpecialType ==
+                                "Drinks"
+                                ? controller.dri
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : controller.saturdaydailySpecialType == "Foods"
+                                ? controller.foo
+                                .map((name) => DropdownMenuItem(
+                              value: name,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                                .toList()
+                                : [],
+                            onChanged:controller.saturdaydailySpecialType != null ? (name) {
+                              controller.dailSpecialName = name!;
+                            } : null,
                           ),
                         ),
                       ),
@@ -1877,11 +2383,14 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       CustomElevatedButtonWidget(
                         onPressed: () {
                           //* add first drop down button
+                          if (controller.saturdaydailySpecialType != null &&
+                              controller.dailSpecialName != null) {
+                            controller.saturdayAddTodailySpecialItemList();
 
-                          controller.saturdayAddTodailySpecialItemList();
-                          // controller.daysList[index].isSelect.value = true;
+                            controller.saturdaydailySpecialType = "";
 
-                          Get.back();
+                            Get.back();
+                          }
                         },
                         text: "Add",
                         textColor: blackColor,
@@ -1906,6 +2415,1270 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
       ),
     );
   }
+
+// //*Add New Item Button
+//   Center sundayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addSundayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller.addManuallysundayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ),
+//                             )
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.sundaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.sundaydailySpecialType == "Drinks"
+//                                 ? controller.dri
+//                                     .map((name) => DropdownMenuItem(
+//                                           value: name,
+//                                           child: Text(
+//                                             name,
+//                                             style: const TextStyle(
+//                                               color: Colors.black,
+//                                               fontSize: 14,
+//                                             ),
+//                                           ),
+//                                         ))
+//                                     .toList()
+//                                 : controller.foo
+//                                     .map((name) => DropdownMenuItem(
+//                                           value: name,
+//                                           child: Text(
+//                                             name,
+//                                             style: const TextStyle(
+//                                               color: Colors.black,
+//                                               fontSize: 14,
+//                                             ),
+//                                           ),
+//                                         ))
+//                                     .toList(),
+//                             onChanged: controller.sundaydailySpecialType != null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             } : null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//                           if (controller.sundaydailySpecialType != null &&
+//                               controller.dailSpecialName != null) {
+//                             controller.sundayAddTodailySpecialItemList();
+//                             Get.back();
+//                           }
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Center mondayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addMondayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller.addManuallymondayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.mondaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.mondaydailySpecialType == "Drinks"
+//                                 ? controller.dri
+//                                     .map((name) => DropdownMenuItem(
+//                                           value: name,
+//                                           child: Text(
+//                                             name,
+//                                             style: const TextStyle(
+//                                               color: Colors.black,
+//                                               fontSize: 14,
+//                                             ),
+//                                           ),
+//                                         ))
+//                                     .toList()
+//                                 : controller.foo
+//                                     .map((name) => DropdownMenuItem(
+//                                           value: name,
+//                                           child: Text(
+//                                             name,
+//                                             style: const TextStyle(
+//                                               color: Colors.black,
+//                                               fontSize: 14,
+//                                             ),
+//                                           ),
+//                                         ))
+//                                     .toList(),
+//                             onChanged: controller.mondaydailySpecialType != null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             } : null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//
+//                           controller.mondayAddTodailySpecialItemList();
+//
+//                           Get.back();
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Center tuesdayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addTuesdayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller
+//                             .addManuallytuesdayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.tuesdaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items:
+//                                 controller.tuesdaydailySpecialType == "Drinks"
+//                                     ? controller.dri
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList()
+//                                     : controller.foo
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList(),
+//                             onChanged: controller.tuesdaydailySpecialType != null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             } : null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//
+//                           controller.tuesdayAddTodailySpecialItemList();
+//                           Get.back();
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Center wednesdayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addWednesdayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller
+//                             .addManuallywednesdayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.wednesdaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items:
+//                                 controller.wednesdaydailySpecialType == "Drinks"
+//                                     ? controller.dri
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList()
+//                                     : controller.foo
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList(),
+//                             onChanged: controller.wednesdaydailySpecialType != null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             } : null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//
+//                           controller.wednesdayAddTodailySpecialItemList();
+//
+//                           Get.back();
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Center thursdayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addThursdayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller
+//                             .addManuallythursdayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.thursdaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items:
+//                                 controller.thursdaydailySpecialType == "Drinks"
+//                                     ? controller.dri
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList()
+//                                     : controller.foo
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList(),
+//                             onChanged: controller.thursdaydailySpecialType != null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             }: null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//
+//                           controller.thursdayAddTodailySpecialItemList();
+//
+//                           Get.back();
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Center fridayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addFridayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller.addManuallyfridayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.fridaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.fridaydailySpecialType == "Drinks"
+//                                 ? controller.dri
+//                                     .map((name) => DropdownMenuItem(
+//                                           value: name,
+//                                           child: Text(
+//                                             name,
+//                                             style: const TextStyle(
+//                                               color: Colors.black,
+//                                               fontSize: 14,
+//                                             ),
+//                                           ),
+//                                         ))
+//                                     .toList()
+//                                 : controller.foo
+//                                     .map((name) => DropdownMenuItem(
+//                                           value: name,
+//                                           child: Text(
+//                                             name,
+//                                             style: const TextStyle(
+//                                               color: Colors.black,
+//                                               fontSize: 14,
+//                                             ),
+//                                           ),
+//                                         ))
+//                                     .toList(),
+//                             onChanged:controller.fridaydailySpecialType!=null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             }: null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//                           controller.fridayAddTodailySpecialItemList();
+//                           Get.back();
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Center saturdayaddButtonPopUP(BuildContext context, int index) {
+//     return Center(
+//       child: SizedBox(
+//         height: H * 0.06,
+//         width: W * 0.5,
+//         child: CustomElevatedButtonWidget(
+//           onPressed: () {
+//             //*It Will Show PopUP
+//             addNewItemDialog(
+//               context,
+//               "Add new item",
+//               () {
+//                 navigator?.pop(context);
+//                 addSaturdayManually(
+//                   context,
+//                   "Add Manually",
+//                   CustomElevatedButtonWidget(
+//                     horizontalPadding: 100,
+//                     verticalPadding: 22,
+//                     borderRadius: 45,
+//                     fontSize: 24,
+//                     textColor: blackColor,
+//                     text: ("Add"),
+//                     onPressed: () {
+//                       if (controller.adddailySpecialManuallyController.text !=
+//                           "") {
+//                         controller
+//                             .addManuallysaturdayAddTodailySpecialItemList();
+//                         Navigator.pop(context);
+//                         controller.adddailySpecialManuallyController.clear();
+//                       }
+//                     },
+//                   ),
+//                   controller.adddailySpecialManuallyController,
+//                 );
+//               },
+//               GetBuilder<AddHappyhourController>(
+//                 builder: (_) {
+//                   return Column(
+//                     children: [
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Type",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items: controller.dailyDropDown
+//                                 .map((foodOrDrink) => DropdownMenuItem(
+//                                       value: foodOrDrink,
+//                                       child: Text(
+//                                         foodOrDrink,
+//                                         style: const TextStyle(
+//                                           color: Colors.black,
+//                                           fontSize: 14,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 .toList(),
+//                             onChanged: (daily) {
+//                               controller.saturdaydailySpecialType = daily!;
+//                               controller.update();
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Card(
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(45),
+//                         ),
+//                         elevation: 5,
+//                         child: SizedBox(
+//                           height: H * 0.07,
+//                           width: W * 0.8,
+//                           child: DropdownButtonFormField<String>(
+//                             elevation: 15,
+//                             decoration: const InputDecoration(
+//                               enabled: false,
+//                               contentPadding:
+//                                   EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+//                               filled: true,
+//                               fillColor: Colors.white,
+//                               border: OutlineInputBorder(
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(45)),
+//                               ),
+//                             ),
+//                             isExpanded: true,
+//                             hint: const Text(
+//                               "Select Item",
+//                               style:
+//                                   TextStyle(fontSize: 14, color: Colors.grey),
+//                             ),
+//                             icon: const Icon(Icons.keyboard_arrow_down),
+//                             items:
+//                                 controller.saturdaydailySpecialType == "Drinks"
+//                                     ? controller.dri
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList()
+//                                     : controller.foo
+//                                         .map((name) => DropdownMenuItem(
+//                                               value: name,
+//                                               child: Text(
+//                                                 name,
+//                                                 style: const TextStyle(
+//                                                   color: Colors.black,
+//                                                   fontSize: 14,
+//                                                 ),
+//                                               ),
+//                                             ))
+//                                         .toList(),
+//                             onChanged: controller.saturdaydailySpecialType != null ? (time) {
+//                               controller.dailSpecialName = time!;
+//                             } : null,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       CustomElevatedButtonWidget(
+//                         onPressed: () {
+//                           //* add first drop down button
+//
+//                           controller.saturdayAddTodailySpecialItemList();
+//                           // controller.daysList[index].isSelect.value = true;
+//
+//                           Get.back();
+//                         },
+//                         text: "Add",
+//                         textColor: blackColor,
+//                         fontSize: 24,
+//                         verticalPadding: 20,
+//                         horizontalPadding: 100,
+//                         borderRadius: 45,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//               Container(),
+//             );
+//           },
+//           text: "Add new item",
+//           textColor: blackColor,
+//           fontSize: 16,
+//           verticalPadding: 0,
+//           borderRadius: 45,
+//         ),
+//       ),
+//     );
+//   }
+
+
 
   //*ListView
   ListView sundaydailspecialItemNameBuilder(int index) {
@@ -1938,29 +3711,29 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           ),
                         ),
                         controller.sundaydailySpecialItemList[x]['index'] ==
-                                "Drinks"
+                            "Drinks"
                             ? SizedBox(
-                                width: W * 0.3,
-                                child: const Text(
-                                  "Size",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: blackColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )
+                          width: W * 0.3,
+                          child: const Text(
+                            "Size",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: blackColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
                             : SizedBox(
-                                width: W * 0.26,
-                                child: const Text(
-                                  "Quantity",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: blackColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
+                          width: W * 0.26,
+                          child: const Text(
+                            "Quantity",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: blackColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           width: W * 0.2,
                           child: const Text(
@@ -2010,141 +3783,141 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       child: Row(
                         children: [
                           controller.sundaydailySpecialItemList[x]['index'] ==
-                                  "Foods"
+                              "Foods"
                               ? Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        //*decrement Button
-                                        controller
-                                            .sundaydailySpecialdecrement(x);
-                                      },
-                                      icon: const Image(
-                                        image: AssetImage(
-                                            "assets/icons/Group 8197.png"),
-                                      ),
-                                    ),
-                                    Text(
-                                      controller.sundaydailySpecialItemList[x]
-                                              ["quantity"]
-                                          .toString(),
-                                      style: const TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontSize: 16),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        //*increment Button
-                                        controller
-                                            .sundaydailySpecialincrement(x);
-                                      },
-                                      icon: const Image(
-                                        image: AssetImage(
-                                            "assets/icons/Group 8192@2x.png"),
-                                      ),
-                                    ),
-                                  ],
-                                )
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  //*decrement Button
+                                  controller
+                                      .sundaydailySpecialdecrement(x);
+                                },
+                                icon: const Image(
+                                  image: AssetImage(
+                                      "assets/icons/Group 8197.png"),
+                                ),
+                              ),
+                              Text(
+                                controller.sundaydailySpecialItemList[x]
+                                ["quantity"]
+                                    .toString(),
+                                style: const TextStyle(
+                                    overflow: TextOverflow.clip,
+                                    fontSize: 16),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  //*increment Button
+                                  controller
+                                      .sundaydailySpecialincrement(x);
+                                },
+                                icon: const Image(
+                                  image: AssetImage(
+                                      "assets/icons/Group 8192@2x.png"),
+                                ),
+                              ),
+                            ],
+                          )
                               : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                28,
-                                        child: Material(
-                                          elevation: 3,
-                                          borderRadius:
-                                              BorderRadius.circular(45),
-                                          child: Row(
-                                            children: [
-                                              Flexible(
-                                                child: TextFormField(
-                                                  validator: (value) {
-                                                    if (value == null ||
-                                                        value.trim().isEmpty) {
-                                                      return 'size';
-                                                    }
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: SizedBox(
+                                  width:
+                                  MediaQuery.of(context).size.width /
+                                      5,
+                                  height:
+                                  MediaQuery.of(context).size.height /
+                                      28,
+                                  child: Material(
+                                    elevation: 3,
+                                    borderRadius:
+                                    BorderRadius.circular(45),
+                                    child: Row(
+                                      children: [
+                                        Flexible(
+                                          child: TextFormField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.trim().isEmpty) {
+                                                return 'size';
+                                              }
 
-                                                    // Return null if the entered Business name is valid
-                                                    return null;
-                                                  },
-                                                  onTap: () => controller
-                                                      .dailySpecialPrice
-                                                      .clear(),
-                                                  obscureText: false,
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  onChanged: (val) {
-                                                    controller
-                                                            .sundaydailySpecialItemList[
-                                                        x]["quantity"] = val;
-                                                  },
-                                                  decoration: InputDecoration(
-                                                    hintStyle: const TextStyle(
-                                                        color: Colors.grey),
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                                .fromLTRB(
-                                                            8.0, 2.0, 2.0, 2.0),
-                                                    filled: false,
-                                                    fillColor: Colors.white,
-                                                    border: OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
-                                                  ),
-                                                ),
+                                              // Return null if the entered Business name is valid
+                                              return null;
+                                            },
+                                            onTap: () => controller
+                                                .dailySpecialPrice
+                                                .clear(),
+                                            obscureText: false,
+                                            keyboardType:
+                                            TextInputType.number,
+                                            onChanged: (val) {
+                                              controller
+                                                  .sundaydailySpecialItemList[
+                                              x]["quantity"] = val;
+                                            },
+                                            decoration: InputDecoration(
+                                              hintStyle: const TextStyle(
+                                                  color: Colors.grey),
+                                              contentPadding:
+                                              const EdgeInsets
+                                                  .fromLTRB(
+                                                  8.0, 2.0, 2.0, 2.0),
+                                              filled: false,
+                                              fillColor: Colors.white,
+                                              border: OutlineInputBorder(
+                                                borderSide:
+                                                BorderSide.none,
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    10),
                                               ),
-                                              Flexible(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: DropdownButton(
-                                                    underline: Container(),
-                                                    isExpanded: true,
-                                                    hint: const Text(""),
-                                                    value: controller
-                                                        .sundaydailySpecialItemList[
-                                                            x]["sizeIcon"]
-                                                        .toString(),
-                                                    items: controller
-                                                        .sizeDropdownList
-                                                        .map((String items) {
-                                                      return DropdownMenuItem(
-                                                          value: items,
-                                                          child: Text(
-                                                            items,
-                                                            maxLines: 1,
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        10),
-                                                          ));
-                                                    }).toList(),
-                                                    onChanged: (String? q) {
-                                                      controller
-                                                              .sundaydailySpecialItemList[
-                                                          x]["sizeIcon"] = q;
-                                                      controller.update();
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                        Flexible(
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.all(2.0),
+                                            child: DropdownButton(
+                                              underline: Container(),
+                                              isExpanded: true,
+                                              hint: const Text(""),
+                                              value: controller
+                                                  .sundaydailySpecialItemList[
+                                              x]["sizeIcon"]
+                                                  .toString(),
+                                              items: controller
+                                                  .sizeDropdownList
+                                                  .map((String items) {
+                                                return DropdownMenuItem(
+                                                    value: items,
+                                                    child: Text(
+                                                      items,
+                                                      maxLines: 1,
+                                                      style:
+                                                      const TextStyle(
+                                                          fontSize:
+                                                          10),
+                                                    ));
+                                              }).toList(),
+                                              onChanged: (String? q) {
+                                                controller
+                                                    .sundaydailySpecialItemList[
+                                                x]["sizeIcon"] = q;
+                                                controller.update();
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
+                              )
+                            ],
+                          ),
                           // SizedBox(
                           //     width: W * 0.22,
                           //     height: H * 0.034,
@@ -2190,9 +3963,9 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     onTap: () {
                       controller.sundaydailySpecialItemList[x]['controller']
                           .clear();
+                      controller.sundaydailySpecialItemList[x]['discount'] = '';
                     },
                     onChanged: (val) {
-                      controller.sundaydailySpecialItemList[x]['discount'] = "";
                       controller.sundaydailySpecialItemList[x]['price'] = val;
                     },
                     keyboardType: TextInputType.number,
@@ -2210,19 +3983,24 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                             Flexible(
                               child: TextFormField(
                                 controller:
-                                    controller.sundaydailySpecialItemList[x]
-                                        ['controller'],
-                                onTap: () => controller
-                                    .sundaydailySpecialItemList[x]
-                                        ['pricecontroller']
-                                    .clear(),
+                                controller.sundaydailySpecialItemList[x]
+                                ['controller'],
+                                onTap: () {
+                                  controller
+                                      .sundaydailySpecialItemList[x]
+                                  ['pricecontroller']
+                                      .clear();
+                                  controller.sundaydailySpecialItemList[x]['price'] = "";
+                                },
                                 obscureText: false,
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) {},
+                                onChanged: (val) {
+                                  controller.sundaydailySpecialItemList[x]['discount']= val;
+                                },
                                 decoration: InputDecoration(
                                   // hintText: "Enter Discount",
                                   hintStyle:
-                                      const TextStyle(color: Colors.grey),
+                                  const TextStyle(color: Colors.grey),
                                   contentPadding: const EdgeInsets.fromLTRB(
                                       8.0, 2.0, 2.0, 2.0),
                                   filled: false,
@@ -2248,12 +4026,14 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                         value: items, child: Text(items));
                                   }).toList(),
                                   onChanged: (String? newValue) {
-                                    controller.foodList[index].dropDown[0] =
-                                        newValue!;
-                                    controller.foodList[index].dropDown[1] =
-                                        newValue;
-                                    controller.foodList[index].discountIcon =
-                                        newValue;
+                                    // controller.foodList[index].dropDown[0] =
+                                    //     newValue!;
+                                    // controller.foodList[index].dropDown[1] =
+                                    //     newValue;
+                                    controller
+                                        .sundaydailySpecialItemList[x]
+                                    ['discountIcon'] = newValue;
+
                                   },
                                 ),
                               ),
@@ -2320,7 +4100,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -2335,20 +4115,20 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.timesList
                             .map((fromTime) => DropdownMenuItem(
-                                  value: fromTime,
-                                  child: Text(
-                                    fromTime,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: fromTime,
+                          child: Text(
+                            fromTime,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (time) {
                           controller.dailySpecialfromtime = time!;
                           controller.update();
-                          print(controller.dailySpecialfromtime);
+                          // print(controller.dailySpecialfromtime);
                         },
                       ),
                     ),
@@ -2373,7 +4153,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -2388,15 +4168,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.timesList
                             .map((toTime) => DropdownMenuItem(
-                                  value: toTime,
-                                  child: Text(
-                                    toTime,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: toTime,
+                          child: Text(
+                            toTime,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (time) {
                           controller.dailySpecialtotime = time!;
@@ -2462,27 +4242,27 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                 ),
                 controller.mondaydailySpecialItemList[x]['index'] == "Drinks"
                     ? SizedBox(
-                        width: W * 0.3,
-                        child: const Text(
-                          "Size",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                  width: W * 0.3,
+                  child: const Text(
+                    "Size",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
                     : SizedBox(
-                        width: W * 0.26,
-                        child: const Text(
-                          "Quantity",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                  width: W * 0.26,
+                  child: const Text(
+                    "Quantity",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: W * 0.2,
                   child: const Text(
@@ -2525,131 +4305,132 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     child: Row(
                       children: [
                         controller.mondaydailySpecialItemList[x]['index'] ==
-                                "Foods"
+                            "Foods"
                             ? Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      //*decrement Button
-                                      controller.mondaydailySpecialdecrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8197.png"),
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.mondaydailySpecialItemList[x]
-                                            ["quantity"]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        overflow: TextOverflow.clip,
-                                        fontSize: 16),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      //*increment Button
-                                      controller.mondaydailySpecialincrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8192@2x.png"),
-                                    ),
-                                  ),
-                                ],
-                              )
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                //*decrement Button
+                                controller.mondaydailySpecialdecrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8197.png"),
+                              ),
+                            ),
+                            Text(
+                              controller.mondaydailySpecialItemList[x]
+                              ["quantity"]
+                                  .toString(),
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontSize: 16),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                //*increment Button
+                                controller.mondaydailySpecialincrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8192@2x.png"),
+                              ),
+                            ),
+                          ],
+                        )
                             : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              28,
-                                      child: Material(
-                                        elevation: 3,
-                                        borderRadius: BorderRadius.circular(45),
-                                        child: Row(
-                                          children: [
-                                            Flexible(
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'size';
-                                                  }
-                                                  return null;
-                                                },
-                                                onTap: () => controller
-                                                    .dailySpecialPrice
-                                                    .clear(),
-                                                obscureText: false,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (val) {
-                                                  controller
-                                                          .mondaydailySpecialItemList[
-                                                      x]["quantity"] = val;
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8.0, 2.0, 2.0, 2.0),
-                                                  filled: false,
-                                                  fillColor: Colors.white,
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 5,
+                                height:
+                                MediaQuery.of(context).size.height /
+                                    28,
+                                child: Material(
+                                  elevation: 3,
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'size';
+                                            }
+                                            return null;
+                                          },
+                                          onTap: () => controller
+                                              .dailySpecialPrice
+                                              .clear(),
+                                          obscureText: false,
+                                          keyboardType:
+                                          TextInputType.number,
+                                          onChanged: (val) {
+                                            controller
+                                                .mondaydailySpecialItemList[
+                                            x]["quantity"] = val;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            contentPadding:
+                                            const EdgeInsets.fromLTRB(
+                                                8.0, 2.0, 2.0, 2.0),
+                                            filled: false,
+                                            fillColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  10),
                                             ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: DropdownButton(
-                                                  underline: Container(),
-                                                  isExpanded: true,
-                                                  hint: const Text(""),
-                                                  value: controller
-                                                      .mondaydailySpecialItemList[
-                                                          x]["sizeIcon"]
-                                                      .toString(),
-                                                  items: controller
-                                                      .sizeDropdownList
-                                                      .map((String items) {
-                                                    return DropdownMenuItem(
-                                                        value: items,
-                                                        child: Text(
-                                                          items,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ));
-                                                  }).toList(),
-                                                  onChanged: (String? q) {
-                                                    controller
-                                                            .mondaydailySpecialItemList[
-                                                        x]["sizeIcon"] = q;
-                                                    controller.update();
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.all(2.0),
+                                          child: DropdownButton(
+                                            underline: Container(),
+                                            isExpanded: true,
+                                            hint: const Text(""),
+                                            value: controller
+                                                .mondaydailySpecialItemList[
+                                            x]["sizeIcon"]
+                                                .toString(),
+                                            items: controller
+                                                .sizeDropdownList
+                                                .map((String items) {
+                                              return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(
+                                                    items,
+                                                    maxLines: 1,
+                                                    style:
+                                                    const TextStyle(
+                                                        fontSize: 10),
+                                                  ));
+                                            }).toList(),
+                                            onChanged: (String? q) {
+                                              controller
+                                                  .mondaydailySpecialItemList[
+                                              x]["sizeIcon"] = q;
+                                              controller.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                            )
+                          ],
+                        ),
 
                         // SizedBox(
                         //     width: W * 0.22,
@@ -2698,6 +4479,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                   },
                   onChanged: (val) {
                     controller.mondaydailySpecialItemList[x]['price'] = val;
+                    controller.mondaydailySpecialItemList[x]['discount'] = "";
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -2727,11 +4509,14 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                   .mondaydailySpecialItemList[x]['controller'],
                               onTap: () => controller
                                   .mondaydailySpecialItemList[x]
-                                      ['pricecontroller']
+                              ['pricecontroller']
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.mondaydailySpecialItemList[x]['discount']= "";
+                                controller.mondaydailySpecialItemList[x]['price'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -2760,11 +4545,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
-                                  controller.foodList[index].discountIcon = newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .mondaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -2839,7 +4626,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -2854,15 +4641,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
-                                value: fromTime,
-                                child: Text(
-                                  fromTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: fromTime,
+                        child: Text(
+                          fromTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialfromtime = time!;
@@ -2890,7 +4677,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -2905,15 +4692,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((toTime) => DropdownMenuItem(
-                                value: toTime,
-                                child: Text(
-                                  toTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: toTime,
+                        child: Text(
+                          toTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -2978,27 +4765,27 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                 ),
                 controller.tuesdaydailySpecialItemList[x]['index'] == "Drinks"
                     ? SizedBox(
-                        width: W * 0.3,
-                        child: const Text(
-                          "Size",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                  width: W * 0.3,
+                  child: const Text(
+                    "Size",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
                     : SizedBox(
-                        width: W * 0.26,
-                        child: const Text(
-                          "Quantity",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                  width: W * 0.26,
+                  child: const Text(
+                    "Quantity",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: W * 0.2,
                   child: const Text(
@@ -3044,134 +4831,135 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         // controller.tuesdaydailySpecialItemList
                         //         .contains(controller.dailySpecialType)
                         controller.tuesdaydailySpecialItemList[x]['index'] ==
-                                "Foods"
+                            "Foods"
                             ? Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      //*decrement Button
-                                      controller
-                                          .tuesdaydailySpecialdecrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8197.png"),
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.tuesdaydailySpecialItemList[x]
-                                            ["quantity"]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        overflow: TextOverflow.clip,
-                                        fontSize: 16),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      //*increment Button
-                                      controller
-                                          .tuesdaydailySpecialincrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8192@2x.png"),
-                                    ),
-                                  ),
-                                ],
-                              )
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                //*decrement Button
+                                controller
+                                    .tuesdaydailySpecialdecrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8197.png"),
+                              ),
+                            ),
+                            Text(
+                              controller.tuesdaydailySpecialItemList[x]
+                              ["quantity"]
+                                  .toString(),
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontSize: 16),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                //*increment Button
+                                controller
+                                    .tuesdaydailySpecialincrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8192@2x.png"),
+                              ),
+                            ),
+                          ],
+                        )
                             : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              28,
-                                      child: Material(
-                                        elevation: 3,
-                                        borderRadius: BorderRadius.circular(45),
-                                        child: Row(
-                                          children: [
-                                            Flexible(
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'size';
-                                                  }
-                                                  return null;
-                                                },
-                                                onTap: () => controller
-                                                    .dailySpecialPrice
-                                                    .clear(),
-                                                obscureText: false,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (val) {
-                                                  controller
-                                                          .tuesdaydailySpecialItemList[
-                                                      x]["quantity"] = val;
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8.0, 2.0, 2.0, 2.0),
-                                                  filled: false,
-                                                  fillColor: Colors.white,
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 5,
+                                height:
+                                MediaQuery.of(context).size.height /
+                                    28,
+                                child: Material(
+                                  elevation: 3,
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'size';
+                                            }
+                                            return null;
+                                          },
+                                          onTap: () => controller
+                                              .dailySpecialPrice
+                                              .clear(),
+                                          obscureText: false,
+                                          keyboardType:
+                                          TextInputType.number,
+                                          onChanged: (val) {
+                                            controller
+                                                .tuesdaydailySpecialItemList[
+                                            x]["quantity"] = val;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            contentPadding:
+                                            const EdgeInsets.fromLTRB(
+                                                8.0, 2.0, 2.0, 2.0),
+                                            filled: false,
+                                            fillColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  10),
                                             ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: DropdownButton(
-                                                  underline: Container(),
-                                                  isExpanded: true,
-                                                  hint: const Text(""),
-                                                  value: controller
-                                                      .tuesdaydailySpecialItemList[
-                                                          x]["sizeIcon"]
-                                                      .toString(),
-                                                  items: controller
-                                                      .sizeDropdownList
-                                                      .map((String items) {
-                                                    return DropdownMenuItem(
-                                                        value: items,
-                                                        child: Text(
-                                                          items,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ));
-                                                  }).toList(),
-                                                  onChanged: (String? q) {
-                                                    controller
-                                                            .tuesdaydailySpecialItemList[
-                                                        x]["sizeIcon"] = q;
-                                                    controller.update();
-                                                    controller.update();
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.all(2.0),
+                                          child: DropdownButton(
+                                            underline: Container(),
+                                            isExpanded: true,
+                                            hint: const Text(""),
+                                            value: controller
+                                                .tuesdaydailySpecialItemList[
+                                            x]["sizeIcon"]
+                                                .toString(),
+                                            items: controller
+                                                .sizeDropdownList
+                                                .map((String items) {
+                                              return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(
+                                                    items,
+                                                    maxLines: 1,
+                                                    style:
+                                                    const TextStyle(
+                                                        fontSize: 10),
+                                                  ));
+                                            }).toList(),
+                                            onChanged:
+                                                (String? newValue) {
+                                              controller
+                                                  .tuesdaydailySpecialItemList[x]
+                                              ["sizeIcon"] = newValue;
+                                              controller.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                            )
+                          ],
+                        ),
 
                         //  SizedBox(
                         //     width: W * 0.22,
@@ -3218,6 +5006,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         .clear();
                   },
                   onChanged: (val) {
+                    controller.tuesdaydailySpecialItemList[x]['discount']= "";
                     controller.tuesdaydailySpecialItemList[x]['price'] = val;
                   },
                   keyboardType: TextInputType.number,
@@ -3248,11 +5037,14 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                   .tuesdaydailySpecialItemList[x]['controller'],
                               onTap: () => controller
                                   .tuesdaydailySpecialItemList[x]
-                                      ['pricecontroller']
+                              ['pricecontroller']
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val){
+                                controller.tuesdaydailySpecialItemList[x]['price']= "";
+                              controller.tuesdaydailySpecialItemList[x]['discount']= val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3281,12 +5073,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].discountIcon = newValue??"";
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
-
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .tuesdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3364,7 +5157,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -3379,15 +5172,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
-                                value: fromTime,
-                                child: Text(
-                                  fromTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: fromTime,
+                        child: Text(
+                          fromTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialfromtime = time!;
@@ -3414,7 +5207,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -3429,15 +5222,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((toTime) => DropdownMenuItem(
-                                value: toTime,
-                                child: Text(
-                                  toTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: toTime,
+                        child: Text(
+                          toTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -3501,27 +5294,27 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                 ),
                 controller.wednesdaydailySpecialItemList[x]['index'] == "Drinks"
                     ? SizedBox(
-                        width: W * 0.3,
-                        child: const Text(
-                          "Size",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                  width: W * 0.3,
+                  child: const Text(
+                    "Size",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
                     : SizedBox(
-                        width: W * 0.26,
-                        child: const Text(
-                          "Quantity",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                  width: W * 0.26,
+                  child: const Text(
+                    "Quantity",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: W * 0.2,
                   child: const Text(
@@ -3565,133 +5358,135 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     child: Row(
                       children: [
                         controller.wednesdaydailySpecialItemList[x]['index'] ==
-                                "Foods"
+                            "Foods"
                             ? Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      //*decrement Button
-                                      controller
-                                          .wednesdaydailySpecialdecrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8197.png"),
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.wednesdaydailySpecialItemList[x]
-                                            ["quantity"]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        overflow: TextOverflow.clip,
-                                        fontSize: 16),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      //*increment Button
-                                      controller
-                                          .wednesdaydailySpecialincrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8192@2x.png"),
-                                    ),
-                                  ),
-                                ],
-                              )
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                //*decrement Button
+                                controller
+                                    .wednesdaydailySpecialdecrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8197.png"),
+                              ),
+                            ),
+                            Text(
+                              controller.wednesdaydailySpecialItemList[x]
+                              ["quantity"]
+                                  .toString(),
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontSize: 16),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                //*increment Button
+                                controller
+                                    .wednesdaydailySpecialincrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8192@2x.png"),
+                              ),
+                            ),
+                          ],
+                        )
                             : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              28,
-                                      child: Material(
-                                        elevation: 3,
-                                        borderRadius: BorderRadius.circular(45),
-                                        child: Row(
-                                          children: [
-                                            Flexible(
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'size';
-                                                  }
-                                                  return null;
-                                                },
-                                                onTap: () => controller
-                                                    .dailySpecialPrice
-                                                    .clear(),
-                                                obscureText: false,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (val) {
-                                                  controller
-                                                          .wednesdaydailySpecialItemList[
-                                                      x]["quantity"] = val;
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8.0, 2.0, 2.0, 2.0),
-                                                  filled: false,
-                                                  fillColor: Colors.white,
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 5,
+                                height:
+                                MediaQuery.of(context).size.height /
+                                    28,
+                                child: Material(
+                                  elevation: 3,
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'size';
+                                            }
+                                            return null;
+                                          },
+                                          onTap: () => controller
+                                              .dailySpecialPrice
+                                              .clear(),
+                                          obscureText: false,
+                                          keyboardType:
+                                          TextInputType.number,
+                                          onChanged: (val) {
+                                            controller
+                                                .wednesdaydailySpecialItemList[
+                                            x]["quantity"] = val;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            contentPadding:
+                                            const EdgeInsets.fromLTRB(
+                                                8.0, 2.0, 2.0, 2.0),
+                                            filled: false,
+                                            fillColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  10),
                                             ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: DropdownButton(
-                                                  underline: Container(),
-                                                  isExpanded: true,
-                                                  hint: const Text(""),
-                                                  value: controller
-                                                      .wednesdaydailySpecialItemList[
-                                                          x]["sizeIcon"]
-                                                      .toString(),
-                                                  items: controller
-                                                      .sizeDropdownList
-                                                      .map((String items) {
-                                                    return DropdownMenuItem(
-                                                        value: items,
-                                                        child: Text(
-                                                          items,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ));
-                                                  }).toList(),
-                                                  onChanged: (String? q) {
-                                                    controller
-                                                            .wednesdaydailySpecialItemList[
-                                                        x]["sizeIcon"] = q;
-                                                    controller.update();
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.all(2.0),
+                                          child: DropdownButton(
+                                            underline: Container(),
+                                            isExpanded: true,
+                                            hint: const Text(""),
+                                            value: controller
+                                                .wednesdaydailySpecialItemList[
+                                            x]["sizeIcon"]
+                                                .toString(),
+                                            items: controller
+                                                .sizeDropdownList
+                                                .map((String items) {
+                                              return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(
+                                                    items,
+                                                    maxLines: 1,
+                                                    style:
+                                                    const TextStyle(
+                                                        fontSize: 10),
+                                                  ));
+                                            }).toList(),
+                                            onChanged:
+                                                (String? newValue) {
+                                              controller
+                                                  .wednesdaydailySpecialItemList[x]
+                                              ["sizeIcon"] = newValue;
+                                              controller.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                            )
+                          ],
+                        ),
                         // SizedBox(
                         //   width: W * 0.22,
                         //   height: H * 0.034,
@@ -3737,6 +5532,8 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                   },
                   onChanged: (val) {
                     controller.wednesdaydailySpecialItemList[x]['price'] = val;
+                    controller.wednesdaydailySpecialItemList[x]['discount'] = "";
+
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -3753,15 +5550,18 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           Flexible(
                             child: TextFormField(
                               controller:
-                                  controller.wednesdaydailySpecialItemList[x]
-                                      ['controller'],
+                              controller.wednesdaydailySpecialItemList[x]
+                              ['controller'],
                               onTap: () => controller
                                   .wednesdaydailySpecialItemList[x]
-                                      ['pricecontroller']
+                              ['pricecontroller']
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.wednesdaydailySpecialItemList[x]['discount']= "";
+                                controller.wednesdaydailySpecialItemList[x]['price'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -3790,11 +5590,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].discountIcon = newValue??"";
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .wednesdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -3871,7 +5673,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -3886,15 +5688,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
-                                value: fromTime,
-                                child: Text(
-                                  fromTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: fromTime,
+                        child: Text(
+                          fromTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialfromtime = time!;
@@ -3921,7 +5723,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -3936,15 +5738,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((toTime) => DropdownMenuItem(
-                                value: toTime,
-                                child: Text(
-                                  toTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: toTime,
+                        child: Text(
+                          toTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -4008,27 +5810,27 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                 ),
                 controller.thursdaydailySpecialItemList[x]['index'] == "Drinks"
                     ? SizedBox(
-                        width: W * 0.3,
-                        child: const Text(
-                          "Size",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                  width: W * 0.3,
+                  child: const Text(
+                    "Size",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
                     : SizedBox(
-                        width: W * 0.26,
-                        child: const Text(
-                          "Quantity",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                  width: W * 0.26,
+                  child: const Text(
+                    "Quantity",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: W * 0.2,
                   child: const Text(
@@ -4072,133 +5874,135 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     child: Row(
                       children: [
                         controller.thursdaydailySpecialItemList[x]['index'] ==
-                                "Foods"
+                            "Foods"
                             ? Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      //*decrement Button
-                                      controller
-                                          .thursdaydailySpecialdecrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8197.png"),
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.thursdaydailySpecialItemList[x]
-                                            ["quantity"]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        overflow: TextOverflow.clip,
-                                        fontSize: 16),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      //*increment Button
-                                      controller
-                                          .thursdaydailySpecialincrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8192@2x.png"),
-                                    ),
-                                  ),
-                                ],
-                              )
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                //*decrement Button
+                                controller
+                                    .thursdaydailySpecialdecrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8197.png"),
+                              ),
+                            ),
+                            Text(
+                              controller.thursdaydailySpecialItemList[x]
+                              ["quantity"]
+                                  .toString(),
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontSize: 16),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                //*increment Button
+                                controller
+                                    .thursdaydailySpecialincrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8192@2x.png"),
+                              ),
+                            ),
+                          ],
+                        )
                             : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              28,
-                                      child: Material(
-                                        elevation: 3,
-                                        borderRadius: BorderRadius.circular(45),
-                                        child: Row(
-                                          children: [
-                                            Flexible(
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'size';
-                                                  }
-                                                  return null;
-                                                },
-                                                onTap: () => controller
-                                                    .dailySpecialPrice
-                                                    .clear(),
-                                                obscureText: false,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (val) {
-                                                  controller
-                                                          .thursdaydailySpecialItemList[
-                                                      x]["quantity"] = val;
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8.0, 2.0, 2.0, 2.0),
-                                                  filled: false,
-                                                  fillColor: Colors.white,
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 5,
+                                height:
+                                MediaQuery.of(context).size.height /
+                                    28,
+                                child: Material(
+                                  elevation: 3,
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'size';
+                                            }
+                                            return null;
+                                          },
+                                          onTap: () => controller
+                                              .dailySpecialPrice
+                                              .clear(),
+                                          obscureText: false,
+                                          keyboardType:
+                                          TextInputType.number,
+                                          onChanged: (val) {
+                                            controller
+                                                .thursdaydailySpecialItemList[
+                                            x]["quantity"] = val;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            contentPadding:
+                                            const EdgeInsets.fromLTRB(
+                                                8.0, 2.0, 2.0, 2.0),
+                                            filled: false,
+                                            fillColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  10),
                                             ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: DropdownButton(
-                                                  underline: Container(),
-                                                  isExpanded: true,
-                                                  hint: const Text(""),
-                                                  value: controller
-                                                      .thursdaydailySpecialItemList[
-                                                          x]["sizeIcon"]
-                                                      .toString(),
-                                                  items: controller
-                                                      .sizeDropdownList
-                                                      .map((String items) {
-                                                    return DropdownMenuItem(
-                                                        value: items,
-                                                        child: Text(
-                                                          items,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ));
-                                                  }).toList(),
-                                                  onChanged: (String? q) {
-                                                    controller
-                                                            .thursdaydailySpecialItemList[
-                                                        x]["sizeIcon"] = q;
-                                                    controller.update();
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.all(2.0),
+                                          child: DropdownButton(
+                                            underline: Container(),
+                                            isExpanded: true,
+                                            hint: const Text(""),
+                                            value: controller
+                                                .thursdaydailySpecialItemList[
+                                            x]["sizeIcon"]
+                                                .toString(),
+                                            items: controller
+                                                .sizeDropdownList
+                                                .map((String items) {
+                                              return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(
+                                                    items,
+                                                    maxLines: 1,
+                                                    style:
+                                                    const TextStyle(
+                                                        fontSize: 10),
+                                                  ));
+                                            }).toList(),
+                                            onChanged:
+                                                (String? newValue) {
+                                              controller
+                                                  .thursdaydailySpecialItemList[x]
+                                              ["sizeIcon"] = newValue;
+                                              controller.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                            )
+                          ],
+                        ),
 
                         // SizedBox(
                         //     width: W * 0.22,
@@ -4247,6 +6051,8 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                   },
                   onChanged: (val) {
                     controller.thursdaydailySpecialItemList[x]['price'] = val;
+                    controller.thursdaydailySpecialItemList[x]['discount'] = "";
+
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -4273,15 +6079,18 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           Flexible(
                             child: TextFormField(
                               controller:
-                                  controller.thursdaydailySpecialItemList[x]
-                                      ['controller'],
+                              controller.thursdaydailySpecialItemList[x]
+                              ['controller'],
                               onTap: () => controller
                                   .thursdaydailySpecialItemList[x]
-                                      ['pricecontroller']
+                              ['pricecontroller']
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.thursdaydailySpecialItemList[x]['discount']= "";
+                                controller.thursdaydailySpecialItemList[x]['price'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4310,11 +6119,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].discountIcon = newValue??"";
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .thursdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -4391,7 +6202,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -4406,15 +6217,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
-                                value: fromTime,
-                                child: Text(
-                                  fromTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: fromTime,
+                        child: Text(
+                          fromTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialfromtime = time!;
@@ -4441,7 +6252,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -4456,15 +6267,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((toTime) => DropdownMenuItem(
-                                value: toTime,
-                                child: Text(
-                                  toTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: toTime,
+                        child: Text(
+                          toTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -4528,27 +6339,27 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                 ),
                 controller.fridaydailySpecialItemList[x]['index'] == "Drinks"
                     ? SizedBox(
-                        width: W * 0.3,
-                        child: const Text(
-                          "Size",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                  width: W * 0.3,
+                  child: const Text(
+                    "Size",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
                     : SizedBox(
-                        width: W * 0.26,
-                        child: const Text(
-                          "Quantity",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                  width: W * 0.26,
+                  child: const Text(
+                    "Quantity",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: W * 0.2,
                   child: const Text(
@@ -4591,131 +6402,133 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     child: Row(
                       children: [
                         controller.fridaydailySpecialItemList[x]['index'] ==
-                                "Foods"
+                            "Foods"
                             ? Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      //*decrement Button
-                                      controller.fridaydailySpecialdecrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8197.png"),
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.fridaydailySpecialItemList[x]
-                                            ["quantity"]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        overflow: TextOverflow.clip,
-                                        fontSize: 16),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      //*increment Button
-                                      controller.fridaydailySpecialincrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8192@2x.png"),
-                                    ),
-                                  ),
-                                ],
-                              )
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                //*decrement Button
+                                controller.fridaydailySpecialdecrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8197.png"),
+                              ),
+                            ),
+                            Text(
+                              controller.fridaydailySpecialItemList[x]
+                              ["quantity"]
+                                  .toString(),
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontSize: 16),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                //*increment Button
+                                controller.fridaydailySpecialincrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8192@2x.png"),
+                              ),
+                            ),
+                          ],
+                        )
                             : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              28,
-                                      child: Material(
-                                        elevation: 3,
-                                        borderRadius: BorderRadius.circular(45),
-                                        child: Row(
-                                          children: [
-                                            Flexible(
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'size';
-                                                  }
-                                                  return null;
-                                                },
-                                                onTap: () => controller
-                                                    .dailySpecialPrice
-                                                    .clear(),
-                                                obscureText: false,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (val) {
-                                                  controller
-                                                          .fridaydailySpecialItemList[
-                                                      x]["quantity"] = val;
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8.0, 2.0, 2.0, 2.0),
-                                                  filled: false,
-                                                  fillColor: Colors.white,
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 5,
+                                height:
+                                MediaQuery.of(context).size.height /
+                                    28,
+                                child: Material(
+                                  elevation: 3,
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'size';
+                                            }
+                                            return null;
+                                          },
+                                          onTap: () => controller
+                                              .dailySpecialPrice
+                                              .clear(),
+                                          obscureText: false,
+                                          keyboardType:
+                                          TextInputType.number,
+                                          onChanged: (val) {
+                                            controller
+                                                .fridaydailySpecialItemList[
+                                            x]["quantity"] = val;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            contentPadding:
+                                            const EdgeInsets.fromLTRB(
+                                                8.0, 2.0, 2.0, 2.0),
+                                            filled: false,
+                                            fillColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  10),
                                             ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: DropdownButton(
-                                                  underline: Container(),
-                                                  isExpanded: true,
-                                                  hint: const Text(""),
-                                                  value: controller
-                                                      .fridaydailySpecialItemList[
-                                                          x]["sizeIcon"]
-                                                      .toString(),
-                                                  items: controller
-                                                      .sizeDropdownList
-                                                      .map((String items) {
-                                                    return DropdownMenuItem(
-                                                        value: items,
-                                                        child: Text(
-                                                          items,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ));
-                                                  }).toList(),
-                                                  onChanged: (String? q) {
-                                                    controller
-                                                            .fridaydailySpecialItemList[
-                                                        x]["sizeIcon"] = q;
-                                                    controller.update();
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.all(2.0),
+                                          child: DropdownButton(
+                                            underline: Container(),
+                                            isExpanded: true,
+                                            hint: const Text(""),
+                                            value: controller
+                                                .fridaydailySpecialItemList[
+                                            x]["sizeIcon"]
+                                                .toString(),
+                                            items: controller
+                                                .sizeDropdownList
+                                                .map((String items) {
+                                              return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(
+                                                    items,
+                                                    maxLines: 1,
+                                                    style:
+                                                    const TextStyle(
+                                                        fontSize: 10),
+                                                  ));
+                                            }).toList(),
+                                            onChanged:
+                                                (String? newValue) {
+                                              controller
+                                                  .fridaydailySpecialItemList[x]
+                                              ["sizeIcon"] = newValue;
+                                              controller.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                            )
+                          ],
+                        ),
                         //SizedBox(
                         //   width: W * 0.22,
                         //   height: H * 0.034,
@@ -4763,6 +6576,8 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                   },
                   onChanged: (val) {
                     controller.fridaydailySpecialItemList[x]['price'] = val;
+                    controller.fridaydailySpecialItemList[x]['discount'] = "";
+
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -4792,11 +6607,14 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                   .fridaydailySpecialItemList[x]['controller'],
                               onTap: () => controller
                                   .fridaydailySpecialItemList[x]
-                                      ['pricecontroller']
+                              ['pricecontroller']
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.fridaydailySpecialItemList[x]['discount']= "";
+                                controller.fridaydailySpecialItemList[x]['price'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -4825,11 +6643,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].discountIcon = newValue??"";
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .fridaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -4906,7 +6726,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -4921,15 +6741,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
-                                value: fromTime,
-                                child: Text(
-                                  fromTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: fromTime,
+                        child: Text(
+                          fromTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialfromtime = time!;
@@ -4956,7 +6776,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -4971,15 +6791,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((toTime) => DropdownMenuItem(
-                                value: toTime,
-                                child: Text(
-                                  toTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: toTime,
+                        child: Text(
+                          toTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -5043,27 +6863,27 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                 ),
                 controller.saturdaydailySpecialItemList[x]['index'] == "Drinks"
                     ? SizedBox(
-                        width: W * 0.3,
-                        child: const Text(
-                          "Size",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                  width: W * 0.3,
+                  child: const Text(
+                    "Size",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
                     : SizedBox(
-                        width: W * 0.26,
-                        child: const Text(
-                          "Quantity",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                  width: W * 0.26,
+                  child: const Text(
+                    "Quantity",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: W * 0.2,
                   child: const Text(
@@ -5107,134 +6927,135 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                     child: Row(
                       children: [
                         controller.saturdaydailySpecialItemList[x]['index'] ==
-                                "Foods"
+                            "Foods"
                             ? Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      //*decrement Button
-                                      controller
-                                          .saturdaydailySpecialdecrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8197.png"),
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.saturdaydailySpecialItemList[x]
-                                            ["quantity"]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        overflow: TextOverflow.clip,
-                                        fontSize: 16),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      //*increment Button
-                                      controller
-                                          .saturdaydailySpecialincrement(x);
-                                    },
-                                    icon: const Image(
-                                      image: AssetImage(
-                                          "assets/icons/Group 8192@2x.png"),
-                                    ),
-                                  ),
-                                ],
-                              )
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                //*decrement Button
+                                controller
+                                    .saturdaydailySpecialdecrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8197.png"),
+                              ),
+                            ),
+                            Text(
+                              controller.saturdaydailySpecialItemList[x]
+                              ["quantity"]
+                                  .toString(),
+                              style: const TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  fontSize: 16),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                //*increment Button
+                                controller
+                                    .saturdaydailySpecialincrement(x);
+                              },
+                              icon: const Image(
+                                image: AssetImage(
+                                    "assets/icons/Group 8192@2x.png"),
+                              ),
+                            ),
+                          ],
+                        )
                             : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              28,
-                                      child: Material(
-                                        elevation: 3,
-                                        borderRadius: BorderRadius.circular(45),
-                                        child: Row(
-                                          children: [
-                                            Flexible(
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'size';
-                                                  }
-                                                  return null;
-                                                },
-                                                onTap: () => controller
-                                                    .dailySpecialPrice
-                                                    .clear(),
-                                                obscureText: false,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (val) {
-                                                  controller
-                                                          .saturdaydailySpecialItemList[
-                                                      x]["quantity"] = val;
-                                                },
-                                                decoration: InputDecoration(
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          8.0, 2.0, 2.0, 2.0),
-                                                  filled: false,
-                                                  fillColor: Colors.white,
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 5,
+                                height:
+                                MediaQuery.of(context).size.height /
+                                    28,
+                                child: Material(
+                                  elevation: 3,
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'size';
+                                            }
+                                            return null;
+                                          },
+                                          onTap: () => controller
+                                              .dailySpecialPrice
+                                              .clear(),
+                                          obscureText: false,
+                                          keyboardType:
+                                          TextInputType.number,
+                                          onChanged: (val) {
+                                            controller
+                                                .saturdaydailySpecialItemList[
+                                            x]["quantity"] = val;
+                                          },
+                                          decoration: InputDecoration(
+                                            hintStyle: const TextStyle(
+                                                color: Colors.grey),
+                                            contentPadding:
+                                            const EdgeInsets.fromLTRB(
+                                                8.0, 2.0, 2.0, 2.0),
+                                            filled: false,
+                                            fillColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  10),
                                             ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: DropdownButton(
-                                                  underline: Container(),
-                                                  isExpanded: true,
-                                                  hint: const Text(""),
-                                                  value: controller
-                                                      .saturdaydailySpecialItemList[
-                                                          x]["sizeIcon"]
-                                                      .toString(),
-                                                  items: controller
-                                                      .sizeDropdownList
-                                                      .map((String items) {
-                                                    return DropdownMenuItem(
-                                                        value: items,
-                                                        child: Text(
-                                                          items,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 12),
-                                                        ));
-                                                  }).toList(),
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    controller
-                                                            .saturdaydailySpecialItemList[x]
-                                                        ["sizeIcon"] = newValue;
-                                                    controller.update();
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.all(2.0),
+                                          child: DropdownButton(
+                                            underline: Container(),
+                                            isExpanded: true,
+                                            hint: const Text(""),
+                                            value: controller
+                                                .saturdaydailySpecialItemList[
+                                            x]["sizeIcon"]
+                                                .toString(),
+                                            items: controller
+                                                .sizeDropdownList
+                                                .map((String items) {
+                                              return DropdownMenuItem(
+                                                  value: items,
+                                                  child: Text(
+                                                    items,
+                                                    maxLines: 1,
+                                                    style:
+                                                    const TextStyle(
+                                                        fontSize: 10),
+                                                  ));
+                                            }).toList(),
+                                            onChanged:
+                                                (String? newValue) {
+                                              controller
+                                                  .saturdaydailySpecialItemList[x]
+                                              ["sizeIcon"] = newValue;
+                                              controller.update();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                            )
+                          ],
+                        ),
 
                         //  SizedBox(
                         //     width: W * 0.22,
@@ -5282,6 +7103,8 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                   },
                   onChanged: (val) {
                     controller.saturdaydailySpecialItemList[x]['price'] = val;
+                    controller.saturdaydailySpecialItemList[x]['discount'] = "";
+
                   },
                   keyboardType: TextInputType.number,
                 ),
@@ -5308,15 +7131,18 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                           Flexible(
                             child: TextFormField(
                               controller:
-                                  controller.saturdaydailySpecialItemList[x]
-                                      ['controller'],
+                              controller.saturdaydailySpecialItemList[x]
+                              ['controller'],
                               onTap: () => controller
                                   .saturdaydailySpecialItemList[x]
-                                      ['pricecontroller']
+                              ['pricecontroller']
                                   .clear(),
                               obscureText: false,
                               keyboardType: TextInputType.number,
-                              onChanged: (val) {},
+                              onChanged: (val) {
+                                controller.saturdaydailySpecialItemList[x]['discount']= "";
+                                controller.saturdaydailySpecialItemList[x]['price'] = val;
+                              },
                               decoration: InputDecoration(
                                 // hintText: "Enter Discount",
                                 hintStyle: const TextStyle(color: Colors.grey),
@@ -5345,11 +7171,13 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                                       value: items, child: Text(items));
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  controller.foodList[index].discountIcon = newValue??"";
-                                  controller.foodList[index].dropDown[0] =
-                                      newValue!;
-                                  controller.foodList[index].dropDown[1] =
-                                      newValue;
+                                  // controller.foodList[index].dropDown[0] =
+                                  //     newValue!;
+                                  // controller.foodList[index].dropDown[1] =
+                                  //     newValue;
+                                  controller
+                                      .saturdaydailySpecialItemList[x]
+                                  ['discountIcon'] = newValue;
                                   controller.update();
                                 },
                               ),
@@ -5416,7 +7244,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -5431,15 +7259,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((fromTime) => DropdownMenuItem(
-                                value: fromTime,
-                                child: Text(
-                                  fromTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: fromTime,
+                        child: Text(
+                          fromTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialfromtime = time!;
@@ -5466,7 +7294,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       decoration: const InputDecoration(
                         enabled: false,
                         contentPadding:
-                            EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
+                        EdgeInsets.fromLTRB(16.0, 10.0, 2.0, 12.0),
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -5481,15 +7309,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                       icon: const Icon(Icons.keyboard_arrow_down),
                       items: controller.timesList
                           .map((toTime) => DropdownMenuItem(
-                                value: toTime,
-                                child: Text(
-                                  toTime,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                        value: toTime,
+                        child: Text(
+                          toTime,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
                           .toList(),
                       onChanged: (time) {
                         controller.dailySpecialtotime = time!;
@@ -5539,13 +7367,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
     );
   }
 
+
+
   Future<dynamic> addNewItemDialog(
-    BuildContext context,
-    String title,
-    VoidCallback onConfrim,
-    Widget widget,
-    Widget addButton,
-  ) {
+      BuildContext context,
+      String title,
+      VoidCallback onConfrim,
+      Widget widget,
+      Widget addButton,
+      ) {
     return showDialog(
       barrierDismissible: true,
       context: context,
@@ -5624,11 +7454,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addSundayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -5692,7 +7522,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -5707,15 +7537,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.sundaydailySpecialType = daily!;
@@ -5748,11 +7578,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addMondayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -5816,7 +7646,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -5831,15 +7661,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.mondaydailySpecialType = daily!;
@@ -5872,11 +7702,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addTuesdayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -5940,7 +7770,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -5955,15 +7785,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.tuesdaydailySpecialType = daily!;
@@ -5996,11 +7826,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addWednesdayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -6064,7 +7894,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -6079,15 +7909,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.wednesdaydailySpecialType = daily!;
@@ -6120,11 +7950,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addThursdayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -6188,7 +8018,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -6203,15 +8033,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.thursdaydailySpecialType = daily!;
@@ -6244,11 +8074,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addFridayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -6312,7 +8142,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -6327,15 +8157,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.fridaydailySpecialType = daily!;
@@ -6368,11 +8198,11 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
   }
 
   addSaturdayManually(
-    BuildContext context,
-    String title,
-    Widget onConfrim,
-    TextEditingController textController,
-  ) {
+      BuildContext context,
+      String title,
+      Widget onConfrim,
+      TextEditingController textController,
+      ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
@@ -6436,7 +8266,7 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         decoration: const InputDecoration(
                           enabled: false,
                           contentPadding:
-                              EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
+                          EdgeInsets.fromLTRB(16.0, 30.0, 18.0, 12.0),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -6451,15 +8281,15 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: controller.dailyDropDown
                             .map((foodOrDrink) => DropdownMenuItem(
-                                  value: foodOrDrink,
-                                  child: Text(
-                                    foodOrDrink,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
+                          value: foodOrDrink,
+                          child: Text(
+                            foodOrDrink,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
                             .toList(),
                         onChanged: (daily) {
                           controller.saturdaydailySpecialType = daily!;
@@ -6490,4 +8320,6 @@ class AddHappyDailySpecialScreen extends GetView<AddHappyhourController> {
       },
     );
   }
+
+/// replace this by business dailyspecial
 }

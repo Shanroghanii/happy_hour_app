@@ -43,7 +43,7 @@ class EditController extends GetxController {
   bool get showLateDayList => _showLateDaysList.value;
   set showLateDayList(value) => _showLateDaysList.value = value;
 
-  final _showLate = true.obs;
+  final _showLate = false.obs;
   bool get showLate => _showLate.value;
   set showLate(value) => _showLate.value = value;
 
@@ -54,6 +54,37 @@ class EditController extends GetxController {
       "HtoTime": hToTime,
     });
   }
+  List menuImageList = [];
+  List menuImagePathList = [];
+
+
+  menuAllImages() {
+    if (hour.menuImage != null) {
+      menuImageList.add(hour.menuImage);
+    }
+    if (hour.menuImage2 != null) {
+      menuImageList.add(hour.menuImage2);
+    }
+  }
+
+  //
+  // void addToHday(int i) {
+  //   hDayTimeList.add({
+  //     "Hday": dayTimeList[i].day,
+  //     "HfromTime": hFromTime,
+  //     "HtoTime": hToTime,
+  //   });
+  // }
+  //
+  // void removeToHday(int i) {
+  //   hDayTimeList
+  //       .removeWhere((element) => element['Hday'] == dayTimeList[i].day);
+  //   // hDayTimeList.remove({
+  //   //   "Hday": dayTimeList[i].day,
+  //   //   "HfromTime": hFromTime,
+  //   //   "HtoTime": hToTime,
+  //   // });
+  // }
 
   List hDayTimeLateList = [];
   void addToHdaySecond(int i) {
@@ -111,6 +142,7 @@ class EditController extends GetxController {
   @override
   void onInit() {
     editDataGet();
+    menuAllImages();
     //business Hour Update
     businessHourUpdate();
 
@@ -317,9 +349,12 @@ class EditController extends GetxController {
             dropDown: ["%", "\$"],
             priceController:
                 TextEditingController(text: hour.foodName?[index]['foodprice']),
+            discountController: TextEditingController(
+                text: hour.foodName?[index]['fooddiscount'].toString()),
             earlyFood: true.obs,
             lateFood: true.obs,
             time: foodtime,
+            discountIcon: hour.foodName?[index]['discountIcon'] ?? "%",
           ),
         );
       }
@@ -339,8 +374,8 @@ class EditController extends GetxController {
             size: hour.drinkitemName?[index]['drinksize'],
             price: hour.drinkitemName?[index]['drinkprice'],
             discount: hour.drinkitemName?[index]['drinkdiscount'],
-            sizeicon: "",
-            discounticon: "",
+            sizeicon: hour.drinkitemName?[index]['sizeIcon'],
+            discounticon: hour.drinkitemName?[index]['discountIcon'],
             dropDown: ["%", "\$"],
             dropDownSize: [
               'oz',
@@ -385,7 +420,8 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'],
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
-            "sizeIcon": "oz",
+            "sizeIcon": hour.dailySpecils?[index]["sizeIcon"],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
             "toTime": hour.dailySpecils?[index]['toTime'],
@@ -403,6 +439,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -417,6 +454,7 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'].toString(),
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "sizeIcon": "oz",
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
@@ -435,6 +473,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -449,6 +488,7 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'].toString(),
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "sizeIcon": "oz",
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
@@ -467,6 +507,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -481,6 +522,7 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'].toString(),
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "sizeIcon": "oz",
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
@@ -499,6 +541,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -513,6 +556,7 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'].toString(),
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "sizeIcon": "oz",
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
@@ -531,6 +575,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -545,6 +590,7 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'].toString(),
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "sizeIcon": "oz",
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
@@ -563,6 +609,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -577,6 +624,7 @@ class EditController extends GetxController {
             "quantity": hour.dailySpecils?[index]['quantity'].toString(),
             "price": hour.dailySpecils?[index]['price'],
             "discount": hour.dailySpecils?[index]['discount'],
+            "discountIcon": hour.dailySpecils?[index]['discountIcon'],
             "sizeIcon": "oz",
             "day": hour.dailySpecils?[index]['day'],
             "fromTime": hour.dailySpecils?[index]['fromTime'],
@@ -595,6 +643,7 @@ class EditController extends GetxController {
               "quantity": e['quantity'],
               "price": e["price"],
               "discount": e["discount"],
+              "discountIcon": e["discountIcon"],
               "sizeIcon": e["sizeIcon"],
               "day": e['day'],
               "fromTime": e["fromTime"],
@@ -801,6 +850,7 @@ class EditController extends GetxController {
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
     if (imageFile != null) {
       businessCard = imageFile.path;
+    //  menuImagePathList.add(imageFile.path);
     }
   }
 
@@ -809,6 +859,7 @@ class EditController extends GetxController {
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
     if (imageFile != null) {
       businessLogo = imageFile.path;
+     // menuImagePathList.add(imageFile.path);
     }
   }
 
@@ -817,6 +868,7 @@ class EditController extends GetxController {
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
     if (imageFile != null) {
       businessImage = imageFile.path;
+      menuImagePathList.add(imageFile.path);
     }
   }
 
@@ -825,6 +877,7 @@ class EditController extends GetxController {
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
     if (imageFile != null) {
       happyHourMenuImage = imageFile.path;
+      menuImagePathList.add(imageFile.path);
     }
   }
 
@@ -1491,11 +1544,26 @@ class EditController extends GetxController {
   }
 
   void bDayTime(index) {
-    selecteddays.add({
-      "bDay": dayFromTimeToTimeList[index].day,
-      "bFtime": dayFromTimeToTimeList[index].from,
-      "bTtime": dayFromTimeToTimeList[index].to,
+    bool isExist = false;
+    selecteddays.forEach((element) {
+      if (element['bDay'] == dayFromTimeToTimeList[index].day) {
+        isExist = true;
+      }
     });
+    if (!isExist) {
+      selecteddays.add({
+        "bDay": dayFromTimeToTimeList[index].day,
+        "bFtime": dayFromTimeToTimeList[index].from,
+        "bTtime": dayFromTimeToTimeList[index].to,
+      });
+    } else {
+      selecteddays.forEach((element) {
+        if (element['bDay'] == dayFromTimeToTimeList[index].day) {
+          element["bFtime"] = dayFromTimeToTimeList[index].from;
+          element["bTtime"] = dayFromTimeToTimeList[index].to;
+        }
+      });
+    }
   }
 
   //*Hour days and Times *//
@@ -1514,8 +1582,12 @@ class EditController extends GetxController {
         // hDay = day.day.toString();
         hDay = dayTimeList[index].day;
         update();
+      } else {
+        hDayTimeList.removeWhere((e) => e['Hday'] == dayTimeList[index].day);
+        hour.day
+            ?.removeWhere((element) =>
+        element['Hday'] == dayTimeList[index].day);
       }
-      hDayTimeList.removeWhere((e) => e['Hday'] == dayTimeList[index].day);
     }
   }
 
@@ -1526,28 +1598,75 @@ class EditController extends GetxController {
         // hDay = day.day.toString();
         hDay = dayTimeList2[index].day;
         update();
+      } else {
+        hDayTimeLateList
+            .removeWhere((e) => e['Hday2'] == dayTimeList2[index].day);
+        hour.dayLate?.removeWhere(
+            (element) => element['Hday2'] == dayTimeList2[index].day);
       }
-      hDayTimeLateList
-          .removeWhere((e) => e['Hday2'] == dayTimeList2[index].day);
     }
   }
 
-  void hDayTime(index) {
-    !hDayTimeList.contains("Hday");
-    hDayTimeList.add({
-      "Hday": dayTimeList[index].day,
-      "HfromTime": dayTimeList[index].fromTime,
-      "HtoTime": dayTimeList[index].toTime,
+  assignDayValue(String day, name) {
+    selectedEvent.forEach((element) {
+      if (element['name'] == name) {
+        element["day"] = day;
+      }
     });
   }
 
-  void hDayTimeLate(index) {
-    !hDayTimeList.contains("Hday2");
-    hDayTimeLateList.add({
-      "Hday2": dayTimeList2[index].day,
-      "HfromTime2": dayTimeList2[index].fromTime2,
-      "HtoTime2": dayTimeList2[index].toTime2,
+  assignFromTimeValue(String startTime, name) {
+    selectedEvent.forEach((element) {
+      if (element['name'] == name) {
+        element["fromtime"] = startTime;
+      }
     });
+  }
+
+  assignToTimeValue(String endtime, name) {
+    selectedEvent.forEach((element) {
+      if (element['name'] == name) {
+        element["totime"] = endtime;
+      }
+    });
+  }
+
+  void hDayTime(int index, String day) {
+    !hDayTimeList.contains("Hday");
+    var a = hDayTimeList.where((element) => element['Hday'] == day);
+    if (a.isEmpty) {
+      hDayTimeList.add({
+        "Hday": dayTimeList[index].day,
+        "HfromTime": dayTimeList[index].fromTime,
+        "HtoTime": dayTimeList[index].toTime,
+      });
+    } else {
+      hDayTimeList.forEach((element) {
+        if (element['Hday'] == day) {
+          element["HfromTime"] = dayTimeList[index].fromTime;
+          element["HtoTime"] = dayTimeList[index].toTime;
+        }
+      });
+    }
+  }
+
+  void hDayTimeLate(index, String day) {
+    !hDayTimeList.contains("Hday2");
+    var a = hDayTimeLateList.where((element) => element['Hday2'] == day);
+    if (a.isEmpty) {
+      hDayTimeLateList.add({
+        "Hday2": dayTimeList2[index].day,
+        "HfromTime2": dayTimeList2[index].fromTime2,
+        "HtoTime2": dayTimeList2[index].toTime2,
+      });
+    } else {
+      hDayTimeLateList.forEach((element) {
+        if (element['Hday2'] == day) {
+          element["HfromTime2"] = dayTimeList2[index].fromTime2;
+          element["HtoTime2"] = dayTimeList2[index].toTime2;
+        }
+      });
+    }
   }
 
   //*FoodItem Section*//
@@ -1651,6 +1770,7 @@ class EditController extends GetxController {
         earlyFood: true.obs,
         lateFood: true.obs,
         time: foodtime,
+        discountIcon: '%',
       ),
     );
     update();
@@ -1658,20 +1778,24 @@ class EditController extends GetxController {
 
   void addFoodFromDropDownList(List foods) {
     for (var e in foods) {
-      foodList.add(
-        LocalFoodModel(
-          name: e.name.toString(),
-          quantity: 0,
-          price: "",
-          discount: 0,
-          dropDown: ["%", "\$"],
-          priceController: TextEditingController(),
-          earlyFood: true.obs,
-          lateFood: true.obs,
-          time: foodtime,
-        ),
-      );
-      update();
+      var a = foodList.where((element) => element.name == e.name);
+      if (a.isEmpty) {
+        foodList.add(
+          LocalFoodModel(
+            name: e.name.toString(),
+            quantity: 0,
+            price: "",
+            discount: 0,
+            dropDown: ["%", "\$"],
+            priceController: TextEditingController(),
+            earlyFood: true.obs,
+            lateFood: true.obs,
+            time: foodtime,
+            discountIcon: '%',
+          ),
+        );
+        update();
+      }
     }
     Get.back();
   }
@@ -1764,8 +1888,8 @@ class EditController extends GetxController {
         size: "",
         price: "",
         discount: 0,
-        sizeicon: "",
-        discounticon: "",
+        sizeicon: "oz",
+        discounticon: "%",
         dropDown: ["%", "\$"],
         dropDownSize: [
           'oz',
@@ -1798,8 +1922,8 @@ class EditController extends GetxController {
           size: "",
           price: "",
           discount: 0,
-          sizeicon: "",
-          discounticon: "",
+          sizeicon: "oz",
+          discounticon: "%",
           dropDown: ["%", "\$"],
           dropDownSize: [
             'oz',
@@ -1912,6 +2036,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1925,6 +2050,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1938,6 +2064,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1951,6 +2078,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1964,6 +2092,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1977,6 +2106,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -1990,6 +2120,7 @@ class EditController extends GetxController {
         "quantity": e['quantity'],
         "price": e["price"],
         "discount": e["discount"],
+        "discountIcon": e["discountIcon"],
         "sizeIcon": e["sizeIcon"],
         "day": e['day'],
         "fromTime": e["fromTime"],
@@ -2377,12 +2508,65 @@ class EditController extends GetxController {
 
   void removesaturday(index) {
     saturdaydailySpecialItemList.removeAt(index);
-
     update();
   }
 
   void dailySpecialDoneTap() {
     var index = daysList.where((e) => e.isSelect.isTrue).length;
+
+    bool isSundayQuantityV = true;
+    for (var element in sundaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isSundayQuantityV = false;
+      }
+      print("isSunday $isSundayQuantityV");
+    }
+
+    bool isMondayQuantityV = true;
+    for (var element in mondaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isMondayQuantityV = false;
+      }
+      print("isSunday $isMondayQuantityV");
+    }
+
+    bool isTeusdayQuantityV = true;
+    for (var element in tuesdaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isTeusdayQuantityV = false;
+      }
+      print("isSunday $isTeusdayQuantityV");
+    }
+
+    bool isWedQuantityV = true;
+    for (var element in wednesdaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isWedQuantityV = false;
+      }
+      print("isSunday $isWedQuantityV");
+    }
+    bool isThursdayQuantityV = true;
+    for (var element in thursdaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isThursdayQuantityV = false;
+      }
+      print("isSunday $isThursdayQuantityV");
+    }
+    bool isFridayQuantityV = true;
+    for (var element in fridaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isFridayQuantityV = false;
+      }
+      print("isSunday $isFridayQuantityV");
+    }
+
+    bool isSatudaryQuantityV = true;
+    for (var element in saturdaydailySpecialItemList) {
+      if (element["quantity"].toString() == "0") {
+        isSatudaryQuantityV = false;
+      }
+      print("isSunday $isSatudaryQuantityV");
+    }
 
     bool isSunday = true;
     bool isMonday = true;
@@ -2452,6 +2636,8 @@ class EditController extends GetxController {
       Get.find<GlobalGeneralController>().errorSnackbar(
           title: "Error", description: "Fill All The Required Fields");
     } else if (index == 0) {
+      addToDailyySpecial();
+      updateBusinessHourToFireStore();
       update();
       Get.back();
     } else if (isSunday == false ||
@@ -2465,17 +2651,27 @@ class EditController extends GetxController {
           .errorSnackbar(title: "Error", description: "Add Items against Day");
     } else if (dailySpecialKey.currentState!.validate()) {
       if (isSunday &&
+          isSundayQuantityV &&
           isMonday &&
+          isMondayQuantityV &&
           isTuesday &&
+          isTeusdayQuantityV &&
           isWednesday &&
+          isWedQuantityV &&
           isThursday &&
+          isThursdayQuantityV &&
           isFriday &&
-          isSaturday) {
+          isFridayQuantityV &&
+          isSaturday &&
+          isSatudaryQuantityV) {
+        addToDailyySpecial();
+        updateBusinessHourToFireStore();
         update();
         Get.back();
+      } else {
+        Get.find<GlobalGeneralController>()
+            .errorSnackbar(title: "Error", description: "Add Items values");
       }
-
-      addToDailyySpecial();
     }
     update();
   }
@@ -2493,6 +2689,7 @@ class EditController extends GetxController {
           title: "Error", description: "Select only Three Bar Type");
     }
     if (a <= 3 && a > 0) {
+      updateBusinessHourToFireStore();
       update();
       Get.back();
     }
@@ -2506,6 +2703,7 @@ class EditController extends GetxController {
           .errorSnackbar(title: "Error", description: "Select Day and Times");
     }
     if (eventKey.currentState?.validate() ?? false) {
+      updateBusinessHourToFireStore();
       Get.back();
     }
   }
@@ -2743,6 +2941,24 @@ class EditController extends GetxController {
   String eventStarttime = "01:00 AM";
   String eventendtime = "01:00 PM";
 
+  assignStartEventInEdit() {
+    print("c");
+    hour.event?.forEach(
+      (newV) {
+        print(newV);
+        eventList.forEach((oldV) {
+          if (newV['name'] == oldV.event) {
+            oldV.day = newV['day'];
+            oldV.fromtime = newV['fromtime'];
+            oldV.totime = newV['totime'];
+          }
+        });
+      },
+    );
+    hour.event?.clear();
+    update();
+  }
+
   List selectedEvent = [];
   List<Event> eventList = [
     Event(
@@ -2861,29 +3077,63 @@ class EditController extends GetxController {
 
   String? eventname = "";
 
+  /// TODO : Modify Must
   eventListadded(index) {
-    selectedEvent.add({
-      "name": eventList[index].event,
-      "day": eventList[index].day,
-      "fromtime": eventList[index].fromtime,
-      "totime": eventList[index].totime,
+    bool isExist = false;
+    print("1");
+    selectedEvent.forEach((element) {
+      if (element['name'] == eventList[index].event) {
+        print("2");
+        isExist = true;
+      }
     });
+    if (isExist) {
+      selectedEvent.forEach((element) {
+        if (element['name'] == eventList[index].event) {
+          print("3");
+          element["day"] = eventList[index].day;
+          element["fromtime"] = eventList[index].fromtime;
+          element["totime"] = eventList[index].totime;
+        }
+      });
+    } else {
+      if (eventList[index].isSelect.value) {
+        print("4");
+        selectedEvent.add({
+          "name": eventList[index].event,
+          "day": eventList[index].day,
+          "fromtime": eventList[index].fromtime,
+          "totime": eventList[index].totime
+        });
+      } else {
+        print("5");
+        selectedEvent.removeWhere(
+            (element) => element['name'] == eventList[index].event);
+      }
+    }
     update();
   }
 
   void updateEvent(index) async {
-    eventList[index].isSelect.value = !eventList[index].isSelect.value;
-    for (var event in eventList) {
-      if (event.isSelect.isTrue) {
-        eventname = eventList[index].event;
-        update();
+    var a = selectedEvent
+        .where((e) => e['name'] == eventList[index].event.toString());
+    if (a.isEmpty) {
+      eventList[index].isSelect.value = !eventList[index].isSelect.value;
+      for (var event in eventList) {
+        if (event.isSelect.isTrue) {
+          eventname = eventList[index].event;
+          update();
+        }
       }
-    }
-    if (eventList[index].isSelect.value == false) {
+      if (eventList[index].isSelect.value == false) {
+        selectedEvent
+            .removeWhere((e) => e['name'] == eventList[index].event.toString());
+      }
+      update();
+    } else {
       selectedEvent
           .removeWhere((e) => e['name'] == eventList[index].event.toString());
     }
-    update();
 
     // if (eventList[index].isSelect.value == false &&
     //     selectedEvent.contains(eventname)) {
@@ -2947,6 +3197,7 @@ class EditController extends GetxController {
         }
       }
     }
+    updateBusinessHourToFireStore();
     update();
     Get.back();
   }
@@ -3057,6 +3308,7 @@ class EditController extends GetxController {
   // }
 
   void onDescriptionNextTap() {
+    updateBusinessHourToFireStore();
     Get.toNamed(Routes.addBusinessHourScreen);
     // if (descriptionController.text == "") {
     //   Get.find<GlobalGeneralController>().errorSnackbar(
@@ -3099,6 +3351,7 @@ class EditController extends GetxController {
                   menuImage: happyHourMenuImage)
           : happyHourMenuImage,
       dayTime: hDayTimeList,
+      daytimeLate: hDayTimeLateList,
       fromTimeToTime: selecteddays,
       dailySpecial: alldailySpecialList,
       foodNames: foodList
@@ -3106,6 +3359,7 @@ class EditController extends GetxController {
                 "foodname": e.name,
                 "foodcount": e.quantity,
                 "fooddiscount": e.discount,
+                "discountIcon": e.discountIcon,
                 "foodprice": e.price,
                 "secondtime": e.time,
                 "early": e.earlyFood.value,
@@ -3135,28 +3389,99 @@ class EditController extends GetxController {
         "longitude": _long == 0.0 ? hour.longitude : _long,
       },
     );
-    await Get.offNamed(Routes.businessAccountHomeScreen);
+    //  await Get.offNamed(Routes.businessAccountHomeScreen);
     isLoading = false;
   }
 
   void onDescriptionDone() {
+    updateBusinessHourToFireStore();
     Get.back();
     update();
   }
 
   void onDayTimeDoneTap() {
-    for (var i = 0; i < dayTimeList.length; i++) {
-      if (dayTimeList[i].isSelect.isTrue) {
-        if (dayTimeList[i].keyfrom!.currentState!.validate() &&
-            dayTimeList[i].keyto!.currentState!.validate()) {
-        } else {
-          Get.find<GlobalGeneralController>().errorSnackbar(
-              title: "Select Time", description: "Please Select all the Time");
+    var index = dayTimeList.where((e) => e.isSelect.isTrue).length;
+
+    if (index == 0) {
+      if (!businessKey.currentState!.validate()) {
+        print("6");
+        Get.find<GlobalGeneralController>().errorSnackbar(
+            title: "Select Time", description: "Please Select all the Time");
+      } else {
+        print("7");
+        if (businessKey.currentState!.validate()) {
+          print("8");
+          for (var i = 0; i < dayTimeList.length; i++) {
+            if (dayTimeList[i].isSelect.isTrue &&
+                dayTimeList[i].fromTime != "" &&
+                dayTimeList[i].toTime != "") {
+              updateBusinessHourToFireStore();
+              update();
+              Get.back();
+              print("9");
+              // Get.toNamed(Routes.businessFoodItemScreen);
+            }
+          }
+          //  Get.toNamed(Routes.businessFoodItemScreen);
         }
       }
+    } else {
+      if (showLate || dayTimeList.isNotEmpty) {
+        print("10");
+        if (businessKey.currentState!.validate()) {
+          print("11");
+          updateBusinessHourToFireStore();
+          update();
+          Get.back();
+        } else {
+          businessKey.currentState?.reset();
+          Get.find<GlobalGeneralController>().errorSnackbar(
+              title: "Select Time",
+              description: "Please Select all the time");
+        }
+      } else {
+        print("12");
+        updateBusinessHourToFireStore();
+        update();
+        Get.back();
+      }
     }
-    update();
-    Get.back();
+
+    // bool validated = true;
+    // bool validated2 = true;
+    // print("object1");
+    // for (var i = 0; i < dayTimeList2.length; i++) {
+    //   if (dayTimeList2[i].isSelect.isTrue) {
+    //     print("object4");
+    //     validated2 = false;
+    //     if (dayTimeList2[i].keyfrom2!.currentState!.validate() &&
+    //         dayTimeList2[i].keyto2!.currentState!.validate()) {
+    //       validated2 = true;
+    //     }
+    //   }
+    // }
+    // for (var i = 0; i < dayTimeList.length; i++) {
+    //   if (dayTimeList[i].isSelect.isTrue) {
+    //     print("object2");
+    //     validated = false;
+    //     if (dayTimeList[i].keyfrom!.currentState!.validate() &&
+    //         dayTimeList[i].keyto!.currentState!.validate()) {
+    //       validated = true;
+    //     }
+    //   }
+    // }
+    //
+    //
+    //
+    // print("object3");
+    //
+    // if(validated && validated2) {
+    //   update();
+    //   Get.back();
+    // } else {
+    //   Get.find<GlobalGeneralController>().errorSnackbar(
+    //       title: "Select Time", description: "Please Select all the Time");
+    // }
   }
 
   void resetDualTime(index) {
@@ -3261,6 +3586,7 @@ class LocalFoodModel {
   late int quantity;
   late String price;
   late int discount;
+  late String discountIcon;
   List<String> dropDown;
   TextEditingController priceController;
   TextEditingController? discountController;
@@ -3273,6 +3599,7 @@ class LocalFoodModel {
     required this.quantity,
     required this.price,
     required this.discount,
+    required this.discountIcon,
     required this.dropDown,
     required this.priceController,
     this.discountController,

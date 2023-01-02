@@ -110,6 +110,9 @@ class EditEventsScreen extends GetView<EditController> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.eventList.length,
                           itemBuilder: (BuildContext context, int index) {
+                            print(controller
+                                .eventList[index].day
+                                .toString());
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -134,7 +137,9 @@ class EditEventsScreen extends GetView<EditController> {
                                               controller.updateEvent(index);
                                               controller
                                                   .forKeyAssignEvent(index);
-                                            }),
+                                             // controller.eventListadded(index);
+                                            },
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -231,13 +236,15 @@ class EditEventsScreen extends GetView<EditController> {
                                                               fontSize: 12,
                                                             ),
                                                           ),
-                                                        ))
+                                                        ),
+                                                      )
                                                     .toList()
                                                 : [],
                                             onChanged: (day) {
                                               controller.day = day!;
                                               controller.eventList[index].day =
                                                   day;
+                                              controller.eventListadded(index);
                                             },
                                           ),
                                         ),
@@ -341,6 +348,7 @@ class EditEventsScreen extends GetView<EditController> {
                                             controller.eventStarttime = time!;
                                             controller.eventList[index]
                                                 .fromtime = time;
+                                            controller.eventListadded(index);
                                             //controller.selectedEvent.add(time);
                                           },
                                         ),

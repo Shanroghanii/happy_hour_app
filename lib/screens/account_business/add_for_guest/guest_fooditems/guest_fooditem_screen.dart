@@ -143,7 +143,7 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                 ),
                                 //*Food Names show Here
                                 SizedBox(
-                                  width: W * 0.2,
+                                  width: W * 0.15,
                                   child: Text(
                                     controller.foodList[index].name.toString(),
                                     style: const TextStyle(fontSize: 16),
@@ -152,7 +152,7 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                 //* increment decrement here
                                 Flexible(
                                   child: SizedBox(
-                                    width: W * 0.27,
+                                    width: W * 0.28,
                                     child: Row(
                                       children: [
                                         IconButton(
@@ -169,7 +169,7 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                               .toString(),
                                           style: const TextStyle(
                                               overflow: TextOverflow.clip,
-                                              fontSize: 16),
+                                              fontSize: 15),
                                         ),
                                         IconButton(
                                           onPressed: () {
@@ -185,7 +185,7 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                   ),
                                 ),
                                 PriceField(
-                                  width: W * 0.21,
+                                  width: W * 0.20,
                                   height: H * 0.036,
                                   onTap: () {
                                     controller.foodList[index]
@@ -193,6 +193,7 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                         TextEditingController();
                                     controller.foodList[index]
                                         .discountController?.text = "";
+                                    controller.foodList[index].discount = 0;
                                     controller.update();
                                   },
                                   textEditingController: controller
@@ -258,6 +259,8 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                                     controller.foodList[index]
                                                             .discount =
                                                         int.parse(val);
+                                                    controller.foodList[index]
+                                                        .price = '';
                                                   },
                                                   decoration: InputDecoration(
                                                     // hintText: "Enter Discount",
@@ -310,6 +313,9 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                                     }).toList(),
                                                     onChanged:
                                                         (String? newValue) {
+                                                          controller.foodList[index]
+                                                              .discountIcon =
+                                                              newValue ?? "%";
                                                       controller.foodList[index]
                                                               .dropDown[0] =
                                                           newValue!;
@@ -447,10 +453,17 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                                       textColor: blackColor,
                                       text: ("Add"),
                                       onPressed: () {
-                                        controller.addfoodmanually();
-                                        Navigator.pop(context);
-                                        controller.addfoodManuallyController
-                                            .clear();
+                                        if(controller.addfoodManuallyController.text.trim() != "") {
+                                          controller.addfoodmanually();
+                                          Navigator.pop(context);
+                                          controller.addfoodManuallyController
+                                              .clear();
+                                        }else{
+                                          Get.find<GlobalGeneralController>().errorSnackbar(
+                                              title: "Error",
+                                              description:
+                                              "Please add food");
+                                        }
                                       }),
                                   controller.addfoodManuallyController,
                                 );
@@ -589,6 +602,11 @@ class GuestFoodItemScreen extends GetView<GuestController> {
                 }
                 if (a.length == controller.foodList.length) {
                   Get.toNamed(Routes.guestDrinksScreen);
+                }else{
+                  Get.find<GlobalGeneralController>().errorSnackbar(
+                      title: "Error",
+                      description:
+                      "Food Quantity and Price/Discount Is Required");
                 }
               }
             },

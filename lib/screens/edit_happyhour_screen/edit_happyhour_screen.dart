@@ -76,137 +76,145 @@ class EditHappyHourScreen extends GetView<EditHappyHourScreenController> {
                             HappyHourModel happyHourModel =
                                 snapshot.docs[index].data();
                             happyHourModel.id = snapshot.docs[index].id;
-                            return ClaimedHappyhourCard(
-                              title: happyHourModel.businessName.toString(),
-                              image: happyHourModel.menuImage.toString(),
-                              subtitle:
-                                  happyHourModel.businessAddress.toString(),
-                              timeIcon: "assets/icons/Group 11432@2x.png",
-                              time: happyHourModel.day!.isEmpty
-                                  ? ""
-                                  : "${happyHourModel.day?.first['HfromTime']}  - "
-                                      "${happyHourModel.day?.first['HtoTime']}",
-                              rating: "assets/icons/Path 16148.svg",
-                              rateCount: happyHourModel.reviewStar?.length
-                                      .toString() ??
-                                  "",
-                              dialogShow: happyHourModel.promoted ?? false
-                                  ? "assets/icons/Group 11540-2@2x.png"
-                                  : "assets/icons/Group 11540@2x.png",
-                              dialogPressed: () {
-                                if (happyHourModel.promoted == true) {
-                                  detailDialog(
-                                      context,
-                                      happyHourModel.businessName.toString(),
-                                      happyHourModel.businessAddress,
-                                      happyHourModel.day,
-                                      happyHourModel.addTime, () {
-                                    Get.back();
-                                  }, () {
-                                    Navigator.pop(context);
-                                    controller
-                                        .onPromotedClick(happyHourModel.id);
-                                  });
-                                } else {
-                                  Get.find<GlobalGeneralController>().dialogueCard(
-                                      context,
-                                      "Promote Happy Hour",
-                                      "Do you want to promote this Happy hour?",
-                                      "Promote", () {
-                                    navigator?.pop(context);
-                                    Get.toNamed(Routes.checkOutClaimScreen,
-                                        arguments: happyHourModel.id);
-                                  });
-                                }
+                            return InkWell(
+                              onTap: () async {
+                                Navigator.pop(context);
+                                await Get.toNamed(
+                                    Routes.happyHourEditScreen,
+                                    arguments: happyHourModel);
                               },
-                              popUpMenu: PopupMenuButton(
-                                elevation: 5,
-                                icon: const Icon(
-                                  Icons.more_vert_outlined,
-                                  size: 40,
-                                ),
-                                itemBuilder: (
-                                  context,
-                                ) {
-                                  return [
-                                    PopupMenuItem(
-                                      padding: const EdgeInsets.all(0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          await Get.toNamed(
-                                              Routes.happyHourEditScreen,
-                                              arguments: happyHourModel);
-                                        },
-                                        child: const ListTile(
-                                          contentPadding: EdgeInsets.all(0),
-                                          title: Text("  Edit"),
-                                        ),
-                                      ),
-                                    ),
-                                    PopupMenuItem(
-                                      padding: const EdgeInsets.all(0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          dialogueCard(
-                                              context,
-                                              'Duplicate',
-                                              "Duplicate Happy Hour",
-                                              "Do you want to Duplicate this Happy Hour?",
-                                              primary, () {
-                                            Navigator.pop(context);
-                                            Get.toNamed(
-                                                Routes
-                                                    .duplicateBusinessAccountScreen,
-                                                arguments: happyHourModel);
-                                          });
-                                        },
-                                        child: const ListTile(
-                                          contentPadding: EdgeInsets.all(0),
-                                          title: Text("  Duplicate"),
-                                        ),
-                                      ),
-                                    ),
-                                    PopupMenuItem(
-                                      padding: const EdgeInsets.all(0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          dialogueCard(
-                                              context,
-                                              'Delete',
-                                              "Delete This Happy Hour",
-                                              "Do you want to Delete this business?",
-                                              primary, () {
-                                            // print(happyHourModel.id);
-                                            controller
-                                                .deleteHour(happyHourModel.id);
-                                            controller.update();
-                                          });
-                                        },
-                                        child: const ListTile(
-                                          contentPadding: EdgeInsets.all(0),
-                                          title: Text("  Delete"),
-                                        ),
-                                      ),
-                                    ),
-                                    PopupMenuItem(
-                                      padding: const EdgeInsets.all(0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          Get.toNamed(Routes.editDetailScreen,
-                                              arguments: happyHourModel);
-                                        },
-                                        child: const ListTile(
-                                          contentPadding: EdgeInsets.all(0),
-                                          title: Text(" Customer View"),
-                                        ),
-                                      ),
-                                    ),
-                                  ];
+                              child: ClaimedHappyhourCard(
+                                title: happyHourModel.businessName.toString(),
+                                image: happyHourModel.menuImage.toString(),
+                                subtitle:
+                                    happyHourModel.businessAddress.toString(),
+                                timeIcon: "assets/icons/Group 11432@2x.png",
+                                time: happyHourModel.day!.isEmpty
+                                    ? ""
+                                    : "${happyHourModel.day?.first['HfromTime']}  - "
+                                        "${happyHourModel.day?.first['HtoTime']}",
+                                rating: "assets/icons/Path 16148.svg",
+                                rateCount: happyHourModel.reviewStar?.length
+                                        .toString() ??
+                                    "",
+                                dialogShow: happyHourModel.promoted ?? false
+                                    ? "assets/icons/Group 11540-2@2x.png"
+                                    : "assets/icons/Group 11540@2x.png",
+                                dialogPressed: () {
+                                  if (happyHourModel.promoted == true) {
+                                    detailDialog(
+                                        context,
+                                        happyHourModel.businessName.toString(),
+                                        happyHourModel.businessAddress,
+                                        happyHourModel.day,
+                                        happyHourModel.addTime, () {
+                                      Get.back();
+                                    }, () {
+                                      Navigator.pop(context);
+                                      controller
+                                          .onPromotedClick(happyHourModel.id);
+                                    });
+                                  } else {
+                                    Get.find<GlobalGeneralController>().dialogueCard(
+                                        context,
+                                        "Promote Happy Hour",
+                                        "Do you want to promote this Happy hour?",
+                                        "Promote", () {
+                                      navigator?.pop(context);
+                                      Get.toNamed(Routes.checkOutClaimScreen,
+                                          arguments: happyHourModel.id);
+                                    });
+                                  }
                                 },
+                                popUpMenu: PopupMenuButton(
+                                  elevation: 5,
+                                  icon: const Icon(
+                                    Icons.more_vert_outlined,
+                                    size: 40,
+                                  ),
+                                  itemBuilder: (
+                                    context,
+                                  ) {
+                                    return [
+                                      PopupMenuItem(
+                                        padding: const EdgeInsets.all(0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            Navigator.pop(context);
+                                            await Get.toNamed(
+                                                Routes.happyHourEditScreen,
+                                                arguments: happyHourModel);
+                                          },
+                                          child: const ListTile(
+                                            contentPadding: EdgeInsets.all(0),
+                                            title: Text("  Edit"),
+                                          ),
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        padding: const EdgeInsets.all(0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            Navigator.pop(context);
+                                            dialogueCard(
+                                                context,
+                                                'Duplicate',
+                                                "Duplicate Happy Hour",
+                                                "Do you want to Duplicate this Happy Hour?",
+                                                primary, () {
+                                              Navigator.pop(context);
+                                              Get.toNamed(
+                                                  Routes
+                                                      .duplicateBusinessAccountScreen,
+                                                  arguments: happyHourModel);
+                                            });
+                                          },
+                                          child: const ListTile(
+                                            contentPadding: EdgeInsets.all(0),
+                                            title: Text("  Duplicate"),
+                                          ),
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        padding: const EdgeInsets.all(0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            Navigator.pop(context);
+                                            dialogueCard(
+                                                context,
+                                                'Delete',
+                                                "Delete This Happy Hour",
+                                                "Do you want to Delete this business?",
+                                                primary, () {
+                                              // print(happyHourModel.id);
+                                              controller
+                                                  .deleteHour(happyHourModel.id);
+                                              controller.update();
+                                            });
+                                          },
+                                          child: const ListTile(
+                                            contentPadding: EdgeInsets.all(0),
+                                            title: Text("  Delete"),
+                                          ),
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        padding: const EdgeInsets.all(0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            Navigator.pop(context);
+                                            Get.toNamed(Routes.editDetailScreen,
+                                                arguments: happyHourModel);
+                                          },
+                                          child: const ListTile(
+                                            contentPadding: EdgeInsets.all(0),
+                                            title: Text(" Customer View"),
+                                          ),
+                                        ),
+                                      ),
+                                    ];
+                                  },
+                                ),
                               ),
                             );
                           });

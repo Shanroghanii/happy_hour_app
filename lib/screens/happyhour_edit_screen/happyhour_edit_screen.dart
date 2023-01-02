@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ import 'package:happy_hour_app/screens/happyhour_edit_screen/edit_screens/edit_c
 
 import '../../core/constants.dart';
 import '../../routes/app_routes.dart';
+import '../happyhour_detail_screen/happyhour_detail_screen.dart';
 
 class HappyHourEditScreen extends GetView<EditController> {
   const HappyHourEditScreen({Key? key}) : super(key: key);
@@ -29,13 +32,15 @@ class HappyHourEditScreen extends GetView<EditController> {
               backgroundColor: Colors.transparent,
               leading: IconButton(
                   onPressed: () {
-                    Get.back();
+                    Navigator.pop(context);
+                   // Get.back();
                   },
                   icon: SvgPicture.asset(
                     "assets/icons/Group 9108.svg",
                     height: 25,
                     width: 25,
-                  )),
+                  ),
+              ),
               // title: const Text(
               //   "Lorem Ipsum Store",
               // ),
@@ -47,7 +52,7 @@ class HappyHourEditScreen extends GetView<EditController> {
               child: GetBuilder<EditController>(
                 builder: (_) {
                   return Padding(
-                    padding: const EdgeInsets.only(left: 18.0, right: 18),
+                    padding: const EdgeInsets.only(left: 12.0, right: 12),
                     child: Column(
                       children: [
                         Obx(() => Stack(
@@ -59,11 +64,13 @@ class HappyHourEditScreen extends GetView<EditController> {
                                         ? controller.happyHourMenuImage
                                                 .contains("image_picker")
                                             ? Image.file(
-                                                File(controller
-                                                    .happyHourMenuImage),
+                                                File(
+                                                  controller
+                                                    .happyHourMenuImage,
+                                                ),
                                                 width: W * 0.95,
                                                 height: H * 0.2,
-                                                fit: BoxFit.cover,
+                                                 fit: BoxFit.cover,
                                               )
                                             : Image.network(
                                                 controller.hour.menuImage
@@ -87,7 +94,8 @@ class HappyHourEditScreen extends GetView<EditController> {
                                   child: GestureDetector(
                                     onTap: () {
                                       Get.toNamed(Routes.editAccountScreen,
-                                          arguments: controller.hour);
+                                          arguments: controller.hour,
+                                      );
                                     },
                                     child: Image.asset(
                                       "assets/icons/Group 11493@2x.png",
@@ -161,80 +169,110 @@ class HappyHourEditScreen extends GetView<EditController> {
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w300),
                               ),
+
                               SizedBox(
                                 height: H * 0.01,
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "Business Hour",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
+                                    "Happy Hour Menu",
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed(Routes.editHourScreen,
+                                      Get.toNamed(Routes.editAccountScreen,
                                           arguments: controller.hour);
                                     },
                                     child: Image.asset(
                                       "assets/icons/Group 11493@2x.png",
-                                      height: H * 0.06,
+                                      height: H * 0.05,
+                                      // width: W * 0.05,
+                                      fit: BoxFit.cover,
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                               SizedBox(
                                 height: H * 0.01,
                               ),
-                              GridView.builder(
-                                physics: const ScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  //  mainAxisExtent: 1,
-                                  childAspectRatio: 30 / 2,
-                                  crossAxisCount: 1,
+                              SizedBox(
+                                height: H * 0.25,
+                                width: W * 1.2,
+                                child:
+                                controller.menuImagePathList.isNotEmpty ? Swiper(
+                                  //physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: controller.menuImagePathList.length,
+                                  pagination: const SwiperPagination(),
+                                  viewportFraction: 1,
+                                  scale: 1,
+                                  loop: false,
+                                  itemBuilder: (BuildContext context, int i) {
+                                    return Container(
+                                      height: H * 0.3,
+                                      width: W,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(width: 4, color: primary),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.to(() => DetailScreen(
+                                              tag: "tag",
+                                              image: controller.menuImageList[i].toString()));
+                                        },
+                                        child: Image.file(File(
+                                          controller.menuImagePathList[i]),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+
+                                    //  Image.network(
+                                    //   controller.imageList[index],
+                                    //   // controller.happyHour.businessImage?.toString() ??
+                                    //   //     controller.happyHour.menuImage.toString(),
+                                    //   fit: BoxFit.fitWidth,
+                                    // );
+                                  },
+                                ) :
+                                Swiper(
+                                  //physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: controller.menuImageList.length,
+                                  pagination: const SwiperPagination(),
+                                  viewportFraction: 1,
+                                  scale: 1,
+                                  loop: false,
+                                  itemBuilder: (BuildContext context, int i) {
+                                    return Container(
+                                      height: H * 0.3,
+                                      width: W,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(width: 4, color: primary),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.to(() => DetailScreen(
+                                              tag: "tag",
+                                              image: controller.menuImageList[i].toString()));
+                                        },
+                                        child: Image.network(
+                                          controller.menuImageList[i],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+
+                                    //  Image.network(
+                                    //   controller.imageList[index],
+                                    //   // controller.happyHour.businessImage?.toString() ??
+                                    //   //     controller.happyHour.menuImage.toString(),
+                                    //   fit: BoxFit.fitWidth,
+                                    // );
+                                  },
                                 ),
-                                shrinkWrap: true,
-                                itemCount: controller.selecteddays.isEmpty
-                                    ? controller.hour.fromTimeToTime?.length
-                                    : controller.selecteddays.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      controller.dayFromTimeToTimeList.isEmpty
-                                          ? Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: W * 0.25,
-                                                  child: Text(
-                                                      "•  ${controller.hour.fromTimeToTime?[index]['bDay']}"),
-                                                ),
-                                                Text(
-                                                    "${controller.hour.fromTimeToTime?[index]['bFtime']}   -"
-                                                    "    ${controller.hour.fromTimeToTime?[index]['bTtime']}"),
-                                              ],
-                                            )
-                                          : controller.selecteddays.isNotEmpty
-                                              ? Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: W * 0.25,
-                                                      child: Text(
-                                                          "• ${controller.selecteddays[index]['bDay']}"),
-                                                    ),
-                                                    Text(
-                                                        "${controller.selecteddays[index]['bFtime']}   -"
-                                                        "  ${controller.selecteddays[index]['bTtime']}"),
-                                                  ],
-                                                )
-                                              : const SizedBox(),
-                                    ],
-                                  );
-                                },
                               ),
+
                               SizedBox(
                                 height: H * 0.01,
                               ),
@@ -245,8 +283,7 @@ class HappyHourEditScreen extends GetView<EditController> {
                                   const Text(
                                     "Happy Hour Times",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
+                                        fontSize: 20, fontWeight: FontWeight.w600, color: primary),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -292,8 +329,9 @@ class HappyHourEditScreen extends GetView<EditController> {
                                                       "•  ${controller.hour.day?[index]['Hday']}"),
                                                 ),
                                                 Text(
-                                                    "    ${controller.hour.day?[index]['HfromTime']}  -"
-                                                    "    ${controller.hour.day?[index]['HtoTime']}"),
+                                                  "    ${controller.hour.day?[index]['HfromTime']}  -"
+                                                  "    ${controller.hour.day?[index]['HtoTime']}",
+                                                ),
                                               ],
                                             )
                                           : controller.hDayTimeList.isNotEmpty
@@ -324,7 +362,7 @@ class HappyHourEditScreen extends GetView<EditController> {
                                   );
                                 },
                               ),
-                              controller.hour.dayLate!.isNotEmpty
+                              controller.hour.dayLate!.isNotEmpty || controller.hDayTimeLateList.isNotEmpty
                                   ? const Text(
                                       "Late Happy Hour time",
                                       style: TextStyle(
@@ -335,7 +373,7 @@ class HappyHourEditScreen extends GetView<EditController> {
                               SizedBox(
                                 height: H * 0.01,
                               ),
-                              controller.hour.dayLate!.isNotEmpty
+                              controller.hour.dayLate!.isNotEmpty || controller.hDayTimeLateList.isNotEmpty
                                   ? GridView.builder(
                                       physics: const ScrollPhysics(),
                                       gridDelegate:
@@ -374,8 +412,9 @@ class HappyHourEditScreen extends GetView<EditController> {
                                                                 "•  ${controller.hDayTimeLateList[index]['Hday2']}"),
                                                           ),
                                                           Text(
-                                                              "   ${controller.hDayTimeLateList[index]['HfromTime2']}   -"
-                                                              "   ${controller.hDayTimeLateList[index]['HtoTime2']}"),
+                                                            "  ${controller.hDayTimeLateList[index]['HfromTime2']}   -"
+                                                            "  ${controller.hDayTimeLateList[index]['HtoTime2']}",
+                                                          ),
                                                         ],
                                                       )
                                                     : const SizedBox(),
@@ -426,13 +465,7 @@ class HappyHourEditScreen extends GetView<EditController> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                     Text(
-                                      "Price",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      "Discount",
+                                      "Price/Discount",
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600),
@@ -455,7 +488,7 @@ class HappyHourEditScreen extends GetView<EditController> {
                                     : controller.foodList.length,
                                 itemBuilder: (context, index) {
                                   return Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(
                                         width: W * 0.28,
@@ -469,17 +502,22 @@ class HappyHourEditScreen extends GetView<EditController> {
                                             ? "•  ${controller.hour.foodName?[index]['foodcount']}"
                                             : "•  ${controller.foodList[index].quantity}"),
                                       ),
+                                      controller.foodList[index].price != "" ? SizedBox(
+                                        width: W * 0.25,
+                                        child: controller.foodList[index].price != "" ? Text(controller.foodList.isEmpty
+                                            ? (controller.hour.foodName?[index]['foodprice']) == "" ? "" : "•  \$${controller.hour.foodName?[index]['foodprice']}"
+                                            : controller.foodList[index].price == "" ? "" : "•  \$${controller.foodList[index].price}") : const Text(""),
+                                      ):
                                       SizedBox(
                                         width: W * 0.25,
-                                        child: Text(controller.foodList.isEmpty
-                                            ? "•  ${controller.hour.foodName?[index]['foodprice']}"
-                                            : "•  ${controller.foodList[index].price}"),
-                                      ),
-                                      SizedBox(
-                                        width: W * 0.09,
-                                        child: Text(controller.foodList.isEmpty
-                                            ? "•  ${controller.hour.foodName?[index]['fooddiscount']}"
-                                            : "•  ${controller.foodList[index].discount}"),
+                                        child: controller
+                                                    .foodList[index].discount
+                                                    .toString() !=
+                                                '0'
+                                            ? Text(controller.foodList.isEmpty
+                                                ? "• ${controller.hour.foodName?[index]['fooddiscount']} off"
+                                                : controller.foodList[index].discountIcon == "%" ? "• ${controller.foodList[index].discount}% off" : "• \$${controller.foodList[index].discount} off")
+                                            : const Text(""),
                                       ),
                                     ],
                                   );
@@ -495,13 +533,16 @@ class HappyHourEditScreen extends GetView<EditController> {
                                   const Text(
                                     "Drink Items",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed(Routes.editDrinksScreen,
-                                          arguments: controller.hour);
+                                      Get.toNamed(
+                                        Routes.editDrinksScreen,
+                                        arguments: controller.hour,
+                                      );
                                     },
                                     child: Image.asset(
                                       "assets/icons/Group 11493@2x.png",
@@ -527,17 +568,17 @@ class HappyHourEditScreen extends GetView<EditController> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                     Text(
-                                      "Price",
+                                      "Price/Discount",
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    Text(
-                                      "Discount",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                                    // Text(
+                                    //   "",
+                                    //   style: TextStyle(
+                                    //       fontSize: 16,
+                                    //       fontWeight: FontWeight.w600),
+                                    // ),
                                   ]),
                               SizedBox(
                                 height: H * 0.01,
@@ -555,34 +596,48 @@ class HappyHourEditScreen extends GetView<EditController> {
                                     : controller.localdrinkList.length,
                                 itemBuilder: (context, index) {
                                   return Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(
                                         width: W * 0.28,
-                                        child: Text(controller
-                                                .localdrinkList.isEmpty
-                                            ? "•  ${controller.hour.drinkitemName?[index]['drinkname']}"
-                                            : "•  ${controller.localdrinkList[index].name}"),
+                                        child: Text(
+                                          controller.localdrinkList.isEmpty
+                                              ? "•  ${controller.hour.drinkitemName?[index]['drinkname']}"
+                                              : "•  ${controller.localdrinkList[index].name}",
+                                        ),
                                       ),
                                       SizedBox(
                                         width: W * 0.23,
                                         child: Text(controller
                                                 .localdrinkList.isEmpty
-                                            ? "•  ${controller.hour.drinkitemName?[index]['drinksize']}"
-                                            : "•  ${controller.localdrinkList[index].size}"),
+                                            ? "•  ${controller.hour.drinkitemName?[index]['drinksize']}${controller.hour.drinkitemName?[index]['drinksize']}"
+                                            : "•  ${controller.localdrinkList[index].size}${controller.localdrinkList[index].sizeicon}",
+                                        ),
                                       ),
+                                      controller.localdrinkList[index].price != "" ? SizedBox(
+                                        width: W * 0.25,
+                                        child: Text(
+                                            controller
+                                                .localdrinkList.isEmpty
+                                            ? (controller.hour.drinkitemName?[index]['drinkprice']) == "" ? "" : "• \$${controller.hour.drinkitemName?[index]['drinkprice']}"
+                                            : controller.localdrinkList[index].price == "" ? "" : "• \$${controller.localdrinkList[index].price}",
+                                        ),
+                                      ):
                                       SizedBox(
                                         width: W * 0.25,
-                                        child: Text(controller
-                                                .localdrinkList.isEmpty
-                                            ? "•  ${controller.hour.drinkitemName?[index]['drinkprice']}"
-                                            : "•  ${controller.localdrinkList[index].price}"),
-                                      ),
-                                      SizedBox(
-                                        width: W * 0.09,
-                                        child: Text(controller
-                                                .localdrinkList.isEmpty
-                                            ? "•  ${controller.hour.drinkitemName?[index]['rinkdiscount']}"
-                                            : "•  ${controller.localdrinkList[index].discount}"),
+                                        child: controller.localdrinkList[index]
+                                                    .discount
+                                                    .toString() !=
+                                                '0'
+                                            ? Text(
+                                                controller
+                                                        .localdrinkList.isEmpty
+                                                    ? "• ${controller.hour.drinkitemName?[index]['drinkdiscount']} off"
+                                                    : "• ${controller.localdrinkList[index].discount}${controller.localdrinkList[index].discounticon} off",
+                                                maxLines: 2,
+                                              )
+                                            : const Text(""),
                                       ),
                                     ],
                                   );
@@ -598,8 +653,9 @@ class HappyHourEditScreen extends GetView<EditController> {
                                   const Text(
                                     "Daily Special",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -641,6 +697,12 @@ class HappyHourEditScreen extends GetView<EditController> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600),
                                   ),
+                                  Text(
+                                    "Discount",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -650,45 +712,117 @@ class HappyHourEditScreen extends GetView<EditController> {
                                 physics: const ScrollPhysics(),
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
-                                  childAspectRatio: 24 / 2,
+                                  childAspectRatio: 10 / 2,
                                   crossAxisCount: 1,
                                 ),
                                 shrinkWrap: true,
                                 itemCount:
                                     controller.alldailySpecialList.length,
                                 itemBuilder: (context, index) {
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: W * 0.2,
-                                        child: Text(controller
-                                                .alldailySpecialList.isEmpty
-                                            ? "  •${controller.hour.dailySpecils?[index]['day']}"
-                                            : "   •${controller.alldailySpecialList[index]['day']}"),
-                                      ),
-                                      SizedBox(
-                                        width: W * 0.3,
-                                        child: Text(controller
-                                                .alldailySpecialList.isEmpty
-                                            ? "•  ${controller.hour.dailySpecils?[index]['name']}"
-                                            : "•  ${controller.alldailySpecialList[index]['name']}"),
-                                      ),
-                                      SizedBox(
-                                        width: W * 0.24,
-                                        child: Text(controller
-                                                .alldailySpecialList.isEmpty
-                                            ? "•  ${controller.hour.dailySpecils?[index]['price']}"
-                                            : "•  ${controller.alldailySpecialList[index]['price']}"),
-                                      ),
-                                      SizedBox(
-                                        width: W * 0.1,
-                                        child: Text(controller
-                                                .alldailySpecialList.isEmpty
-                                            ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
-                                            : "•  ${controller.alldailySpecialList[index]['quantity']}"),
-                                      ),
-                                    ],
+                                  print(controller.alldailySpecialList[index]
+                                  ['quantity']);
+                                  return SizedBox(
+                                    height: 50,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: W * 0.4,
+                                          child: Text(controller
+                                                  .alldailySpecialList.isEmpty
+                                              ? "•${controller.hour.dailySpecils?[index]['day']}"
+                                              : "•${controller.alldailySpecialList[index]['day']}"),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: W * 0.3,
+                                              child: Text(controller
+                                                      .alldailySpecialList
+                                                      .isEmpty
+                                                  ? "•    ${controller.hour.dailySpecils?[index]['name']}"
+                                                  : "•    ${controller.alldailySpecialList[index]['name']}"),
+                                            ),
+                                            SizedBox(
+                                              width: W * 0.24,
+                                              child: Text(controller
+                                                      .alldailySpecialList
+                                                      .isEmpty
+                                                  ? (controller.hour.dailySpecils?[index]['price']) != "" ? "•  \$${controller.hour.dailySpecils?[index]['price']}" :""
+                                                  : (controller.alldailySpecialList[index]['price']) != "" ? "•  \$${controller.alldailySpecialList[index]['price']}" : ""),
+                                            ),
+                                            SizedBox(
+                                              width: W * 0.2,
+                                              child: controller.alldailySpecialList[index]
+                                                          ['index'] ==
+                                                      'Foods'
+                                                  ? Text(controller
+                                                          .alldailySpecialList
+                                                          .isEmpty
+                                                      ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
+                                                      : controller.alldailySpecialList[
+                                                                      index][
+                                                                  'quantity'] ==
+                                                              ''
+                                                          ? "•  0"
+                                                          : "•  ${controller.alldailySpecialList[index]['quantity']}")
+                                                  : Text(controller
+                                                          .alldailySpecialList
+                                                          .isEmpty
+                                                      ? "•  ${controller.hour.dailySpecils?[index]['quantity']}"
+                                                      : controller.alldailySpecialList[index]
+                                                                  ['index'] !=
+                                                              "food"
+                                                          ? "•  ${controller.alldailySpecialList[index]['quantity']} ${controller.alldailySpecialList[index]['sizeIcon']}"
+                                                          : "•  ${controller.alldailySpecialList[index]['quantity']}"),
+                                            ),
+                                            SizedBox(
+                                              width: W * 0.22,
+                                              child: controller.alldailySpecialList[index]
+                                                              ['discount'] !=
+                                                          "" &&
+                                                      controller.alldailySpecialList[index]
+                                                                  ['discount']
+                                                              .toString() !=
+                                                          '0' &&
+                                                      controller.alldailySpecialList[index][
+                                                              'discountIcon'] !=
+                                                          "null"
+                                                  ? Text(controller
+                                                          .alldailySpecialList
+                                                          .isEmpty
+                                                      ? "• ${controller.hour.dailySpecils?[index]['discount']}"
+                                                      : controller.alldailySpecialList[index]
+                                                                      ['discountIcon'] !=
+                                                                  null &&
+                                                              controller.alldailySpecialList[index]['discountIcon'] != "null"
+                                                          ? "• ${controller.alldailySpecialList[index]['discount']}${controller.alldailySpecialList[index]['discountIcon']} off"
+                                                          : "• ${controller.alldailySpecialList[index]['discount']}% off",
+                                              )
+                                                  : const Text(""),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            const SizedBox(
+                                              width: 70,
+                                            ),
+                                            Text(
+                                              "${controller.alldailySpecialList[index]['fromTime']} -  ${controller.alldailySpecialList[index]['toTime']}",
+                                              maxLines: 1,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               ),
@@ -735,7 +869,8 @@ class HappyHourEditScreen extends GetView<EditController> {
                                 itemBuilder: (context, index) {
                                   return Text(controller.amentyAddList.isEmpty
                                       ? "•  ${controller.hour.amenities?[index]}"
-                                      : "•  ${controller.amentyAddList[index]}");
+                                      : "•  ${controller.amentyAddList[index]}",
+                                  );
                                 },
                               ),
                               SizedBox(
@@ -799,6 +934,7 @@ class HappyHourEditScreen extends GetView<EditController> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
+                                      controller.assignStartEventInEdit();
                                       Get.toNamed(Routes.editEventsScreen,
                                           arguments: controller.hour);
                                     },
@@ -864,17 +1000,19 @@ class HappyHourEditScreen extends GetView<EditController> {
                                     children: [
                                       SizedBox(
                                         width: W * 0.2,
-                                        child: Text(controller
+                                        child: Text(
+                                          controller
                                                 .selectedEvent.isEmpty
                                             ? "•  ${controller.hour.event?[index]['name']}"
-                                            : "•  ${controller.selectedEvent[index]['name']}"),
+                                            : "•  ${controller.selectedEvent[index]['name']}",
+                                        ),
                                       ),
                                       Text(controller.selectedEvent.isEmpty
                                           ? "•  ${controller.hour.event?[index]['day']}"
                                           : "•  ${controller.selectedEvent[index]['day']}"),
                                       Text(controller.selectedEvent.isEmpty
                                           ? "•  ${controller.hour.event?[index]['fromtime']}"
-                                          : "•  ${controller.selectedEvent[index]['fromtime']}"),
+                                          : "•  ${controller.selectedEvent[index]['fromtime']}",),
                                       Text(controller.selectedEvent.isEmpty
                                           ? "•  ${controller.hour.event?[index]['totime']}"
                                           : "•  ${controller.selectedEvent[index]['totime']}"),
@@ -885,23 +1023,97 @@ class HappyHourEditScreen extends GetView<EditController> {
                               SizedBox(
                                 height: H * 0.01,
                               ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Business Hour",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(Routes.editHourScreen,
+                                          arguments: controller.hour);
+                                    },
+                                    child: Image.asset(
+                                      "assets/icons/Group 11493@2x.png",
+                                      height: H * 0.06,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: H * 0.01,
+                              ),
+                              GridView.builder(
+                                physics: const ScrollPhysics(),
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  //  mainAxisExtent: 1,
+                                  childAspectRatio: 30 / 2,
+                                  crossAxisCount: 1,
+                                ),
+                                shrinkWrap: true,
+                                itemCount: controller.selecteddays.isEmpty
+                                    ? controller.hour.fromTimeToTime?.length
+                                    : controller.selecteddays.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      controller.dayFromTimeToTimeList.isEmpty
+                                          ? Row(
+                                        children: [
+                                          SizedBox(
+                                            width: W * 0.25,
+                                            child: Text(
+                                                "•  ${controller.hour.fromTimeToTime?[index]['bDay']}"),
+                                          ),
+                                          Text(
+                                              "${controller.hour.fromTimeToTime?[index]['bFtime']}   -"
+                                                  "    ${controller.hour.fromTimeToTime?[index]['bTtime']}"),
+                                        ],
+                                      )
+                                          : controller.selecteddays.isNotEmpty
+                                          ? Row(
+                                        children: [
+                                          SizedBox(
+                                            width: W * 0.25,
+                                            child: Text(
+                                                "• ${controller.selecteddays[index]['bDay']}"),
+                                          ),
+                                          Text(
+                                              "${controller.selecteddays[index]['bFtime']}   -"
+                                                  "  ${controller.selecteddays[index]['bTtime']}"),
+                                        ],
+                                      )
+                                          : const SizedBox(),
+                                    ],
+                                  );
+                                },
+                              ),
+                              SizedBox(
+                                height: H * 0.03,
+                              ),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: H * 0.09,
-                          width: W,
-                          child: CustomElevatedButtonWidget(
-                            onPressed: () {
-                              controller.updateBusinessHourToFireStore();
-                            },
-                            text: "Done",
-                            textColor: blackColor,
-                            fontSize: 24,
-                            verticalPadding: 0,
-                            borderRadius: 45,
-                          ),
-                        ),
+                        // SizedBox(
+                        //   height: H * 0.09,
+                        //   width: W,
+                        //   child: CustomElevatedButtonWidget(
+                        //     onPressed: () {
+                        //       controller.updateBusinessHourToFireStore();
+                        //     },
+                        //     text: "Done",
+                        //     textColor: blackColor,
+                        //     fontSize: 24,
+                        //     verticalPadding: 0,
+                        //     borderRadius: 45,
+                        //   ),
+                        // ),
                       ],
                     ),
                   );

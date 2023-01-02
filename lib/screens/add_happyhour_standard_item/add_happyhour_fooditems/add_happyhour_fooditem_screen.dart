@@ -355,8 +355,8 @@ class AddHappyHourFoodItemScreen extends GetView<AddHappyhourController> {
                                               onChanged: (v) {
                                                 controller
                                                     .showLateTimeFood(index);
-                                              }),
-
+                                              },
+                                          ),
                                           Flexible(
                                             child: Padding(
                                               padding: const EdgeInsets.only(
@@ -420,10 +420,19 @@ class AddHappyHourFoodItemScreen extends GetView<AddHappyhourController> {
                                       textColor: blackColor,
                                       text: ("Add"),
                                       onPressed: () {
-                                        controller.addfoodmanually();
-                                        Navigator.pop(context);
-                                        controller.addfoodManuallyController
-                                            .clear();
+                                        if(controller.addfoodManuallyController.text.trim() != ""){
+                                          controller.addfoodmanually();
+                                          Navigator.pop(context);
+                                          controller.addfoodManuallyController
+                                              .clear();
+                                        }else{
+                                          Get.find<GlobalGeneralController>()
+                                              .errorSnackbar(
+                                                  title: "Error",
+                                                  description: "Text required",
+                                          );
+                                        }
+
                                       }),
                                   controller.addfoodManuallyController,
                                 );
@@ -563,6 +572,12 @@ class AddHappyHourFoodItemScreen extends GetView<AddHappyhourController> {
                 }
                 if (a.length == controller.foodList.length) {
                   Get.toNamed(Routes.addHappyHourDrinksScreen);
+                }
+                else{
+                  Get.find<GlobalGeneralController>().errorSnackbar(
+                      title: "Error",
+                      description:
+                      "Food Quantity and Price/Discount Is Required");
                 }
               }
             },

@@ -132,19 +132,20 @@ class BusinessEventsScreen extends GetView<AddHappyhourBusinessController> {
                                             value: controller.eventList[index]
                                                 .isSelect.value,
                                             onChanged: (v) {
+                                              controller.eventKey.currentState?.reset();
                                               controller.eventList[index]
                                                       .isSelect.value =
                                                   !controller.eventList[index]
                                                       .isSelect.value;
-
-                                              controller.updateEvent();
-                                            }),
+                                              controller.addIntoList(controller.eventList[index].event);
+                                            },
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: W * 0.3,
+                                  width: W * 0.2,
                                   child: Row(
                                     children: [
                                       //SizedBox(width: W * 0.018),
@@ -225,7 +226,10 @@ class BusinessEventsScreen extends GetView<AddHappyhourBusinessController> {
                                                   .toList()
                                               : [],
                                           onChanged: (day) {
-                                            controller.day = day!;
+                                            controller.assignDayValue(day!, controller.eventList[index].event);
+                                            controller.eventList[index].day = day;
+                                           // controller.eventListadded();
+                                          //  controller.day = day!;
                                           },
                                         ),
                                       ),
@@ -297,7 +301,11 @@ class BusinessEventsScreen extends GetView<AddHappyhourBusinessController> {
                                                   .toList()
                                               : [],
                                           onChanged: (time) {
-                                            controller.eventStarttime = time!;
+                                            controller.assignFromTimeValue(time!, controller.eventList[index].event);
+
+                                            controller.eventList[index].day = time;
+                                            controller.eventStarttime = time;
+                                          //  controller.eventListadded();
                                             //controller.selectedEvent.add(time);
                                           },
                                         ),
@@ -370,8 +378,9 @@ class BusinessEventsScreen extends GetView<AddHappyhourBusinessController> {
                                                   .toList()
                                               : [],
                                           onChanged: (time) {
-                                            controller.eventendtime = time!;
-                                            controller.eventListadded();
+                                            controller.assignToTimeValue(time!, controller.eventList[index].event);
+                                            controller.eventendtime = time;
+                                          //  controller.eventListadded();
                                           },
                                         ),
                                       ),

@@ -99,7 +99,8 @@ class EditAmenitiesScreen extends GetView<EditController> {
                         ],
                       ),
                     );
-                  }),
+                  },
+              ),
             ],
           ),
         ),
@@ -110,6 +111,7 @@ class EditAmenitiesScreen extends GetView<EditController> {
           height: H * 0.09,
           child: CustomElevatedButtonWidget(
             onPressed: () {
+              controller.updateBusinessHourToFireStore();
               controller.update();
               Get.back();
             },

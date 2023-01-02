@@ -201,6 +201,7 @@ class DuplicateBusinessHourScreen extends GetView<DuplicateController> {
                                   onChanged: (fromTime) {
                                     controller.dayFromTimeToTimeList[index]
                                         .from = fromTime!;
+                                    controller.bDayTime(index);
                                   },
                                 ),
                               ),

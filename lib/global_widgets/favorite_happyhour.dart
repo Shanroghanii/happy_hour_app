@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutterfire_ui/firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:happy_hour_app/data/models/happyhour_model.dart';
 import 'package:happy_hour_app/data/models/hour_favorite_model.dart';
 import 'package:happy_hour_app/global_widgets/hour_card.dart';
 import 'package:happy_hour_app/routes/app_routes.dart';

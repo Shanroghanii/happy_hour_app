@@ -193,6 +193,7 @@ class BusinessFoodItemScreen extends GetView<AddHappyhourBusinessController> {
                                         TextEditingController();
                                     controller.foodList[index]
                                         .discountController?.text = "";
+                                    controller.foodList[index].discount = 0;
                                     controller.update();
                                   },
                                   textEditingController: controller
@@ -247,10 +248,15 @@ class BusinessFoodItemScreen extends GetView<AddHappyhourBusinessController> {
                                                   controller: controller
                                                       .foodList[index]
                                                       .discountController,
-                                                  onTap: () => controller
-                                                      .foodList[index]
-                                                      .priceController
-                                                      .clear(),
+                                                  onTap: () {
+                                                    controller
+                                                        .foodList[index]
+                                                        .priceController
+                                                        .clear();
+                                                    controller.foodList[index].price = '';
+
+
+                                                  },
                                                   obscureText: false,
                                                   keyboardType:
                                                       TextInputType.number,
@@ -258,6 +264,8 @@ class BusinessFoodItemScreen extends GetView<AddHappyhourBusinessController> {
                                                     controller.foodList[index]
                                                             .discount =
                                                         int.parse(val);
+                                                    controller.foodList[index].price = '';
+                                                    print(controller.foodList[index].price);
                                                   },
                                                   decoration: InputDecoration(
                                                     // hintText: "Enter Discount",
@@ -450,10 +458,18 @@ class BusinessFoodItemScreen extends GetView<AddHappyhourBusinessController> {
                                       textColor: blackColor,
                                       text: ("Add"),
                                       onPressed: () {
-                                        controller.addfoodmanually();
-                                        Navigator.pop(context);
-                                        controller.addfoodManuallyController
-                                            .clear();
+                                        if(controller.addfoodManuallyController.text.trim() != ""){
+                                          controller.addfoodmanually();
+                                          Navigator.pop(context);
+                                          controller.addfoodManuallyController
+                                              .clear();
+                                        }
+  else{
+                                          Get.find<GlobalGeneralController>().errorSnackbar(
+                                              title: "Error",
+                                              description:
+                                              "Please add food");
+                                        }
                                       }),
                                   controller.addfoodManuallyController,
                                 );
@@ -589,9 +605,16 @@ class BusinessFoodItemScreen extends GetView<AddHappyhourBusinessController> {
                       title: "Error",
                       description:
                           "Food Quantity and Price/Discount Is Required");
-                }
-                if (a.length == controller.foodList.length) {
-                  Get.toNamed(Routes.businessDrinksScreen);
+                }else {
+                  print(5);
+                  if (a.length == controller.foodList.length) {
+                    Get.toNamed(Routes.businessDrinksScreen);
+                  }else{
+                    Get.find<GlobalGeneralController>().errorSnackbar(
+                        title: "Error",
+                        description:
+                        "Make sure all fields are validated");
+                  }
                 }
               }
             },

@@ -92,7 +92,10 @@ class BusinessBarTypeScreen extends GetView<AddHappyhourBusinessController> {
                                               .value =
                                           !controller.barTypeList[index]
                                               .isSelect.value;
-                                      controller.updateBartype(index);
+                                      controller.updateBartype(
+                                          index,
+                                          controller
+                                              .barTypeList[index].barType);
                                     }),
                               ),
                             ),

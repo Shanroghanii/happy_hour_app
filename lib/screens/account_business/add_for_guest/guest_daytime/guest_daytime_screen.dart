@@ -43,6 +43,7 @@ class GuestDayTimeScreen extends GetView<GuestController> {
               radius: const Radius.circular(20),
               thickness: 10,
               child: ListView(
+                controller: controller.scrollController,
                 children: [
                   SizedBox(
                     height: H * 0.009,
@@ -112,9 +113,11 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                       ),
                                     ))
                                 .toList(),
-                            onChanged: (time) {
-                              controller.hFromTime = time!;
-                            },
+                            onChanged: controller.showDayList
+                                ? null
+                                : (time) {
+                                    controller.hFromTime = time!;
+                                  },
                           ),
                         ),
                       ),
@@ -166,9 +169,11 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                       ),
                                     ))
                                 .toList(),
-                            onChanged: (time) {
-                              controller.hToTime = time!;
-                            },
+                            onChanged: controller.showDayList
+                                ? null
+                                : (time) {
+                                    controller.hToTime = time!;
+                                  },
                           ),
                         ),
                       ),
@@ -210,6 +215,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                             controller.dayTimeList[0].toTime =
                                                 controller.hToTime!;
                                             controller.addToHday(0);
+                                          } else {
+                                            controller.removeToHday(0);
                                           }
                                         }),
                                   ),
@@ -251,6 +258,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                             controller.dayTimeList[1].toTime =
                                                 controller.hToTime!;
                                             controller.addToHday(1);
+                                          } else {
+                                            controller.removeToHday(1);
                                           }
                                         }),
                                   ),
@@ -293,6 +302,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                 controller.hToTime!;
 
                                             controller.addToHday(2);
+                                          } else {
+                                            controller.removeToHday(2);
                                           }
                                         }),
                                   ),
@@ -335,6 +346,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                             controller.dayTimeList[3].toTime =
                                                 controller.hToTime!;
                                             controller.addToHday(3);
+                                          } else {
+                                            controller.removeToHday(3);
                                           }
                                         }),
                                   ),
@@ -375,6 +388,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                             controller.dayTimeList[4].toTime =
                                                 controller.hToTime!;
                                             controller.addToHday(4);
+                                          } else {
+                                            controller.removeToHday(4);
                                           }
                                         }),
                                   ),
@@ -416,6 +431,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                             controller.dayTimeList[5].toTime =
                                                 controller.hToTime!;
                                             controller.addToHday(5);
+                                          } else {
+                                            controller.removeToHday(5);
                                           }
                                         }),
                                   ),
@@ -457,6 +474,8 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                             controller.dayTimeList[6].toTime =
                                                 controller.hToTime!;
                                             controller.addToHday(6);
+                                          } else {
+                                            controller.removeToHday(6);
                                           }
                                         }),
                                   ),
@@ -483,12 +502,20 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                     ),
                     child: CustomElevatedButtonWidget(
                       onPressed: () {
+                        var index = controller.dayTimeList
+                            .where((e) => e.isSelect.isTrue)
+                            .length;
+
                         if (controller.hFromTime != null &&
-                            controller.hToTime != null) {
+                            controller.hToTime != null &&
+                            index != 0) {
                           controller.showDayList = true;
+                          controller.update();
                         } else {
                           Get.find<GlobalGeneralController>().errorSnackbar(
-                              title: "Time", description: "Select Time ");
+                              title: "Time",
+                              description: "Select Time and day",
+                          );
                         }
                       },
                       verticalPadding: 0,
@@ -546,7 +573,6 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                                   index]
                                                               .isSelect
                                                               .value;
-
                                                       controller
                                                           .hUpdateDay(index);
                                                       if (controller
@@ -576,7 +602,9 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                         //     .dayTimeList[index]
                                                         //     .isLate
                                                         //     .value = false;
-                                                      } else {}
+                                                      }  else {
+                                                        controller.removeToHday(index);
+                                                      }
                                                     }),
                                               ),
                                             ),
@@ -614,7 +642,6 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                                 .isEmpty) {
                                                           return 'select';
                                                         }
-
                                                         return null;
                                                       }
                                                     : null,
@@ -697,7 +724,6 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                                 .isEmpty) {
                                                           return 'select';
                                                         }
-
                                                         return null;
                                                       }
                                                     : null,
@@ -707,14 +733,20 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                   enabled: false,
                                                   contentPadding:
                                                       EdgeInsets.fromLTRB(
-                                                          12.0, 2.0, 8.0, 2.0),
+                                                    12.0,
+                                                    2.0,
+                                                    8.0,
+                                                    2.0,
+                                                  ),
                                                   filled: true,
                                                   fillColor: Colors.white,
                                                   border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                            Radius.circular(
-                                                                45)),
+                                                      Radius.circular(
+                                                        45,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                                 isExpanded: true,
@@ -749,7 +781,7 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                 onChanged: (time) {
                                                   controller.dayTimeList[index]
                                                       .toTime = time!;
-                                                  controller.hDayTime(index);
+                                                 // controller.hDayTime(index);
                                                 },
                                               ),
                                             ),
@@ -854,9 +886,11 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                               ),
                                             ))
                                         .toList(),
-                                    onChanged: (time) {
-                                      controller.hFromTime2 = time!;
-                                    },
+                                    onChanged: controller.showLateDayList
+                                        ? null
+                                        : (time) {
+                                            controller.hFromTime2 = time!;
+                                          },
                                   ),
                                 ),
                               ),
@@ -909,9 +943,11 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                               ),
                                             ))
                                         .toList(),
-                                    onChanged: (time) {
-                                      controller.hToTime2 = time!;
-                                    },
+                                    onChanged: controller.showLateDayList
+                                        ? null
+                                        : (time) {
+                                            controller.hToTime2 = time!;
+                                          },
                                   ),
                                 ),
                               ),
@@ -920,332 +956,369 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                           Obx(
                             () => AbsorbPointer(
                               absorbing: controller.showLateDayList,
-                              child: Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[0].isLate.value,
-                                              onChanged: (val) {
-                                                // controller.isSun = !controller.isSun;
-                                                controller.dayTimeList[0].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[0]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[0]
-                                                    .isLate.isTrue) {
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[0]
+                                                    .isLate.value,
+                                                onChanged: (val) {
+                                                  // controller.isSun = !controller.isSun;
                                                   controller.dayTimeList[0]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[0]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(0);
-                                                }
-                                              }),
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[0]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[0]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[0]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[0]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(0);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(0);
+                                                  }
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "S",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[1].isLate.value,
-                                              onChanged: (val) {
-                                                controller.dayTimeList[1].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[1]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[1]
-                                                    .isLate.isTrue) {
+                                    const Text(
+                                      "S",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[1]
+                                                    .isLate.value,
+                                                onChanged: (val) {
                                                   controller.dayTimeList[1]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[1]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(1);
-                                                }
-                                              }),
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[1]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[1]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[1]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[1]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(1);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(1);
+                                                  }
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "M",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[2].isLate.value,
-                                              onChanged: (val) {
-                                                // controller.isTue = !controller.isTue;
-                                                controller.dayTimeList[2].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[2]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[2]
-                                                    .isLate.isTrue) {
+                                    const Text(
+                                      "M",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[2]
+                                                    .isLate.value,
+                                                onChanged: (val) {
+                                                  // controller.isTue = !controller.isTue;
                                                   controller.dayTimeList[2]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[2]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(2);
-                                                }
-                                              }),
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[2]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[2]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[2]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[2]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(2);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(2);
+                                                  }
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "T",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[3].isLate.value,
-                                              onChanged: (val) {
-                                                controller.dayTimeList[3].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[3]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[3]
-                                                    .isLate.isTrue) {
+                                    const Text(
+                                      "T",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[3]
+                                                    .isLate.value,
+                                                onChanged: (val) {
                                                   controller.dayTimeList[3]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[3]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(3);
-                                                }
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[3]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[3]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[3]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[3]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(3);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(3);
+                                                  }
 
-                                                //controller.isWed = !controller.isWed;
-                                              }),
+                                                  //controller.isWed = !controller.isWed;
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "W",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[4].isLate.value,
-                                              onChanged: (val) {
-                                                // controller.isThu = !controller.isThu;
+                                    const Text(
+                                      "W",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[4]
+                                                    .isLate.value,
+                                                onChanged: (val) {
+                                                  // controller.isThu = !controller.isThu;
 
-                                                controller.dayTimeList[4].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[4]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[4]
-                                                    .isLate.isTrue) {
                                                   controller.dayTimeList[4]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[4]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(4);
-                                                }
-                                              }),
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[4]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[4]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[4]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[4]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(4);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(4);
+                                                  }
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "T",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[5].isLate.value,
-                                              onChanged: (val) {
-                                                controller.dayTimeList[5].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[5]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[5]
-                                                    .isLate.isTrue) {
+                                    const Text(
+                                      "T",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[5]
+                                                    .isLate.value,
+                                                onChanged: (val) {
                                                   controller.dayTimeList[5]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[5]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(5);
-                                                }
-                                              }),
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[5]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[5]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[5]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[5]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(5);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(5);
+                                                  }
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "F",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Transform.scale(
-                                    scale: 0.5,
-                                    child: Obx(
-                                      () => Card(
-                                        margin: const EdgeInsets.all(1),
-                                        elevation: 3,
-                                        shape: const StadiumBorder(),
-                                        child: Transform.scale(
-                                          scale: 2.0,
-                                          child: Checkbox(
-                                              activeColor: primary,
-                                              checkColor: Colors.amber,
-                                              splashRadius: 20,
-                                              shape: const StadiumBorder(),
-                                              side: BorderSide.none,
-                                              value: controller
-                                                  .dayTimeList[6].isLate.value,
-                                              onChanged: (val) {
-                                                // controller.isSat = !controller.isSat;
-                                                controller.dayTimeList[6].isLate
-                                                        .value =
-                                                    !controller.dayTimeList[6]
-                                                        .isLate.value;
-                                                if (controller.dayTimeList[6]
-                                                    .isLate.isTrue) {
+                                    const Text(
+                                      "F",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Transform.scale(
+                                      scale: 0.5,
+                                      child: Obx(
+                                        () => Card(
+                                          margin: const EdgeInsets.all(1),
+                                          elevation: 3,
+                                          shape: const StadiumBorder(),
+                                          child: Transform.scale(
+                                            scale: 2.0,
+                                            child: Checkbox(
+                                                activeColor: primary,
+                                                checkColor: Colors.amber,
+                                                splashRadius: 20,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none,
+                                                value: controller.dayTimeList[6]
+                                                    .isLate.value,
+                                                onChanged: (val) {
+                                                  // controller.isSat = !controller.isSat;
                                                   controller.dayTimeList[6]
-                                                          .fromTime2 =
-                                                      controller.hFromTime2!;
-                                                  controller.dayTimeList[6]
-                                                          .toTime2 =
-                                                      controller.hToTime2!;
-                                                  controller.addToHdaySecond(6);
-                                                }
-                                              }),
+                                                          .isLate.value =
+                                                      !controller.dayTimeList[6]
+                                                          .isLate.value;
+                                                  if (controller.dayTimeList[6]
+                                                      .isLate.isTrue) {
+                                                    controller.dayTimeList[6]
+                                                            .fromTime2 =
+                                                        controller.hFromTime2!;
+                                                    controller.dayTimeList[6]
+                                                            .toTime2 =
+                                                        controller.hToTime2!;
+                                                    controller
+                                                        .addToHdaySecond(6);
+                                                  } else {
+                                                    controller
+                                                        .removeToHdaySecond(6);
+                                                  }
+                                                }),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "S",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
+                                    const Text(
+                                      "S",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           CustomElevatedButtonWidget(
                             onPressed: () {
+                              var index = controller.dayTimeList
+                                  .where((e) => e.isLate.isTrue)
+                                  .length;
                               if (controller.hFromTime2 != null &&
-                                  controller.hToTime2 != null) {
+                                  controller.hToTime2 != null &&
+                                  index != 0) {
                                 controller.showLateDayList = true;
-                                controller.showDayList = true;
-                                controller.showLateDayList = true;
+                                controller.lateHappyHourForValidationOnly =
+                                    true;
+                                controller.animateToIndex(6);
+                                controller.update();
                               } else {
                                 Get.find<GlobalGeneralController>()
                                     .errorSnackbar(
                                         title: "Time",
-                                        description: "Select Time ");
+                                        description: "Select Day and Time");
                               }
                             },
                             horizontalPadding: 40,
@@ -1324,6 +1397,9 @@ class GuestDayTimeScreen extends GetView<GuestController> {
                                                         controller
                                                             .addToHdaySecond(
                                                                 index);
+                                                      } else {
+                                                        controller
+                                                            .removeToHdaySecond(index);
                                                       }
                                                     }),
                                               ),

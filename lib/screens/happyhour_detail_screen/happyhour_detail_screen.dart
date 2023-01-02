@@ -481,8 +481,12 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                       child: Text(controller.happyHour.foodName?[index]
                                   ["foodprice"] !=
                               ""
-                          ? "• \$ ${controller.happyHour.foodName?[index]["foodprice"]}"
-                          : "• ${controller.happyHour.foodName?[index]["fooddiscount"]}%"),
+                          ? "• \$${controller.happyHour.foodName?[index]["foodprice"]}"
+                          : controller.happyHour.foodName?[index]
+                                      ["discountIcon"] ==
+                                  "%"
+                              ? "• ${controller.happyHour.foodName?[index]["fooddiscount"]}${controller.happyHour.foodName?[index]["discountIcon"]} off"
+                              : "• ${controller.happyHour.foodName?[index]["discountIcon"]}${controller.happyHour.foodName?[index]["fooddiscount"]} off"),
                     ),
                   ],
                 ),
@@ -531,16 +535,29 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                     ),
                     SizedBox(
                       width: W * 0.25,
-                      child: Text(
-                          "• ${controller.happyHour.drinkitemName?[index]['drinksize']}  ${controller.happyHour.drinkitemName?[index]['sizeIcon']}"),
+                      child: Text(controller.happyHour.drinkitemName?[index]
+                                  ['sizeIcon'] !=
+                              ""
+                          ? "• ${controller.happyHour.drinkitemName?[index]['drinksize']} ${controller.happyHour.drinkitemName?[index]['sizeIcon']}"
+                          : "• ${controller.happyHour.drinkitemName?[index]['drinksize']} oz"),
                     ),
                     SizedBox(
                       width: W * 0.2,
                       child: Text(controller.happyHour.drinkitemName?[index]
                                   ['drinkprice'] !=
                               ""
-                          ? "• \$ ${controller.happyHour.drinkitemName?[index]['drinkprice']}"
-                          : "•  ${controller.happyHour.drinkitemName?[index]['drinkdiscount']}%"),
+                          ? "• \$${controller.happyHour.drinkitemName?[index]['drinkprice']}"
+                          : controller.happyHour.drinkitemName?[index]
+                                      ['discountIcon'] ==
+                                  ""
+                              ? "•  ${controller.happyHour.drinkitemName?[index]['drinkdiscount']}% off"
+                              : controller.happyHour.drinkitemName?[index]
+                                          ['discountIcon'] ==
+                                      "%"
+                                  ? "•  ${controller.happyHour.drinkitemName?[index]['drinkdiscount']}"
+                                      "${controller.happyHour.drinkitemName?[index]['discountIcon']} off"
+                                  : "•  ${controller.happyHour.drinkitemName?[index]['discountIcon']}"
+                                      "${controller.happyHour.drinkitemName?[index]['drinkdiscount']} off"),
                     ),
                   ],
                 ),
@@ -649,8 +666,12 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                             child: Text(controller.lateFoodList[index]
                                         ["foodprice"] !=
                                     ""
-                                ? "• \$ ${controller.lateFoodList[index]["foodprice"]}"
-                                : "• ${controller.lateFoodList[index]["fooddiscount"]}%"),
+                                ? "• \$${controller.lateFoodList[index]["foodprice"]}"
+                                : controller.lateFoodList[index]
+                                            ["discountIcon"] ==
+                                        "%"
+                                    ? "• ${controller.lateFoodList[index]["fooddiscount"]}${controller.lateFoodList[index]["discountIcon"]} off"
+                                    : "• ${controller.lateFoodList[index]["discountIcon"]}${controller.lateFoodList[index]["fooddiscount"]} off"),
                           ),
                         ],
                       ),
@@ -715,7 +736,7 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                           SizedBox(
                             width: W * 0.25,
                             child: Text(
-                                "• ${controller.lateDrinkList[index]["drinksize"]}"),
+                                controller.lateDrinkList[index]["sizeIcon"] != "" ? "• ${controller.lateDrinkList[index]["drinksize"]} ${controller.lateDrinkList[index]["sizeIcon"]}" : "• ${controller.lateDrinkList[index]["drinksize"]} oz"),
                           ),
                           SizedBox(
                             width: W * 0.2,
@@ -723,7 +744,11 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                         ["drinkprice"] !=
                                     ""
                                 ? "• \$ ${controller.lateDrinkList[index]["drinkprice"]}"
-                                : "•  ${controller.lateDrinkList[index]["drinkdiscount"]}%"),
+                                : controller.lateDrinkList[index]
+                                            ["discountIcon"] ==
+                                        "%"
+                                    ? "•  ${controller.lateDrinkList[index]["drinkdiscount"]}${controller.lateDrinkList[index]["discountIcon"]} off"
+                                    : "•  ${controller.lateDrinkList[index]["discountIcon"]}${controller.lateDrinkList[index]["drinkdiscount"]} off"),
                           ),
                         ],
                       ),
@@ -738,9 +763,6 @@ class OverView extends GetView<HappyhourDetailScreenController> {
           const Text(
             "Daily Specials",
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            height: H * 0.01,
           ),
           //Sunday List
           controller.sundayList.isNotEmpty
@@ -845,7 +867,9 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                             child: Text(
                                               controller.sundayList[index]
                                                           ['sizeIcon'] ==
-                                                      null
+                                                      null || controller.sundayList[index]
+                                              ['sizeIcon'] ==
+                                                  ""
                                                   ? "ml"
                                                   : "${controller.sundayList[index]['sizeIcon']}",
                                               maxLines: 1,
@@ -858,18 +882,35 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.sundayList[index]['price']}",
+                                  controller.sundayList[index]['price'] != ""
+                                      ? "\$${controller.sundayList[index]['price']}"
+                                      : "",
                                   maxLines: 1,
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.sundayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.sundayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.sundayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.sundayList[index]['discount']}${controller.sundayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.sundayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.sundayList[index]['discountIcon']}${controller.sundayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
                             ],
                           ),
@@ -974,7 +1015,7 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                           "Foods"
                                       ? "  ${controller.mondayList[index]['quantity']}"
                                       : "",
-                                  maxLines: 1,
+                                  maxLines: 2,
                                 ),
                               ),
                               SizedBox(
@@ -986,7 +1027,7 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                               "Drinks"
                                           ? "${controller.mondayList[index]['quantity']} "
                                           : "",
-                                      maxLines: 1,
+                                      maxLines: 2,
                                     ),
                                     controller.mondayList[index]['index'] ==
                                             "Drinks"
@@ -998,7 +1039,7 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                                       null
                                                   ? "ml"
                                                   : "${controller.mondayList[index]['sizeIcon']}",
-                                              maxLines: 1,
+                                              maxLines: 2,
                                               softWrap: false,
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -1007,20 +1048,53 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                   ],
                                 ),
                               ),
+
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.mondayList[index]['price']}",
-                                  maxLines: 1,
+                                  controller.mondayList[index]['price'] != ""
+                                      ? "\$${controller.mondayList[index]['price']}"
+                                      : "",
+                                  maxLines: 2,
                                 ),
                               ),
+                              // SizedBox(
+                              //   width: W * 0.16,
+                              //   child: Text(
+                              //     "\$${controller.mondayList[index]['price']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
+
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.mondayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.mondayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.mondayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.mondayList[index]['discount']}${controller.mondayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.mondayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.mondayList[index]['discountIcon']}${controller.mondayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
+                              // SizedBox(
+                              //   width: W * 0.1,
+                              //   child: Text(
+                              //     "${controller.mondayList[index]['discount']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -1158,19 +1232,51 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.tuesdayList[index]['price']}",
-                                  maxLines: 1,
+                                  controller.tuesdayList[index]['price'] != ""
+                                      ? "\$${controller.tuesdayList[index]['price']}"
+                                      : "",
+                                  maxLines: 2,
                                 ),
                               ),
+                              // SizedBox(
+                              //   width: W * 0.16,
+                              //   child: Text(
+                              //     "\$${controller.tuesdayList[index]['price']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.tuesdayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.tuesdayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.tuesdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.tuesdayList[index]['discount']}${controller.tuesdayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.tuesdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.tuesdayList[index]['discountIcon']}${controller.tuesdayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
+                              //  ///
+                              // SizedBox(
+                              //   width: W * 0.1,
+                              //   child: Text(
+                              //     "${controller.tuesdayList[index]['discount']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -1308,19 +1414,45 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.wednesdayList[index]['price']}",
-                                  maxLines: 1,
+                                  controller.wednesdayList[index]['price'] != ""
+                                      ? "\$${controller.wednesdayList[index]['price']}"
+                                      : "",
+                                  maxLines: 2,
                                 ),
                               ),
+
+                              ///
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.wednesdayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.wednesdayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.wednesdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.wednesdayList[index]['discount']}${controller.wednesdayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.wednesdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.wednesdayList[index]['discountIcon']}${controller.wednesdayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
+                              // SizedBox(
+                              //   width: W * 0.1,
+                              //   child: Text(
+                              //     "${controller.wednesdayList[index]['discount']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -1418,15 +1550,50 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.15,
-                                child: Text(
-                                  controller.thursdayList[index]['index'] ==
+                                  width: W * 0.15,
+                                  child: controller.thursdayList[index]
+                                              ['index'] ==
                                           "Foods"
-                                      ? "  ${controller.thursdayList[index]['quantity']}"
-                                      : "",
-                                  maxLines: 1,
-                                ),
-                              ),
+                                      ? Text(
+                                          "  ${controller.thursdayList[index]['quantity']}",
+                                          maxLines: 1,
+                                        )
+                                      : SizedBox()
+                                  // SizedBox(
+                                  //         width: W * 0.19,
+                                  //         child: Row(
+                                  //           children: [
+                                  //             Text(
+                                  //               controller.thursdayList[index]
+                                  //                           ['index'] ==
+                                  //                       "Drinks"
+                                  //                   ? "${controller.thursdayList[index]['quantity']} "
+                                  //                   : "",
+                                  //               maxLines: 1,
+                                  //             ),
+                                  //             controller.thursdayList[index]
+                                  //                         ['index'] ==
+                                  //                     "Drinks"
+                                  //                 ? Expanded(
+                                  //                     flex: 1,
+                                  //                     child: Text(
+                                  //                       controller.thursdayList[
+                                  //                                       index][
+                                  //                                   'sizeIcon'] ==
+                                  //                               null
+                                  //                           ? "ml"
+                                  //                           : "${controller.thursdayList[index]['sizeIcon']}",
+                                  //                       maxLines: 1,
+                                  //                       softWrap: false,
+                                  //                       overflow:
+                                  //                           TextOverflow.ellipsis,
+                                  //                     ),
+                                  //                   )
+                                  //                 : const Text(""),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  ),
                               SizedBox(
                                 width: W * 0.19,
                                 child: Row(
@@ -1457,20 +1624,58 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                   ],
                                 ),
                               ),
+
+                              // controller.thursdayList[index]['price'] != ""
+                              //     ?
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.thursdayList[index]['price']}",
-                                  maxLines: 1,
+                                  controller.thursdayList[index]['price'] != ""
+                                      ? "\$${controller.thursdayList[index]['price']}"
+                                      : "",
+                                  maxLines: 2,
                                 ),
                               ),
+                              //:
+
+                              // SizedBox(
+                              //   width: W * 0.16,
+                              //   child: Text(
+                              //     "\$${controller.thursdayList[index]['price']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.thursdayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.thursdayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.thursdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.thursdayList[index]['discount']}${controller.thursdayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.thursdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.thursdayList[index]['discountIcon']}${controller.thursdayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
+
+                              ///
+                              // SizedBox(
+                              //   width: W * 0.1,
+                              //   child: Text(
+                              //     "${controller.thursdayList[index]['discount']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -1607,20 +1812,54 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                   ],
                                 ),
                               ),
+
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.fridayList[index]['price']}",
-                                  maxLines: 1,
+                                  controller.fridayList[index]['price'] != ""
+                                      ? "\$${controller.fridayList[index]['price']}"
+                                      : "",
+                                  maxLines: 2,
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.fridayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.fridayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.fridayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.fridayList[index]['discount']}${controller.fridayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.fridayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.fridayList[index]['discountIcon']}${controller.fridayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
+
+                              ///
+                              // SizedBox(
+                              //   width: W * 0.16,
+                              //   child: Text(
+                              //     "\$${controller.fridayList[index]['price']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
+                              // SizedBox(
+                              //   width: W * 0.1,
+                              //   child: Text(
+                              //     "${controller.fridayList[index]['discount']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -1758,19 +1997,51 @@ class OverView extends GetView<HappyhourDetailScreenController> {
                                 ),
                               ),
                               SizedBox(
-                                width: W * 0.16,
+                                width: W * 0.14,
                                 child: Text(
-                                  "\$${controller.saturdayList[index]['price']}",
-                                  maxLines: 1,
+                                  controller.saturdayList[index]['price'] != ""
+                                      ? "\$${controller.saturdayList[index]['price']}"
+                                      : "",
+                                  maxLines: 2,
                                 ),
                               ),
+                              // SizedBox(
+                              //   width: W * 0.16,
+                              //   child: Text(
+                              //     "\$${controller.saturdayList[index]['price']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                               SizedBox(
-                                width: W * 0.1,
-                                child: Text(
-                                  "${controller.saturdayList[index]['discount']}",
-                                  maxLines: 1,
-                                ),
+                                width: W * 0.14,
+                                child: controller.saturdayList[index]
+                                            ['discountIcon'] ==
+                                        "%"
+                                    ? Text(
+                                        controller.saturdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.saturdayList[index]['discount']}${controller.saturdayList[index]['discountIcon']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      )
+                                    : Text(
+                                        controller.saturdayList[index]
+                                                    ['discount'] !=
+                                                ""
+                                            ? "${controller.saturdayList[index]['discountIcon']}${controller.saturdayList[index]['discount']} off"
+                                            : "",
+                                        maxLines: 2,
+                                      ),
                               ),
+                              // ///
+                              // SizedBox(
+                              //   width: W * 0.1,
+                              //   child: Text(
+                              //     "${controller.saturdayList[index]['discount']}",
+                              //     maxLines: 1,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -1837,6 +2108,7 @@ class OverView extends GetView<HappyhourDetailScreenController> {
             shrinkWrap: true,
             itemCount: controller.happyHour.barType?.length ?? 0,
             itemBuilder: (context, index) {
+
               return Text("•  ${controller.happyHour.barType?[index]}");
             },
           ),
